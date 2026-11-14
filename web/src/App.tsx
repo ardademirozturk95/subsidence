@@ -201,19 +201,6 @@ function PointPanel({ point, region, index }: { point: Point; region: Region; in
   )
 }
 
-// Ayrıntılı, kaynaklı anlatım: docs/neden-cokuyor-kaynaklar.md
-const SOURCES: [string, string][] = [
-  ["Carrillo 1947, Influence of Artesian Wells in the Sinking of Mexico City", "https://www.semanticscholar.org/paper/Influence-of-Artesian-Wells-in-the-Sinking-of-City-Carrillo/bb4a5a13383dcfdfbee711f82b894f021c5c8e25"],
-  ["Chaussard et al. 2021, JGR Solid Earth", "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020JB020648"],
-  ["Cigna & Tapete 2021, Remote Sensing of Environment", "https://doi.org/10.1016/j.rse.2020.112161"],
-  ["Solano-Rojas et al. 2024, Scientific Reports", "https://doi.org/10.1038/s41598-024-53525-y"],
-  ["Managed aquifer recharge in Mexico City (review), PMC", "https://pmc.ncbi.nlm.nih.gov/articles/PMC9543496/"],
-  ["NASA/JPL 2026, US-Indian spacecraft captures Mexico City subsidence", "https://www.jpl.nasa.gov/images/pia26709-us-indian-spacecraft-captures-mexico-city-subsidence/"],
-  ["La Silla Rota 2025 (Conagua recarga/extracción)", "https://lasillarota.com/metropoli/2025/9/6/cdmx-hundimiento-alcanza-42-cm-anuales-por-extraccion-de-agua-467591.html"],
-  ["Infobae 2025, grietas en la CDMX", "https://www.infobae.com/mexico/2025/06/27/sobreexplotacion-del-acuifero-agrava-grietas-en-la-cdmx-hay-seguimiento-permanente-advierte-sheinbaum/"],
-  ["Milenio, resurge lago en Chalco", "https://amp.milenio.com/estados/resurge-lago-chalco-pone-riesgo-80-mil"],
-]
-
 function Why() {
   const { t } = useI18n()
   return (
@@ -223,21 +210,8 @@ function Why() {
       <p className="text-sm leading-relaxed">{t("why2")}</p>
       <p className="text-sm leading-relaxed">{t("why3")}</p>
       <p className="border-l-2 border-staff pl-3 text-sm leading-relaxed font-medium">{t("whyHuman")}</p>
-      <p className="text-sm leading-relaxed">{t("whyFast")}</p>
-      <p className="text-sm leading-relaxed">{t("whyEffects")}</p>
       <p className="text-sm leading-relaxed text-ink/80">{t("whyBlind")}</p>
-      <p className="text-sm leading-relaxed">{t("whyJpl")}</p>
       <p className="text-xs leading-relaxed text-muted-foreground">{t("whyCheck")}</p>
-      <details className="text-xs text-muted-foreground">
-        <summary className="cursor-pointer font-semibold text-ink/70">{t("sourcesLabel")}</summary>
-        <ul className="mt-2 space-y-1">
-          {SOURCES.map(([label, href]) => (
-            <li key={href}>
-              <a href={href} target="_blank" rel="noreferrer" className="underline decoration-ink/30 underline-offset-2 hover:text-ink">{label}</a>
-            </li>
-          ))}
-        </ul>
-      </details>
     </section>
   )
 }

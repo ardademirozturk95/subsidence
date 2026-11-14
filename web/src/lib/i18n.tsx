@@ -71,12 +71,12 @@ const S = {
 
   whyTitle: { tr: "Neden çöküyor?", en: "Why is it sinking?" },
   why1: {
-    tr: "Aztekler şehri Texcoco gölünün üstüne kurdu. Texcoco, Xochimilco ve Chalco gölleri kurutuldu; geriye yumuşak, suya doymuş kil kaldı.",
-    en: "The Aztecs built the city on Lake Texcoco. Lakes Texcoco, Xochimilco and Chalco were drained, leaving soft, water-soaked clay.",
+    tr: "Aztekler şehri Texcoco gölünün üstüne kurdu. Göl kurutuldu, geriye yumuşak, suya doymuş kil kaldı.",
+    en: "The Aztecs built the city on Lake Texcoco. The lake was drained, leaving soft, water-soaked clay.",
   },
   why2: {
-    tr: "Şehrin suyunun yaklaşık %70'i bu kilin altındaki akiferden pompalanıyor. Conagua'ya göre her yıl yaklaşık 990 milyon m³ su çekiliyor, yağmurla geri gelen ise 510 milyon m³: neredeyse iki katı. Su basıncı düşünce kil sıkışıyor ve bir daha geri dönmüyor. Bu mekanizmayı ilk kez 1947'de Nabor Carrillo açıkladı.",
-    en: "About 70% of the city's water is pumped from the aquifer below that clay. According to Conagua, about 990 million m³ is withdrawn each year while rain returns about 510 million m³: almost twice as much goes out. As water pressure drops the clay compacts and never springs back. Nabor Carrillo first explained this mechanism in 1947.",
+    tr: "Şehrin suyunun büyük kısmı bu kilin altındaki akiferden pompalanıyor. Su gidince kil sıkışıyor ve bir daha eski haline dönmüyor.",
+    en: "Most of the city's water is pumped from the aquifer below that clay. When the water leaves, the clay compacts and does not spring back.",
   },
   why3: {
     tr: "Haritamız bunu gösteriyor: kalın kilin üstündeki Xochimilco–Tláhuac yılda 36 cm, Chalco 36 cm, Nezahualcóyotl 29 cm çöküyor. Volkanik kayanın üstündeki Santa Fe, Ciudad Universitaria ve ovanın ortasındaki Peñón Viejo tepesi ise neredeyse hiç kıpırdamıyor (yılda 1 cm'den az).",
@@ -86,19 +86,6 @@ const S = {
     tr: "Hipotezimiz: neden fiziksel (sıkışan kil), tetikleyici insan (yeraltı suyu pompalama). Ölçtüğümüz hızlı çöken yerlerin hepsi eski göl tabanında, sabit kalanların hepsi kaya zeminde.",
     en: "Our hypothesis: the cause is physical (compacting clay), the trigger is human (groundwater pumping). Every fast-sinking spot we measured is on the old lakebed; every stable one is on rock.",
   },
-  whyFast: {
-    tr: "Neden bazı mahalleler daha hızlı? Araştırmalara göre hızı en çok kil tabakasının kalınlığı belirliyor (Chaussard ve ark. 2021). Haritamızın en hızlı yerleri Chalco ve Tláhuac, eski Chalco gölünün tabanı. Orada zemin o kadar çöktü ki yeni bir göl oluştu (Tláhuac–Xico).",
-    en: "Why do some neighbourhoods sink faster? Research shows the thickness of the clay layer sets the pace (Chaussard et al. 2021). Our fastest spots are Chalco and Tláhuac, the bed of old Lake Chalco. The ground there has sunk so much that a new lake has formed (Tláhuac–Xico).",
-  },
-  whyEffects: {
-    tr: "Sonuçları sokakta görülüyor: Bağımsızlık Anıtı'nın tabanına 14 basamak eklendi, Katedral eğik, Iztapalapa'nın yaklaşık üçte birinde yer çatlakları var. 2024 kuraklığında şehre su getiren Cutzamala barajları tarihî düşüğe inince hükümetin planlarından biri yeni kuyular açmak oldu.",
-    en: "The effects show on the street: 14 steps were added to the base of the Angel of Independence, the Cathedral leans, and about a third of Iztapalapa has ground cracks. When the Cutzamala reservoirs that supply the city hit record lows in the 2024 drought, one of the government's plans was to drill new wells.",
-  },
-  whyJpl: {
-    tr: "NASA/JPL da NISAR'ın ilk üç ayından (Ekim 2025 – Ocak 2026) bir Mexico City haritası yayınladı ve ayda birkaç santime varan çökme buldu. Bizim 11 aylık, iki yönlü sonucumuz onunla aynı mertebede.",
-    en: "NASA/JPL also published a Mexico City map from NISAR's first three months (Oct 2025 – Jan 2026), finding sinking of up to a few centimetres a month. Our 11-month, two-direction result agrees in magnitude.",
-  },
-  sourcesLabel: { tr: "Kaynaklar", en: "Sources" },
   whyBlind: {
     tr: "Radarın göremediği yerler de var: eski göl tabanında, havalimanının çevresinde, iki ölçüm arasında yüzey çok değiştiği için sinyal kopuyor. Haritadaki boşluklar 'çökme yok' değil, 'ölçüm yok' demek.",
     en: "There are places the radar cannot see: on the old lakebed around the airport the surface changes too much between passes and the signal breaks up. Gaps on the map mean 'no measurement', not 'no sinking'.",
