@@ -83,8 +83,8 @@ const S = {
     en: "There are places the radar cannot see: on the old lakebed around the airport the surface changes too much between passes and the signal breaks up. Gaps on the map mean 'no measurement', not 'no sinking'.",
   },
   whyCheck: {
-    tr: "Sonuçlarımız yayınlanmış çalışmalarla aynı mertebede: Nezahualcóyotl'de yılda yaklaşık 39 cm (Cigna ve Tapete 2021), Chalco'da yılda 35 cm'den fazla (Solano-Rojas ve ark. 2024).",
-    en: "Our results match published studies in magnitude: about 39 cm a year at Nezahualcóyotl (Cigna and Tapete 2021), over 35 cm a year at Chalco (Solano-Rojas et al. 2024).",
+    tr: "Sonuçlarımız yayınlanmış çalışmalarla aynı mertebede: Nezahualcóyotl'de yılda yaklaşık 39 cm (Cigna ve Tapete 2021), şehrin en yüksek hızları Chalco'da (Solano-Rojas ve ark. 2024).",
+    en: "Our results match published studies in magnitude: about 39 cm a year at Nezahualcóyotl (Cigna and Tapete 2021), the city's highest rates at Chalco (Solano-Rojas et al. 2024).",
   },
 
   radarTitle: { tr: "Radar ne görüyor?", en: "What does the radar see?" },
@@ -169,7 +169,7 @@ const S = {
   sf1: { tr: "%70", en: "70%" },
   sfl1: { tr: "suyun yeraltından gelen payı", en: "of the water comes from underground" },
   sf2: { tr: "2×", en: "2×" },
-  sfl2: { tr: "çekilen su / yağmurla gelen", en: "pumped out vs. returned by rain" },
+  sfl2: { tr: "çekim izni / yıllık besleme", en: "withdrawal rights vs. yearly recharge" },
   sf3: { tr: "1947", en: "1947" },
   sfl3: { tr: "mekanizmanın ilk açıklandığı yıl", en: "year the mechanism was first explained" },
   sf4: { tr: "2024", en: "2024" },
@@ -181,10 +181,10 @@ const S = {
     tr: "Valle de México'da 20 milyondan fazla insan yaşıyor. Suyun yaklaşık %70'i dışarıdan değil, şehrin hemen altındaki akiferden geliyor.",
     en: "More than 20 million people live in the Valley of Mexico. About 70% of their water comes not from outside but from the aquifer right beneath the city.",
   },
-  st2T: { tr: "Gelenin iki katı çekiliyor", en: "Twice the inflow is pumped out" },
+  st2T: { tr: "Gelenin iki katına izin verilmiş", en: "Pumping rights twice the inflow" },
   st2: {
-    tr: "Conagua'ya göre akiferden her yıl 993 milyon m³ su çekiliyor; yağmurla geri dönen ise 513 milyon m³. Conagua bu akiferi ülkenin en kritik akiferi sayıyor.",
-    en: "According to Conagua, 993 million m³ is pumped from the aquifer each year while rain returns 513 million m³. Conagua rates it the most critical aquifer in the country.",
+    tr: "Conagua'ya göre akiferin yıllık beslenmesi 513 milyon m³, ama yeraltı suyu çekimi için verilmiş izinler 993 milyon m³: neredeyse iki katı. Conagua bu akiferi ülkenin en kritik akiferi sayıyor.",
+    en: "According to Conagua, the aquifer is recharged by 513 million m³ a year, yet groundwater withdrawal rights total 993 million m³: almost twice as much. Conagua rates it the most critical aquifer in the country.",
   },
   st3T: { tr: "Kil sıkışıyor, geri dönmüyor", en: "The clay compacts for good" },
   st3: {
@@ -235,7 +235,7 @@ function initialLang(): Lang {
     const s = localStorage.getItem("lang")
     if (s === "tr" || s === "en") return s
   } catch { /* depolama kapalı olabilir */ }
-  return navigator.language.toLowerCase().startsWith("tr") ? "tr" : "en"
+  return "en" // varsayılan İngilizce (yarışma dili); Türkçe için ?lang=tr ya da TR düğmesi
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
