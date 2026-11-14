@@ -27,22 +27,19 @@ export type Point = {
   lat: number
   lon: number
   rate_cm_yr: number
-  s1_rate_cm_yr: number | null  // Sentinel-1 uzun dönem hızı; yoksa null
   series: Sample[]
 }
 
 export type View = "disp" | "wrap" | "swipe"
-export type Band = "L" | "C"
 export type Fringes = {
   l_half_wave_cm: number
-  c_half_wave_cm: number
-  dates: { date: string; max_los_cm: number; rings_l: number; rings_c: number }[]
+  dates: { date: string; max_los_cm: number; rings_l: number }[]
 }
 export type Backdrop = "map" | "hh" | "hv" | "rgb"
 
 const base = import.meta.env.BASE_URL
 export const dataUrl = (path: string) => `${base}data/${path}`
-export const frameUrl = (r: Region, kind: "disp" | "wrap" | "lwrap" | "cwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
+export const frameUrl = (r: Region, kind: "disp" | "wrap" | "lwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
 export const polUrl = (r: Region, pol: Exclude<Backdrop, "map">) => dataUrl(`${r.dir}/${pol}.png`)
 
 export async function loadAll(): Promise<{ region: Region; points: Point[]; fringes: Fringes | null }> {

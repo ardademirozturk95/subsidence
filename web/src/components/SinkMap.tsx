@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { CircleMarker, ImageOverlay, MapContainer, Pane, TileLayer, Tooltip, ZoomControl, useMap } from "react-leaflet"
-import { WRAP_STOPS, dispColor, dispGradient, frameUrl, polUrl, type Backdrop, type Band, type Fringes, type Point, type Region, type View } from "@/lib/data"
+import { WRAP_STOPS, dispColor, dispGradient, frameUrl, polUrl, type Backdrop, type Fringes, type Point, type Region, type View } from "@/lib/data"
 import { useI18n } from "@/lib/i18n"
 
 type Props = {
@@ -8,14 +8,13 @@ type Props = {
   points: Point[]
   date: string
   view: View
-  band: Band
   fringes: Fringes | null
   backdrop: Backdrop
   selectedId: string
   onSelect: (id: string) => void
 }
 
-export function SinkMap({ region, points, date, view, band, fringes, backdrop, selectedId, onSelect }: Props) {
+export function SinkMap({ region, points, date, view, fringes, backdrop, selectedId, onSelect }: Props) {
   const { t, pick } = useI18n()
   const [split, setSplit] = useState(0.5)
   const showWrap = view !== "disp"
@@ -23,7 +22,7 @@ export function SinkMap({ region, points, date, view, band, fringes, backdrop, s
 
   // Kareleri önceden indir: oynatırken titreme olmasın
   useEffect(() => {
-    for (const d of region.dates) for (const k of (fringes ? ["disp", "lwrap", "cwrap"] : ["disp", "wrap"]) as ("disp" | "wrap" | "lwrap" | "cwrap")[]) new Image().src = frameUrl(region, k, d)
+    for (const d of region.dates) for (const k of (fringes ? ["disp", "lwrap"] : ["disp", "wrap"]) as ("disp" | "wrap" | "lwrap")[]) new Image().src = frameUrl(region, k, d)
   }, [region, fringes])
 
   return (
@@ -44,7 +43,7 @@ export function SinkMap({ region, points, date, view, band, fringes, backdrop, s
         />
         {backdrop !== "map" && <ImageOverlay url={polUrl(region, backdrop)} bounds={region.bounds} opacity={1} zIndex={1} />}
         <Pane name="wrap" style={{ zIndex: 410 }}>
-          {showWrap && <ImageOverlay url={frameUrl(region, !fringes ? "wrap" : band === "C" ? "cwrap" : "lwrap", date)} bounds={region.bounds} opacity={0.85} />}
+          {showWrap && <ImageOverlay url={frameUrl(region, fringes ? "lwrap" : "wrap", date)} bounds={region.bounds} opacity={0.85} />}
         </Pane>
         <Pane name="disp" style={{ zIndex: 420 }}>
           {showDisp && <ImageOverlay url={frameUrl(region, "disp", date)} bounds={region.bounds} opacity={backdrop === "map" ? 0.82 : 0.7} />}
@@ -83,14 +82,11 @@ export function SinkMap({ region, points, date, view, band, fringes, backdrop, s
       {view === "swipe" && <SwipeHandle split={split} onChange={setSplit} />}
       {view === "swipe" && (
         <>
-          <span className="map-chip pointer-events-none absolute top-3 left-3 z-[500]">{band === "C" ? t("swipeLeftC") : t("swipeLeft")}</span>
+          <span className="map-chip pointer-events-none absolute top-3 left-3 z-[500]">{t("swipeLeft")}</span>
           <span className="map-chip pointer-events-none absolute top-3 right-3 z-[500]">{t("swipeRight")}</span>
         </>
       )}
-      {view === "wrap" && band === "C" && (
-        <span className="map-chip pointer-events-none absolute top-3 left-3 z-[500]">{t("simChip")}</span>
-      )}
-      <Legend region={region} view={view} half={band === "C" && fringes ? fringes.c_half_wave_cm : region.half_wave_cm} />
+      <Legend region={region} view={view} half={region.half_wave_cm} />
     </div>
   )
 }
