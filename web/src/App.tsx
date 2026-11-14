@@ -206,7 +206,7 @@ function RegionPanel({ points, point, region, index, onSelect }: { points: Point
           <dd className="font-display text-2xl font-semibold tabular-nums">{region.dates.length}</dd>
         </div>
       </dl>
-      <Everyday cum={cur} rate={point.rate_cm_yr} />
+      <Everyday rate={point.rate_cm_yr} />
     </div>
   )
 }
