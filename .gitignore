@@ -28,3 +28,7 @@ Thumbs.db
 
 # Veri hattı çıktıları
 backend/out/
+
+# export_web.py yan çıktıları (sitede kullanılmıyor)
+web/public/data/cdmx/cwrap_*.png
+web/public/data/cdmx/val/

@@ -23,7 +23,7 @@ export function SinkMap({ region, points, date, view, fringes, backdrop, selecte
 
   // Kareleri önceden indir: oynatırken titreme olmasın
   useEffect(() => {
-    for (const d of region.dates) for (const k of (fringes ? ["disp", "lwrap"] : ["disp", "wrap"]) as ("disp" | "wrap" | "lwrap")[]) new Image().src = frameUrl(region, k, d)
+    for (const d of region.dates) for (const k of ["disp", "lwrap"] as const) new Image().src = frameUrl(region, k, d)
   }, [region, fringes])
 
   return (
@@ -45,7 +45,7 @@ export function SinkMap({ region, points, date, view, fringes, backdrop, selecte
         />
         {backdrop !== "map" && <ImageOverlay url={polUrl(region, backdrop)} bounds={region.bounds} opacity={1} zIndex={1} />}
         <Pane name="wrap" style={{ zIndex: 410 }}>
-          {showWrap && <ImageOverlay url={frameUrl(region, fringes ? "lwrap" : "wrap", date)} bounds={region.bounds} opacity={0.85} />}
+          {showWrap && <ImageOverlay url={frameUrl(region, "lwrap", date)} bounds={region.bounds} opacity={0.85} />}
         </Pane>
         <Pane name="disp" style={{ zIndex: 420 }}>
           {showDisp && <ImageOverlay url={frameUrl(region, "disp", date)} bounds={region.bounds} opacity={backdrop === "map" ? 0.82 : 0.7} />}

@@ -40,7 +40,7 @@ export type Backdrop = "map" | "hh" | "hv" | "rgb"
 
 const base = import.meta.env.BASE_URL
 export const dataUrl = (path: string) => `${base}data/${path}`
-export const frameUrl = (r: Region, kind: "disp" | "wrap" | "lwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
+export const frameUrl = (r: Region, kind: "disp" | "lwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
 export const polUrl = (r: Region, pol: Exclude<Backdrop, "map">) => dataUrl(`${r.dir}/${pol}.png`)
 
 export async function loadAll(): Promise<{ region: Region; points: Point[]; fringes: Fringes | null }> {
@@ -48,8 +48,22 @@ export async function loadAll(): Promise<{ region: Region; points: Point[]; frin
   const region: Region = regions.regions[0]
   const pts = await fetch(dataUrl(`${region.dir}/points.json`)).then((r) => r.json())
   // Halka simülasyonu isteğe bağlı: dosya yoksa site yine çalışır
-  const fringes = await fetch(dataUrl(`${region.dir}/fringes.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null)
-  return { region, points: pts.points, fringes }
+  const raw = await fetch(dataUrl(`${region.dir}/fringes.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  return { region, points: pts.points, fringes: normalizeFringes(raw, region) }
+}
+
+// fringes.json iki biçimde gelebilir: bizim {dates:[{date,max_los_cm,rings_l}]} ya da
+// backend/export_web.py'nin {series:[{L, los_cm}]} (tarihler regions.json ile aynı sırada). İkisini tek biçime çevir.
+function normalizeFringes(raw: unknown, region: Region): Fringes | null {
+  if (!raw || typeof raw !== "object") return null
+  const r = raw as { dates?: Fringes["dates"]; series?: { L: number; los_cm: number }[]; l_half_wave_cm?: number }
+  if (Array.isArray(r.dates)) return { l_half_wave_cm: r.l_half_wave_cm ?? region.half_wave_cm, dates: r.dates }
+  if (Array.isArray(r.series))
+    return {
+      l_half_wave_cm: region.half_wave_cm,
+      dates: r.series.map((s, i) => ({ date: region.dates[i], max_los_cm: Math.abs(s.los_cm), rings_l: s.L })),
+    }
+  return null
 }
 
 // Renk ölçekleri — scripts/mock-data.mjs ile birebir aynı olmalı.

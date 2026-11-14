@@ -1,71 +1,180 @@
 {
- "_aciklama": "export_web.py bu dosyadan nokta tanımlarını okur; hız ve seri veriden hesaplanır. Koordinatlar 14 Kasım 2026 dikey hız haritasındaki çanaklara göre seçildi.",
+ "_aciklama": "export_web.py bu dosyadan nokta tanımlarını okur; hız ve seri veriden hesaplanır. Koordinatlar 14 Kasım 2026 dikey hız haritasındaki çanaklara göre seçildi. ground: clay|rock; role: reference|control; lit_*: briften alınan literatür değerleri (docs/dogrulama.md ile kontrol edin).",
  "points": [
   {
    "id": "aragon",
-   "name": {"tr": "Aragón (havalimanının kuzeyi)", "en": "Aragón (north of the airport)"},
-   "note": {"tr": "Kuzey çanağın en hızlı çöken yeri; eski Texcoco gölünün kil tabanı.", "en": "Fastest-sinking spot of the northern bowl; clay bed of former Lake Texcoco."},
-   "lat": 19.4716, "lon": -99.0575
+   "name": {
+    "tr": "Aragón (havalimanının kuzeyi)",
+    "en": "Aragón (north of the airport)"
+   },
+   "note": {
+    "tr": "Kuzey çanağın en hızlı çöken yeri; eski Texcoco gölünün kil tabanı.",
+    "en": "Fastest-sinking spot of the northern bowl; clay bed of former Lake Texcoco."
+   },
+   "lat": 19.4716,
+   "lon": -99.0575,
+   "ground": "clay",
+   "role": null,
+   "caution": {
+    "tr": "Belirsizlik daha yüksek: göl tabanının maskeli kenarı, iki track burada ayrışıyor.",
+    "en": "Higher uncertainty: masked edge of the lake bed, the two tracks disagree here."
+   }
   },
   {
    "id": "neza",
-   "name": {"tr": "Nezahualcóyotl", "en": "Nezahualcóyotl"},
-   "note": {"tr": "Göl tabanına kurulmuş yoğun yerleşim; hareket neredeyse tamamen dikey.", "en": "Dense housing built on the lake bed; motion is almost purely vertical."},
-   "lat": 19.4, "lon": -99.015
+   "name": {
+    "tr": "Nezahualcóyotl",
+    "en": "Nezahualcóyotl"
+   },
+   "note": {
+    "tr": "Göl tabanına kurulmuş yoğun yerleşim; hareket neredeyse tamamen dikey.",
+    "en": "Dense housing built on the lake bed; motion is almost purely vertical."
+   },
+   "lat": 19.4,
+   "lon": -99.015,
+   "ground": "clay",
+   "role": null,
+   "lit_rate_cm_yr": -38.7,
+   "lit_source": "Cigna & Tapete 2021, Sentinel-1 2014–2019"
   },
   {
    "id": "iztapalapa",
-   "name": {"tr": "Iztapalapa (doğu ova)", "en": "Iztapalapa (eastern plain)"},
-   "note": {"tr": "Peñón Viejo ile Santa Catarina sıradağı arasındaki ova; yer çatlaklarıyla bilinen bölge.", "en": "Plain between Peñón Viejo and the Santa Catarina range; an area known for ground fissures."},
-   "lat": 19.3564, "lon": -99.0407
+   "name": {
+    "tr": "Iztapalapa (doğu ova)",
+    "en": "Iztapalapa (eastern plain)"
+   },
+   "note": {
+    "tr": "Peñón Viejo ile Santa Catarina sıradağı arasındaki ova; yer çatlaklarıyla bilinen bölge.",
+    "en": "Plain between Peñón Viejo and the Santa Catarina range; an area known for ground fissures."
+   },
+   "lat": 19.3564,
+   "lon": -99.0407,
+   "ground": "clay",
+   "role": null,
+   "lit_rate_cm_yr": -39.0,
+   "lit_source": "Cigna & Tapete 2021, Sentinel-1 2014–2019 (Iztapalapa geneli)"
   },
   {
    "id": "penon",
-   "name": {"tr": "Peñón Viejo (volkanik tepe)", "en": "Peñón Viejo (volcanic hill)"},
-   "note": {"tr": "Çöken ovanın ortasında sabit kalan kaya ada: çökme kile özgü.", "en": "A rock island that stays put in the middle of the sinking plain: subsidence is tied to the clay."},
-   "lat": 19.3786, "lon": -99.03
+   "name": {
+    "tr": "Peñón Viejo (volkanik tepe)",
+    "en": "Peñón Viejo (volcanic hill)"
+   },
+   "note": {
+    "tr": "Çöken ovanın ortasında sabit kalan kaya ada: çökme kile özgü.",
+    "en": "A rock island that stays put in the middle of the sinking plain: subsidence is tied to the clay."
+   },
+   "lat": 19.3786,
+   "lon": -99.03,
+   "ground": "rock",
+   "role": "control"
   },
   {
    "id": "zocalo",
-   "name": {"tr": "Zócalo (tarihi merkez)", "en": "Zócalo (historic centre)"},
-   "note": {"tr": "Katedralin ve eski şehrin bulunduğu meydan; çanağın batı yamacı.", "en": "Main square with the cathedral and old city; western slope of the bowl."},
-   "lat": 19.433, "lon": -99.133
+   "name": {
+    "tr": "Zócalo (tarihi merkez)",
+    "en": "Zócalo (historic centre)"
+   },
+   "note": {
+    "tr": "Katedralin ve eski şehrin bulunduğu meydan; çanağın batı yamacı.",
+    "en": "Main square with the cathedral and old city; western slope of the bowl."
+   },
+   "lat": 19.433,
+   "lon": -99.133,
+   "ground": "clay",
+   "role": null
   },
   {
    "id": "angel",
-   "name": {"tr": "Bağımsızlık Anıtı", "en": "Angel of Independence"},
-   "note": {"tr": "Çanağın batı kenarı; anıtın çevresi çöktükçe kaidesine basamak eklendi.", "en": "Western edge of the bowl; steps were added to the base as the ground around it sank."},
-   "lat": 19.427, "lon": -99.168
+   "name": {
+    "tr": "Bağımsızlık Anıtı",
+    "en": "Angel of Independence"
+   },
+   "note": {
+    "tr": "Çanağın batı kenarı; anıtın çevresi çöktükçe kaidesine basamak eklendi.",
+    "en": "Western edge of the bowl; steps were added to the base as the ground around it sank."
+   },
+   "lat": 19.427,
+   "lon": -99.168,
+   "ground": "clay",
+   "role": null
   },
   {
    "id": "tlaxialtemalco",
-   "name": {"tr": "Xochimilco–Tláhuac sulak alanı", "en": "Xochimilco–Tláhuac wetland"},
-   "note": {"tr": "San Luis Tlaxialtemalco'nun kuzeyindeki tarım alanı; haritadaki en hızlı çöken nokta.", "en": "Farmland north of San Luis Tlaxialtemalco; the fastest-sinking point on the map."},
-   "lat": 19.2682, "lon": -99.0392
+   "name": {
+    "tr": "Xochimilco–Tláhuac sulak alanı",
+    "en": "Xochimilco–Tláhuac wetland"
+   },
+   "note": {
+    "tr": "San Luis Tlaxialtemalco'nun kuzeyindeki tarım alanı; haritadaki en hızlı çöken nokta.",
+    "en": "Farmland north of San Luis Tlaxialtemalco; the fastest-sinking point on the map."
+   },
+   "lat": 19.2682,
+   "lon": -99.0392,
+   "ground": "clay",
+   "role": null
   },
   {
    "id": "chalco",
-   "name": {"tr": "Chalco ovası (Xico'nun güneyi)", "en": "Chalco plain (south of Xico)"},
-   "note": {"tr": "Eski Chalco gölü tabanı; Xico volkanının hemen güneyindeki tarlalar.", "en": "Bed of former Lake Chalco; fields just south of the Xico volcano."},
-   "lat": 19.2453, "lon": -98.9363
+   "name": {
+    "tr": "Chalco ovası (Xico'nun güneyi)",
+    "en": "Chalco plain (south of Xico)"
+   },
+   "note": {
+    "tr": "Eski Chalco gölü tabanı; Xico volkanının hemen güneyindeki tarlalar.",
+    "en": "Bed of former Lake Chalco; fields just south of the Xico volcano."
+   },
+   "lat": 19.2453,
+   "lon": -98.9363,
+   "ground": "clay",
+   "role": null,
+   "lit_rate_cm_yr": -35.0,
+   "lit_source": "Solano-Rojas vd. 2024 (>35)"
   },
   {
    "id": "xochimilco",
-   "name": {"tr": "Xochimilco (çanak kenarı)", "en": "Xochimilco (bowl edge)"},
-   "note": {"tr": "Güney çanağın batı ucu; merkeze göre yavaş.", "en": "Western tip of the southern bowl; slow compared with its centre."},
-   "lat": 19.262, "lon": -99.1
+   "name": {
+    "tr": "Xochimilco (çanak kenarı)",
+    "en": "Xochimilco (bowl edge)"
+   },
+   "note": {
+    "tr": "Güney çanağın batı ucu; merkeze göre yavaş.",
+    "en": "Western tip of the southern bowl; slow compared with its centre."
+   },
+   "lat": 19.262,
+   "lon": -99.1,
+   "ground": "clay",
+   "role": null
   },
   {
    "id": "cu",
-   "name": {"tr": "Ciudad Universitaria (lav zemin)", "en": "Ciudad Universitaria (lava ground)"},
-   "note": {"tr": "Bağımsız kontrol: referans olmayan kaya zeminde hareket sıfıra yakın.", "en": "Independent check: near-zero motion on rock that is not the reference."},
-   "lat": 19.332, "lon": -99.187
+   "name": {
+    "tr": "Ciudad Universitaria (lav zemin)",
+    "en": "Ciudad Universitaria (lava ground)"
+   },
+   "note": {
+    "tr": "Bağımsız kontrol: referans olmayan kaya zeminde hareket sıfıra yakın.",
+    "en": "Independent check: near-zero motion on rock that is not the reference."
+   },
+   "lat": 19.332,
+   "lon": -99.187,
+   "ground": "rock",
+   "role": "control"
   },
   {
    "id": "santafe",
-   "name": {"tr": "Santa Fe (referans)", "en": "Santa Fe (reference)"},
-   "note": {"tr": "Havza dışı kaya zemin; bütün ölçümler bu noktaya göre.", "en": "Bedrock outside the basin; every measurement is relative to this point."},
-   "lat": 19.36, "lon": -99.26
+   "name": {
+    "tr": "Santa Fe (referans)",
+    "en": "Santa Fe (reference)"
+   },
+   "note": {
+    "tr": "Havza dışı kaya zemin; bütün ölçümler bu noktaya göre.",
+    "en": "Bedrock outside the basin; every measurement is relative to this point."
+   },
+   "lat": 19.36,
+   "lon": -99.26,
+   "ground": "rock",
+   "role": "reference"
   }
  ]
 }

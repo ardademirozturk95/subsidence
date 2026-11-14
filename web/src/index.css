@@ -2,8 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter/opsz.css";
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/500.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -13,7 +11,7 @@
     --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter Variable", "Segoe UI", system-ui, sans-serif;
     --font-serif: var(--font-sans);
     --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Variable", "Segoe UI", system-ui, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     --color-paper: var(--background);
     --color-card2: var(--card);
     --color-ink: var(--foreground);

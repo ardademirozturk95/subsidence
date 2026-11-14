@@ -70,8 +70,8 @@ Yerleşim (masaüstü):
   - `HANDOFF.md`: veri hattının ayrıntısı.
   - `docs/dogrulama.md`: literatür doğrulaması.
   - `docs/challenge-cevaplari.md`: 3 sorunun sade cevabı.
-  - `docs/l-vs-c-raporu.md`: Sentinel-1 testi, yedek.
-  - `docs/video-senaryosu.md`: video senaryosu; **güncel değil**, eski örnek veri rakamları var.
+  - `docs/arsiv/l-vs-c-raporu.md`: Sentinel-1 testi, yedek.
+  - `docs/arsiv/video-senaryosu.md`: eski video senaryosu; **güncel değil**, yeniden yazılacak.
 
 ## 7. Bilinen sorunlar ve açık işler (dağıtılmayı bekliyor)
 

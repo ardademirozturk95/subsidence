@@ -8,7 +8,10 @@ Girdi  (hepsi backend/out altında, ağ ve token GEREKMEZ):
     regions.json
     cdmx/points.json
     cdmx/disp_<tarih>.png   o tarihe kadar birikmiş dikey hareket
-    cdmx/wrap_<tarih>.png   aynı tarihte sarılı LOS fazı (ana track)
+    cdmx/lwrap_<tarih>.png  aynı tarihte sarılı LOS fazı, L-band (ana track, bir tur 11,92 cm)
+    cdmx/cwrap_<tarih>.png  aynı hareket C-band dalga boyuyla sarılmış (SİMÜLASYON, bir tur 2,77 cm)
+    cdmx/val/*.png          piksel değeri okumak için 8 bit gri kodlu değer (regions.json > value_encoding)
+    cdmx/fringes.json       en hızlı noktada tarih tarih L ve C halka sayısı
     cdmx/rate.png           dikey hız haritası (cm/yıl), disp ile aynı renk mantığı
 
 Çalıştır:  backend\\.venv\\Scripts\\python backend\\export_web.py --out web\\public\\data
@@ -29,15 +32,19 @@ import numpy as np
 HERE = Path(__file__).parent
 LAMBDA_L_CM = 23.84
 HALF_WAVE_CM = LAMBDA_L_CM / 2
+LAMBDA_C_CM = 5.5465  # Sentinel-1 C-band
+HALF_WAVE_C_CM = LAMBDA_C_CM / 2
 BOX = dict(south=19.15, north=19.60, west=-99.30, east=-98.85)
 REF = (19.36, -99.26)  # Santa Fe
 ZONE = 14
 TRACKS = (113, 19)  # (descending, ascending)
+RATE_RANGE = [-40.0, 8.0]
 
 DEFAULT_STOPS = {
     # t: 0..1 konum, renk [R,G,B]. disp: en negatif -> 0 cm (beyaz) -> en pozitif.
-    "disp_neg": [[0.0, [84, 0, 46]], [0.25, [165, 15, 21]], [0.5, [239, 101, 72]], [0.75, [253, 187, 132]], [1.0, [255, 255, 255]]],
-    "disp_pos": [[0.0, [255, 255, 255]], [1.0, [49, 130, 189]]],
+    # Uydu görüntüsü üstünde iki temada da okunur: sarı -> turuncu -> kırmızı -> koyu bordo (beyaz uç yok)
+    "disp_neg": [[0.0, [103, 0, 13]], [0.25, [189, 0, 38]], [0.5, [240, 59, 32]], [0.75, [253, 141, 60]], [0.9, [254, 204, 92]], [1.0, [255, 237, 160]]],
+    "disp_pos": [[0.0, [198, 219, 239]], [1.0, [33, 113, 181]]],
     "wrap": [[0.0, [255, 0, 0]], [1 / 6, [255, 255, 0]], [2 / 6, [0, 255, 0]], [3 / 6, [0, 255, 255]],
              [4 / 6, [0, 0, 255]], [5 / 6, [255, 0, 255]], [1.0, [255, 0, 0]]],
 }
@@ -105,7 +112,7 @@ class Sampler:
         return out
 
 
-def write_png(path, idx, palette):
+def write_png(path, idx, palette, alpha=None):
     """Bağımlılıksız paletli PNG yazıcı (Pillow gerekmez). idx: (h, w) uint8; 0 = saydam; palette: (256, 3) uint8.
     Paletli PNG, RGBA'ya göre ~4 kat küçük; renkler aynı."""
     h, w = idx.shape
@@ -114,7 +121,19 @@ def write_png(path, idx, palette):
     def chunk(tag, data):
         return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
     Path(path).write_bytes(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 3, 0, 0, 0))
-                           + chunk(b"PLTE", np.asarray(palette, np.uint8).tobytes()) + chunk(b"tRNS", b"\x00")
+                           + chunk(b"PLTE", np.asarray(palette, np.uint8).tobytes())
+                           + chunk(b"tRNS", b"\x00" if alpha is None else np.asarray(alpha, np.uint8).tobytes())
+                           + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
+
+
+def write_gray(path, idx):
+    """8 bit gri PNG (değer kodlaması için; 0 = veri yok)."""
+    h, w = idx.shape
+    raw = np.concatenate([np.zeros((h, 1), np.uint8), idx.astype(np.uint8)], axis=1).tobytes()
+
+    def chunk(tag, data):
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
+    Path(path).write_bytes(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 0, 0, 0, 0))
                            + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
 
 
@@ -141,28 +160,56 @@ def hexc(c):
 
 def legend(rng, stops):
     """Arayüz lejantı için durakları fiziksel birimde verir: [[cm, '#hex'], ...] ve sarılı faz [[tur 0..1, '#hex'], ...]."""
-    lo, hi = rng
-    cms = sorted({round(lo * (1 - t), 2) for t, _ in stops["disp_neg"]} | {0.0, float(hi)})
-    return dict(disp_stops_cm=[[c, hexc(disp_rgb(np.array([c]), rng, stops)[0])] for c in cms],
-                wrap_stops=[[round(t, 4), hexc(c)] for t, c in stops["wrap"]])
+    def stops_for(r):
+        lo, hi = r
+        vals = sorted({round(lo * (1 - t), 2) for t, _ in stops["disp_neg"]} | {0.0, float(hi)})
+        return [[c, hexc(disp_rgb(np.array([c]), r, stops)[0])] for c in vals]
+    return dict(disp_stops_cm=stops_for(rng), rate_stops_cm_yr=stops_for(RATE_RANGE),
+                wrap_stops=[[round(t, 4), hexc(c)] for t, c in stops["wrap"]], fade=dict(alpha_min=FADE[0], start_abs=FADE[1], full_at_abs=FADE[2], up_start=FADE_UP[0], up_full=FADE_UP[1], up_max=FADE_UP[2]),
+                nodata=dict(rgb=hexc(NODATA_RGBA[:3]), alpha=round(NODATA_RGBA[3] / 255, 2)))
 
 
-def color_disp(cm, rng, stops):
-    """Birikmiş hareket -> (indeks, palet). 255 renk kademesi (35+5 cm aralıkta ~0,16 cm); NaN -> indeks 0 (saydam)."""
+FADE = (0.0, 1.5, 6.0)  # |değer| <= 1,5 cm: çizilmez (gürültü düzeyi, şehir görünsün); 1,5..6 arası artar; >= 6: tam opak.
+NODATA_RGBA = (128, 128, 128, 110)  # maskeli (veri yok): yarı saydam gri örtü, "çökme yok" ile karışmasın
+# Amaç: ±2-3 cm atmosfer gürültüsü ve sabit zemin soluk kalsın, çökme öne çıksın (koyu ve açık temada).
+
+
+def color_disp(cm, rng, stops, fade=FADE):
+    """Hareket -> (indeks, palet, alfa). 255 kademe; NaN -> indeks 0 (tam saydam).
+    İndeks i (1..255) her zaman lo + (i-1)/254*(hi-lo) değerine karşılık gelir (değer PNG'leriyle aynı kodlama)."""
     lo, hi = rng
     levels = lo + np.arange(255) / 254 * (hi - lo)
-    levels[np.abs(levels).argmin()] = 0.0  # 0 cm tam beyaz durağa otursun
-    pal = np.vstack([[[0, 0, 0]], disp_rgb(levels, rng, stops)])
-    idx = 1 + np.abs(np.clip(np.nan_to_num(cm), lo, hi)[..., None] - levels).argmin(-1)
-    return np.where(np.isfinite(cm), idx, 0).astype(np.uint8), pal
+    pal = np.vstack([[NODATA_RGBA[:3]], disp_rgb(levels, rng, stops)])
+    alpha = np.concatenate([[NODATA_RGBA[3]], np.round(255 * fade_alpha(levels, fade))]) if fade else None
+    idx = value_index(cm, rng)
+    return idx, pal, alpha
 
 
-def color_wrap(los_cm, stops):
-    """LOS hareketi -> sarılı faz (indeks, palet). Bir tur = lambda/2 = 11,92 cm."""
-    t = np.mod(np.nan_to_num(los_cm) / HALF_WAVE_CM, 1.0)
-    pal = np.vstack([[[0, 0, 0]], ramp(stops["wrap"], (np.arange(255) + 0.5) / 255)])
+FADE_UP = (3.0, 12.0, 0.6)  # yükselme (artı) tarafı: çoğu gürültü; 3 cm'den başlar, en fazla %60 opak
+
+
+def fade_alpha(v, fade=FADE):
+    a0, start, full = fade
+    down = np.clip(a0 + (1 - a0) * (np.abs(v) - start) / (full - start), a0, 1.0)
+    s_up, f_up, max_up = FADE_UP
+    up = np.clip((v - s_up) / (f_up - s_up), 0, 1) * max_up
+    return np.where(v < 0, down, up)
+
+
+def value_index(v, rng):
+    """Değer -> 1..255 (0 = veri yok). Arayüz: değer = lo + (i-1)/254*(hi-lo)."""
+    lo, hi = rng
+    i = 1 + np.round((np.clip(np.nan_to_num(v), lo, hi) - lo) / (hi - lo) * 254)
+    return np.where(np.isfinite(v), i, 0).astype(np.uint8)
+
+
+def color_wrap(los_cm, stops, half_wave=HALF_WAVE_CM):
+    """LOS hareketi -> sarılı faz (indeks, palet). Bir tur = lambda/2 (L: 11,92 cm, C: 2,77 cm)."""
+    t = np.mod(np.nan_to_num(los_cm) / half_wave, 1.0)
+    pal = np.vstack([[NODATA_RGBA[:3]], ramp(stops["wrap"], (np.arange(255) + 0.5) / 255)])
     idx = 1 + np.minimum((t * 255).astype(int), 254)
-    return np.where(np.isfinite(los_cm), idx, 0).astype(np.uint8), pal
+    alpha = np.concatenate([[NODATA_RGBA[3]], np.full(255, 255)])
+    return np.where(np.isfinite(los_cm), idx, 0).astype(np.uint8), pal, alpha
 
 
 # ---------- zincir ----------
@@ -276,15 +323,19 @@ def main():
 
     d = outdir / "cdmx"
     d.mkdir(parents=True, exist_ok=True)
-    for old in list(d.glob("disp_*.png")) + list(d.glob("wrap_*.png")):
+    (d / "val").mkdir(exist_ok=True)
+    for old in list(d.glob("disp_*.png")) + list(d.glob("*wrap_*.png")) + list((d / "val").glob("*.png")):
         os.remove(old)
     Ugrid = np.stack([samp(u) for u in R["U"]]).astype("float32")
     Lgrid = np.stack([samp(s) for s in R["Smaster"]]).astype("float32")
     rate_grid = samp(R["vU"]).astype("float32")
     for k, s in enumerate(R["dates"]):
         write_png(d / f"disp_{iso(s)}.png", *color_disp(Ugrid[k], a.range, stops))
-        write_png(d / f"wrap_{iso(s)}.png", *color_wrap(Lgrid[k], stops))
-    write_png(d / "rate.png", *color_disp(rate_grid, [-40.0, 8.0], stops))
+        write_png(d / f"lwrap_{iso(s)}.png", *color_wrap(Lgrid[k], stops, HALF_WAVE_CM))
+        write_png(d / f"cwrap_{iso(s)}.png", *color_wrap(Lgrid[k], stops, HALF_WAVE_C_CM))
+        write_gray(d / "val" / f"disp_{iso(s)}.png", value_index(Ugrid[k], a.range))
+    write_png(d / "rate.png", *color_disp(rate_grid, RATE_RANGE, stops))
+    write_gray(d / "val" / "rate.png", value_index(rate_grid, RATE_RANGE))
     if a.grid:  # sayısal ızgara: siteye konmaz (büyük), kontrol ve başka analizler için
         np.savez_compressed(a.grid, lat=lat, lon=lon, dates=np.array(R["dates"]), disp_cm=Ugrid.astype("float16"),
                             los_master_cm=Lgrid.astype("float16"), rate_cm_yr=rate_grid, east_rate_cm_yr=samp(R["vE"]).astype("float32"))
@@ -304,7 +355,17 @@ def main():
         q["series"] = [dict(date=iso(s), disp_cm=None if v is None else round(v, 2)) for s, v in zip(R["dates"], ser)]
         q["los_rate_cm_yr"] = {str(t): (round(float(np.nanmedian(R["A"][t]["rate"][win])), 1) if np.isfinite(R["A"][t]["rate"][win]).any() else None) for t in TRACKS}
         q["east_rate_cm_yr"] = None if rate is None else round(float(np.nanmedian(R["vE"][win])), 1)
+        q["_los_master"] = [float(np.nanmedian(L[win])) if np.isfinite(L[win]).any() else None for L in R["Smaster"]]
         out_pts.append(q)
+    fast = min((q for q in out_pts if q["rate_cm_yr"] is not None), key=lambda q: q["rate_cm_yr"])
+    fr = dict(point_id=fast["id"], track=R["master"], half_wave_cm=dict(L=round(HALF_WAVE_CM, 3), C=round(HALF_WAVE_C_CM, 3)),
+              note=dict(tr="En hızlı noktada (7x7 piksel medyan) birikmiş LOS hareketi ve bunun L-band ile C-band dalga boyunda kaç halkaya karşılık geldiği. C-band değeri simülasyondur.",
+                        en="Cumulative LOS motion at the fastest point (7x7 pixel median) and how many fringes it equals at L-band and C-band wavelength. C-band is a simulation."),
+              series=[dict(date=iso(s), los_cm=round(v, 2), L=round(abs(v) / HALF_WAVE_CM, 2), C=round(abs(v) / HALF_WAVE_C_CM, 2))
+                      for s, v in zip(R["dates"], fast["_los_master"])])
+    (d / "fringes.json").write_text(json.dumps(fr, ensure_ascii=False, indent=1), encoding="utf-8")
+    for q in out_pts:
+        del q["_los_master"]
     (d / "points.json").write_text(json.dumps(dict(points=out_pts), ensure_ascii=False, indent=1), encoding="utf-8")
 
     dd = [d64(s) for s in R["dates"]]
@@ -322,7 +383,9 @@ def main():
         gap=[str(longest[1]), str(longest[2])] if longest[0] > 12 else None, gaps=gaps,
         disp_range_cm=a.range, half_wave_cm=round(HALF_WAVE_CM, 2), dir="cdmx",
         colors=legend(a.range, stops),
-        rate_range_cm_yr=[-40, 8], wrap_track=R["master"],
+        rate_range_cm_yr=RATE_RANGE, wrap_track=R["master"], half_wave_c_cm=round(HALF_WAVE_C_CM, 3),
+        value_encoding=dict(files="val/disp_<tarih>.png, val/rate.png", formula="deger = min + (gri - 1) / 254 * (max - min); gri 0 = veri yok",
+                            disp_range_cm=a.range, rate_range_cm_yr=RATE_RANGE),
         stats=dict(days=int(R["td"][-1]), vertical_rate_p1_cm_yr=round(float(np.nanpercentile(R["vU"], 1)), 1),
                    valid_frac=round(float(np.isfinite(R["vU"]).mean()), 3)),
     )

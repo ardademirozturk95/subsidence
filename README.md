@@ -1,13 +1,17 @@
 # Mexico City batıyor
 
-NASA Space Apps 2026, **Dancing with the SARs**. NISAR L-band radarıyla Mexico City'de zemin çökmesini
-zaman içinde gösteren interaktif harita: birikmiş çökme (cm), radar halkaları (sarılı faz),
-ikisini karşılaştıran kaydırıcı, nokta zaman serisi ve HH/HV/RGB polarizasyon arka planı. TR/EN.
+**NASA Space Apps 2026, "Dancing with the SARs"**
 
-> Şu an `web/public/data/` içindeki her şey **örnek veri** (`scripts/mock-data.mjs` üretir).
-> Gerçek NISAR çıktısı aynı şemayla konunca arayüz değişmeden çalışır ve üstteki rozet "NISAR verisi" olur.
+NISAR uydusunun gerçek L-band radar verisiyle Mexico City'nin 11 ayda (Kasım 2025 – Ekim 2026) ne kadar çöktüğünü gösteren etkileşimli bir web sitesi.
+Bazı mahalleler yılda 35 cm alçalıyor. Sebebi büyük ölçüde insan: şehrin altındaki akiferden, yağmurla geri gelenin iki katı su çekiliyor.
 
-## Çalıştırma
+Ekip: Arda, Mert, Yağız.
+
+Projenin güncel durumu, sonuçları ve açık işler: **[docs/proje-durumu.md](docs/proje-durumu.md)**
+
+---
+
+## Siteyi çalıştırmak
 
 ```bash
 cd web
@@ -15,63 +19,44 @@ npm install
 npm run dev
 ```
 
-Örnek veriyi yeniden üretmek: `node scripts/mock-data.mjs`
+Tarayıcıda `http://localhost:5173`. Tam yerleşimi görmek için pencereyi geniş tutun; dar ekranda paneller alt alta dizilir.
 
-## Veri sözleşmesi (Mert ve Yağız için)
+Site sadece `web/public/data/` klasöründeki hazır dosyaları okur. Sunucu, API anahtarı ya da token gerekmez.
 
-Hepsi `web/public/data/` altına gider.
+## Klasörler
 
-**`regions.json`**
-
-```json
-{ "regions": [{
-  "id": "cdmx",
-  "name": { "tr": "Mexico City", "en": "Mexico City" },
-  "center": [19.38, -99.08], "zoom": 11,
-  "bounds": [[19.15, -99.3], [19.6, -98.85]],
-  "source": { "status": "verified", "sensor": "NISAR L-band HH", "product": "L2 GUNW + L2 GCOV", "maturity": "provisional", "track": "…" },
-  "dates": ["2026-06-17", "2026-06-29", "…"],
-  "gap": ["2026-07-27", "2026-08-10"],
-  "disp_range_cm": [-15, 3],
-  "half_wave_cm": 11.9,
-  "dir": "cdmx"
-}]}
+```
+web/                  site (React + Vite + Tailwind + Leaflet)
+  src/App.tsx         yerleşim ve paneller
+  src/components/     harita, zaman çizgisi, grafik, HH/HV karşılaştırıcı
+  src/lib/i18n.tsx    bütün metinler (Türkçe / İngilizce)
+  public/data/        sitenin okuduğu gerçek NISAR verisi (PNG + JSON)
+backend/              veri hattı (Python): NISAR'dan okuma, zincir, dikey hız, siteye aktarma
+  arsiv/              kullanılmayan deneyler (Sentinel-1 karşılaştırması, C-band simülasyonu)
+docs/                 sonuçlar, doğrulama, challenge cevapları
+  arsiv/              eski belgeler
+HANDOFF.md            veri hattının ayrıntılı teknik notu
 ```
 
-`status` `"mock"` ise rozet "Örnek veri", `"verified"` ise "NISAR verisi" yazar.
+## Veriyi baştan üretmek (isteğe bağlı)
 
-**`<dir>/points.json`**
+Gerekenler: Python 3, bir Earthdata hesabı ve `EARTHDATA_TOKEN` ortam değişkeni (urs.earthdata.nasa.gov > Generate Token).
 
-```json
-{ "points": [{
-  "id": "neza",
-  "name": { "tr": "Nezahualcóyotl", "en": "Nezahualcóyotl" },
-  "note": { "tr": "…", "en": "…" },
-  "lat": 19.4, "lon": -99.015,
-  "rate_cm_yr": -34.7,
-  "s1_rate_cm_yr": -33.5,
-  "series": [{ "date": "2026-06-17", "disp_cm": 0 }, { "date": "2026-06-29", "disp_cm": -1.1 }]
-}]}
+```bash
+python -m venv backend/.venv
+backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
 ```
 
-`series` içindeki tarihler `dates` ile birebir aynı olmalı. `disp_cm` ilk tarihe göre birikmiş **dikey** hareket, eksi = çöküyor.
+Sırayla:
 
-**`<dir>/*.png`** — hepsi `bounds` kutusunu tam kaplayan, kuzey yukarı, EPSG:4326 düz ızgara.
+1. `backend/chain_test.py --track 113` ve `--track 19`: NISAR GUNW çiftlerinden Mexico City kesitini okur ve 11 aylık zinciri kurar. Dosyalar indirilmez, buluttan parça parça okunur.
+2. `backend/decompose.py`: iki bakış yönünden gerçek dikey hızı çıkarır.
+3. `backend/export_web.py`: sitenin okuduğu PNG ve JSON dosyalarını `web/public/data/` altına yazar.
+4. `backend/gcov_subset.py --track 19 --date 20261013`: HH / HV / RGB arka plan görüntüleri.
 
-| Dosya | İçerik | Renk |
-|---|---|---|
-| `disp_<tarih>.png` | O tarihe kadar birikmiş dikey hareket | `DISP_STOPS` (`web/src/lib/data.ts`), 0 cm = beyaz durak; veri yoksa alfa 0 |
-| `wrap_<tarih>.png` | Aynı hareketin sarılı fazı (bir tur = λ/2 ≈ 11.9 cm LOS) | `WRAP_STOPS`, döngüsel |
-| `hh.png`, `hv.png` | GCOV geri saçılım, dB → gri ton | −30…−2 dB |
-| `rgb.png` | R: HH, G: HV, B: HH/HV oranı | |
+Ara çıktılar `backend/out/` altına yazılır; bu klasör git'e girmez. Ayrıntılar [HANDOFF.md](HANDOFF.md) dosyasında.
 
-Python tarafında renklendirme `scripts/mock-data.mjs` içindeki `ramp` ve `dispT` ile aynı mantıkta olmalı.
+## Veri kaynağı
 
-## Yayına alma
-
-`.github/workflows/deploy.yml`, `main`'e her push'ta `web/`'i derleyip GitHub Pages'e koyar.
-Bir kez GitHub'da **Settings > Pages > Source: GitHub Actions** seçilmeli.
-
-## Ekip
-
-Arda (arayüz, sunum), Mert (NISAR GUNW veri hattı), Yağız (GCOV polarizasyon, Konya, bilimsel metin).
+NISAR L2 GUNW ve L2 GCOV, provisional sürüm, ASF DAAC üzerinden (NASA/ISRO).
+Track 19 (ascending) ve 113 (descending). Troposfer düzeltmesi yok: denendi, bu havzada gürültüyü artırdı.
