@@ -4,6 +4,8 @@ import { SinkMap } from "@/components/SinkMap"
 import { Timeline } from "@/components/Timeline"
 import { SeriesChart } from "@/components/SeriesChart"
 import { PolCompare } from "@/components/PolCompare"
+import { PointPicker } from "@/components/PointPicker"
+import { Everyday } from "@/components/Everyday"
 import { fmtCm, fmtDate, loadAll, type Backdrop, type Fringes, type Point, type Region, type View } from "@/lib/data"
 import { I18nProvider, useI18n, type Key } from "@/lib/i18n"
 
@@ -32,7 +34,7 @@ function Shell() {
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [view, setView] = useState<View>("disp")
-  const [backdrop, setBackdrop] = useState<Backdrop>("map")
+  const backdrop: Backdrop = "map"
   const [selectedId, setSelectedId] = useState("neza")
   const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"))
   useEffect(() => {
@@ -129,7 +131,7 @@ function Shell() {
               <Story />
             </section>
             <section className="card p-5 lg:p-8" aria-labelledby="pol-h">
-              <PolCompare region={region} backdrop={backdrop} onBackdrop={setBackdrop} />
+              <PolCompare region={region} />
             </section>
           </div>
 
@@ -171,23 +173,14 @@ function ViewSwitch({ view, onView, fringes, date }: { view: View; onView: (v: V
 
 function RegionPanel({ points, point, region, index, onSelect }: { points: Point[]; point: Point; region: Region; index: number; onSelect: (id: string) => void }) {
   const { t, lang, pick } = useI18n()
+  void pick
   const cur = point.series[index]?.disp_cm ?? 0
   const stable = Math.abs(point.rate_cm_yr) < 2
   const nf = (v: number, d = 1) => Math.abs(v).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { minimumFractionDigits: d, maximumFractionDigits: d })
   const p1 = (region as Region & { stats?: { vertical_rate_p1_cm_yr?: number } }).stats?.vertical_rate_p1_cm_yr
   return (
     <div aria-live="polite">
-      <label className="block">
-        <span className="sr-only">{t("regionPick")}</span>
-        <select
-          value={point.id}
-          onChange={(e) => onSelect(e.target.value)}
-          className="w-full cursor-pointer appearance-none rounded-md border border-border bg-card2 bg-[length:14px] bg-[right_10px_center] bg-no-repeat py-1.5 pr-8 pl-2.5 font-display text-2xl leading-tight font-semibold focus-visible:outline-2 focus-visible:outline-staff"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%236a675f' stroke-width='2'/%3E%3C/svg%3E\")" }}
-        >
-          {points.map((p) => <option key={p.id} value={p.id}>{pick(p.name)}</option>)}
-        </select>
-      </label>
+      <PointPicker points={points} value={point.id} region={region} onSelect={onSelect} />
       <p className="mt-2 text-sm text-ink/75">{pick(point.note)}</p>
 
       <div className="mt-4">
@@ -213,7 +206,7 @@ function RegionPanel({ points, point, region, index, onSelect }: { points: Point
           <dd className="font-display text-2xl font-semibold tabular-nums">{region.dates.length}</dd>
         </div>
       </dl>
-      {stable && <p className="mt-3 text-sm font-medium">{t("statStable")}</p>}
+      <Everyday cum={cur} rate={point.rate_cm_yr} />
     </div>
   )
 }
@@ -261,14 +254,14 @@ function Story() {
           <p className="text-sm leading-relaxed text-ink/80">{t("whyBlind")}</p>
           <p className="text-sm leading-relaxed text-muted-foreground">{t("storyJpl")} {t("whyCheck")}</p>
         </div>
-        <details className="text-xs text-muted-foreground">
-          <summary className="cursor-pointer text-sm font-semibold text-ink/70">{t("sourcesLabel")}</summary>
-          <ul className="mt-2 space-y-1">
+        <div className="text-xs text-muted-foreground">
+          <h3 className="text-sm font-semibold text-ink/80">{t("sourcesLabel")}</h3>
+          <ul className="mt-2 space-y-1.5">
             {SOURCES.map(([label, href]) => (
               <li key={href}><a href={href} target="_blank" rel="noreferrer" className="underline decoration-ink/30 underline-offset-2 hover:text-ink">{label}</a></li>
             ))}
           </ul>
-        </details>
+        </div>
       </div>
     </div>
   )
