@@ -70,7 +70,7 @@ export function SinkMap({ region, points, date, view, fringes, tilt, backdrop, s
           const sel = p.id === selectedId
           const now = p.series.find((s) => s.date === date)?.disp_cm ?? 0
           const beta = tiltPointBeta(tilt, p.id)
-          const betaInv = beta && beta > 0 ? Math.round(1 / beta).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB") : null
+          const betaCm = beta !== null && beta > 0 ? (beta * 10000).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { maximumFractionDigits: 1 }) : null
           return (
             <CircleMarker
               key={p.id}
@@ -83,7 +83,7 @@ export function SinkMap({ region, points, date, view, fringes, tilt, backdrop, s
             >
               <Tooltip permanent={sel} direction="right" offset={[10, 0]} className="pt-label">
                 <span>{pick(p.name)}</span>
-                {betaInv && <span className="ml-1.5 opacity-75">· {t("tiltTooltipBeta", { n: betaInv })}</span>}
+                {showTilt && betaCm && <span className="ml-1.5 opacity-75">· {t("tiltTooltipBeta", { n: betaCm })}</span>}
               </Tooltip>
             </CircleMarker>
           )
@@ -199,9 +199,9 @@ function Legend({ region, view, half }: { region: Region; view: View; half: numb
         />
         <div className="relative mt-1 h-4 tabular-nums">
           <span className="num absolute left-0">0</span>
-          <span className="num absolute -translate-x-1/2" style={{ left: "25%" }}>1/5000</span>
-          <span className="num absolute -translate-x-1/2" style={{ left: "55%" }}>1/2000</span>
-          <span className="num absolute right-0">1/1000 yr⁻¹</span>
+          <span className="num absolute -translate-x-1/2" style={{ left: "25%" }}>2</span>
+          <span className="num absolute -translate-x-1/2" style={{ left: "55%" }}>5</span>
+          <span className="num absolute right-0">10+ cm</span>
         </div>
         <div className="flex justify-between text-muted-foreground">
           <span>{t("legendTiltLow")}</span>
