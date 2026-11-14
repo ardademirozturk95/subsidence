@@ -40,7 +40,7 @@ HANDOFF.md            veri hattının ayrıntılı teknik notu
 
 ## Veriyi baştan üretmek (isteğe bağlı)
 
-Gerekenler: Python 3, bir Earthdata hesabı ve `EARTHDATA_TOKEN` ortam değişkeni (urs.earthdata.nasa.gov > Generate Token).
+Gerekenler: Python 3, bir Earthdata hesabı ve `EARTHDATA_TOKEN` ortam değişkeni var (urs.earthdata.nasa.gov > Generate Token).
 
 ```bash
 python -m venv backend/.venv
