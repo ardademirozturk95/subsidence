@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { L10n, Lang } from "@/lib/data"
 
 const S = {
-  title: { tr: "Mexico City batıyor", en: "Mexico City is sinking" },
+  title: { tr: "SinkWatch", en: "SinkWatch" },
   lede: {
     tr: "Şehir eski bir gölün kili üstünde duruyor. Yerin altından su çekildikçe kil sıkışıyor ve zemin bazı mahallelerde yılda 30 cm'den fazla alçalıyor. Bu harita, NISAR uydusunun 11 aylık gerçek radar ölçümlerinden hesaplandı.",
     en: "The city sits on the clay of an old lake. As water is pumped from underground the clay compacts, and in some neighbourhoods the ground drops more than 30 cm a year. This map was computed from 11 months of real NISAR radar measurements.",
@@ -127,8 +127,8 @@ const S = {
   chartTrend: { tr: "11 ayın eğilimi", en: "11-month trend" },
   pointTitle: { tr: "{n}, NISAR'ın {k} ölçümüyle", en: "{n}, from {k} NISAR measurements" },
   subtitle: {
-    tr: "NISAR L-band radarı, 11 ay, 28 ölçüm: bazı mahalleler yılda 35 cm alçalıyor.",
-    en: "NISAR L-band radar, 11 months, 28 passes: some neighbourhoods drop 35 cm a year.",
+    tr: "Bunu NISAR radarıyla kurduk ve dünyanın en hızlı çöken şehirlerinden biri olan Mexico City'de denedik: bazı mahalleler yılda 35 cm alçalıyor. Aynı yöntem her şehirde uygulanabilir.",
+    en: "We built this with NISAR radar and tested it on Mexico City, one of the fastest-sinking cities on Earth: some neighbourhoods drop 35 cm a year. The same method works for any city.",
   },
   themeToggle: { tr: "Açık / koyu tema", en: "Light / dark theme" },
   polView: { tr: "Görünüm", en: "View" },
