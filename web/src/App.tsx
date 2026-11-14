@@ -96,9 +96,9 @@ function Shell() {
 
       {data && region && point && (
         <>
-          <main className="grid gap-4 p-4 lg:h-[calc(100svh-104px)] lg:grid-cols-[minmax(300px,340px)_minmax(0,1fr)_minmax(320px,380px)] lg:grid-rows-[minmax(0,auto)_minmax(0,1fr)] lg:p-5">
+          <main className="grid gap-4 p-4 lg:p-5 xl:h-[calc(100svh-104px)] xl:grid-cols-[minmax(290px,330px)_minmax(0,1fr)_minmax(310px,360px)] lg:grid-cols-2">
             {/* Orta: harita oynatıcı */}
-            <section className="card flex min-h-[80svh] flex-col overflow-hidden lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-0" aria-label={t("mapLabel")}>
+            <section className="card flex min-h-[80svh] flex-col overflow-hidden lg:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-start-1 xl:min-h-0" aria-label={t("mapLabel")}>
               <ViewSwitch view={view} onView={setView} fringes={data.fringes} date={region.dates[index]} />
               <div className="relative min-h-[56svh] flex-1">
                 <SinkMap region={region} points={data.points} date={region.dates[index]} view={view} fringes={data.fringes}
@@ -110,27 +110,28 @@ function Shell() {
             </section>
 
             {/* Sol üst: bölge ve sayılar */}
-            <Panel className="lg:col-start-1 lg:row-start-1">
+            <Panel className="xl:col-start-1 xl:row-start-1 xl:overflow-y-auto">
               <RegionPanel points={data.points} point={point} region={region} index={index} onSelect={setSelectedId} />
             </Panel>
 
             {/* Sağ üst: grafik */}
-            <Panel className="lg:col-start-3 lg:row-start-1">
+            <Panel className="xl:col-start-3 xl:row-start-1 xl:overflow-y-auto">
               <h2 className="font-display text-xl leading-tight font-semibold">{t("chartTitle2")}</h2>
               <p className="mb-2 text-sm text-muted-foreground">{t("pointTitle", { n: point.name[lang], k: region.dates.length })}</p>
               <SeriesChart point={point} region={region} index={index} />
             </Panel>
 
-            {/* Sağ alt: insan etkisi hikâyesi */}
-            <Panel className="lg:col-start-3 lg:row-start-2 lg:overflow-y-auto">
-              <Story />
-            </Panel>
-
-            {/* Sol alt: polarizasyon karşılaştırıcı */}
-            <Panel className="lg:col-start-1 lg:row-start-2 lg:overflow-y-auto">
-              <PolCompare region={region} backdrop={backdrop} onBackdrop={setBackdrop} />
-            </Panel>
           </main>
+
+          {/* Aşağı kaydırınca: tam genişlikte, iç kaydırmasız bölümler */}
+          <div className="space-y-4 px-4 pb-4 lg:px-5 lg:pb-5">
+            <section className="card p-5 lg:p-8" aria-labelledby="story-h">
+              <Story />
+            </section>
+            <section className="card p-5 lg:p-8" aria-labelledby="pol-h">
+              <PolCompare region={region} backdrop={backdrop} onBackdrop={setBackdrop} />
+            </section>
+          </div>
 
           <Footer region={region} />
         </>
@@ -230,36 +231,45 @@ const SOURCES: [string, string][] = [
   ["Milenio, resurge lago en Chalco", "https://amp.milenio.com/estados/resurge-lago-chalco-pone-riesgo-80-mil"],
 ]
 
-/** Sağ alt: çökmenin nedeni, insan etkisini öne çıkaran neden-sonuç zinciri (gerçekten bir sıra olduğu için numaralı). */
+/** Çökmenin nedeni: insan etkisini öne çıkaran neden-sonuç zinciri. Gerçekten bir sıra olduğu için numaralı. */
 function Story() {
   const { t } = useI18n()
-  const steps: [Key, Key][] = [["st1T", "st1"], ["st2T", "st2"], ["st3T", "st3"], ["st4T", "st4"], ["st5T", "st5"]]
+  const steps: [Key, Key, Key, Key][] = [
+    ["sf1", "sfl1", "st1T", "st1"], ["sf2", "sfl2", "st2T", "st2"], ["sf3", "sfl3", "st3T", "st3"],
+    ["sf4", "sfl4", "st4T", "st4"], ["sf5", "sfl5", "st5T", "st5"],
+  ]
   return (
-    <div className="space-y-3">
-      <h2 className="font-display text-xl leading-tight font-semibold">{t("storyTitle")}</h2>
-      <p className="text-sm leading-relaxed">{t("storyIntro")}</p>
-      <ol className="space-y-3">
-        {steps.map(([h, b], i) => (
-          <li key={h} className="grid grid-cols-[1.75rem_1fr] gap-x-2">
-            <span className="font-display text-xl leading-none font-semibold text-staff tabular-nums">{i + 1}</span>
-            <div>
-              <h3 className="text-sm font-bold">{t(h)}</h3>
-              <p className="text-sm leading-relaxed text-ink/85">{t(b)}</p>
-            </div>
+    <div>
+      <div className="max-w-3xl">
+        <h2 id="story-h" className="font-display text-3xl leading-tight font-semibold lg:text-4xl">{t("storyTitle")}</h2>
+        <p className="mt-2 text-base leading-relaxed text-ink/80">{t("storyIntro")}</p>
+      </div>
+      <ol className="mt-6 grid gap-x-5 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {steps.map(([fig, figL, h, b], i) => (
+          <li key={h} className="flex flex-col border-t-2 border-staff pt-3">
+            <span className="text-xs font-semibold text-muted-foreground tabular-nums">{i + 1}</span>
+            <span className="font-display mt-1 text-4xl leading-none font-semibold tabular-nums text-staff">{t(fig)}</span>
+            <span className="mt-1 text-xs text-muted-foreground">{t(figL)}</span>
+            <h3 className="mt-3 text-[15px] leading-snug font-semibold">{t(h)}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-ink/80">{t(b)}</p>
           </li>
         ))}
       </ol>
-      <p className="border-l-2 border-staff pl-3 text-sm leading-relaxed font-medium">{t("storyMap")}</p>
-      <p className="text-sm leading-relaxed text-ink/80">{t("whyBlind")}</p>
-      <p className="text-xs leading-relaxed text-muted-foreground">{t("storyJpl")} {t("whyCheck")}</p>
-      <details className="text-xs text-muted-foreground">
-        <summary className="cursor-pointer font-semibold text-ink/70">{t("sourcesLabel")}</summary>
-        <ul className="mt-2 space-y-1">
-          {SOURCES.map(([label, href]) => (
-            <li key={href}><a href={href} target="_blank" rel="noreferrer" className="underline decoration-ink/30 underline-offset-2 hover:text-ink">{label}</a></li>
-          ))}
-        </ul>
-      </details>
+      <div className="mt-8 grid gap-6 border-t border-border pt-5 lg:grid-cols-[1.4fr_1fr]">
+        <div className="space-y-3">
+          <p className="border-l-2 border-staff pl-3 text-base leading-relaxed font-medium">{t("storyMap")}</p>
+          <p className="text-sm leading-relaxed text-ink/80">{t("whyBlind")}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">{t("storyJpl")} {t("whyCheck")}</p>
+        </div>
+        <details className="text-xs text-muted-foreground">
+          <summary className="cursor-pointer text-sm font-semibold text-ink/70">{t("sourcesLabel")}</summary>
+          <ul className="mt-2 space-y-1">
+            {SOURCES.map(([label, href]) => (
+              <li key={href}><a href={href} target="_blank" rel="noreferrer" className="underline decoration-ink/30 underline-offset-2 hover:text-ink">{label}</a></li>
+            ))}
+          </ul>
+        </details>
+      </div>
     </div>
   )
 }
