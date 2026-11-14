@@ -1,0 +1,237 @@
+{
+  "sigma_px": 1.0,
+  "dx_m": 80.0,
+  "dy_m": -80.0,
+  "grid_shape": [
+    600,
+    600
+  ],
+  "thresholds": {
+    "low": 0.0002,
+    "mid": 0.0005,
+    "high": 0.001,
+    "low_inv": "1/5000 yr^-1",
+    "mid_inv": "1/2000 yr^-1",
+    "high_inv": "1/1000 yr^-1"
+  },
+  "noise_floor": {
+    "point_id": "santafe",
+    "beta": 5.11397502400748e-05,
+    "beta_permil_yr": 0.0511397502400748,
+    "beta_inv": "1/19554 yr^-1",
+    "raised_lower_threshold": false
+  },
+  "sensitivity": [
+    {
+      "sigma_px": 0,
+      "sigma_m": 0.0,
+      "valid_pixels": 340333,
+      "median": 0.00015160871735560972,
+      "p95": 0.000579934945397947,
+      "p99": 0.0008982887222649524,
+      "max": 0.005641718388199334,
+      "frac_ge_low": 0.38026286019868777,
+      "frac_ge_mid": 0.07633112275330338,
+      "frac_ge_high": 0.00638492300188345,
+      "santafe_median": 0.00014440104808381216
+    },
+    {
+      "sigma_px": 1,
+      "sigma_m": 80.0,
+      "valid_pixels": 340333,
+      "median": 6.760116677022356e-05,
+      "p95": 0.00026295627947688554,
+      "p99": 0.00043038364510713406,
+      "max": 0.002346498324701082,
+      "frac_ge_low": 0.10246435109143104,
+      "frac_ge_mid": 0.005615088751311215,
+      "frac_ge_high": 0.00041136181328287297,
+      "santafe_median": 5.11397502400748e-05
+    },
+    {
+      "sigma_px": 2,
+      "sigma_m": 160.0,
+      "valid_pixels": 340333,
+      "median": 3.879038809836982e-05,
+      "p95": 0.00015404908603238474,
+      "p99": 0.00027887537448310906,
+      "max": 0.0009056861751055911,
+      "frac_ge_low": 0.02637416882876477,
+      "frac_ge_mid": 0.0005759065385960221,
+      "frac_ge_high": 0.0,
+      "santafe_median": 3.295856057074384e-05
+    }
+  ],
+  "track_jaccard": {
+    "top_pct": 1.0,
+    "valid_both_pixels": 340333,
+    "threshold_113": 0.0004380141878548271,
+    "threshold_19": 0.0003511818262424888,
+    "intersection": 846,
+    "union": 5962,
+    "jaccard": 0.14189869171418987
+  },
+  "points": [
+    {
+      "id": "aragon",
+      "name": {
+        "tr": "Aragón (havalimanının kuzeyi)",
+        "en": "Aragón (north of the airport)"
+      },
+      "beta": 3.54e-05,
+      "beta_permil_yr": 0.0354,
+      "beta_inv": "1/28245 yr^-1"
+    },
+    {
+      "id": "neza",
+      "name": {
+        "tr": "Nezahualcóyotl",
+        "en": "Nezahualcóyotl"
+      },
+      "beta": 2.43e-05,
+      "beta_permil_yr": 0.0243,
+      "beta_inv": "1/41173 yr^-1"
+    },
+    {
+      "id": "iztapalapa",
+      "name": {
+        "tr": "Iztapalapa (doğu ova)",
+        "en": "Iztapalapa (eastern plain)"
+      },
+      "beta": 0.0002554,
+      "beta_permil_yr": 0.2554,
+      "beta_inv": "1/3915 yr^-1"
+    },
+    {
+      "id": "penon",
+      "name": {
+        "tr": "Peñón Viejo (volkanik tepe)",
+        "en": "Peñón Viejo (volcanic hill)"
+      },
+      "beta": 8.74e-05,
+      "beta_permil_yr": 0.0874,
+      "beta_inv": "1/11448 yr^-1"
+    },
+    {
+      "id": "zocalo",
+      "name": {
+        "tr": "Zócalo (tarihi merkez)",
+        "en": "Zócalo (historic centre)"
+      },
+      "beta": 5.13e-05,
+      "beta_permil_yr": 0.0513,
+      "beta_inv": "1/19487 yr^-1"
+    },
+    {
+      "id": "angel",
+      "name": {
+        "tr": "Bağımsızlık Anıtı",
+        "en": "Angel of Independence"
+      },
+      "beta": 4.42e-05,
+      "beta_permil_yr": 0.0442,
+      "beta_inv": "1/22634 yr^-1"
+    },
+    {
+      "id": "tlaxialtemalco",
+      "name": {
+        "tr": "Xochimilco–Tláhuac sulak alanı",
+        "en": "Xochimilco–Tláhuac wetland"
+      },
+      "beta": 0.0002393,
+      "beta_permil_yr": 0.2393,
+      "beta_inv": "1/4179 yr^-1"
+    },
+    {
+      "id": "chalco",
+      "name": {
+        "tr": "Chalco ovası (Xico'nun güneyi)",
+        "en": "Chalco plain (south of Xico)"
+      },
+      "beta": 0.0006048,
+      "beta_permil_yr": 0.6048,
+      "beta_inv": "1/1654 yr^-1"
+    },
+    {
+      "id": "xochimilco",
+      "name": {
+        "tr": "Xochimilco (çanak kenarı)",
+        "en": "Xochimilco (bowl edge)"
+      },
+      "beta": 6.25e-05,
+      "beta_permil_yr": 0.0625,
+      "beta_inv": "1/16008 yr^-1"
+    },
+    {
+      "id": "cu",
+      "name": {
+        "tr": "Ciudad Universitaria (lav zemin)",
+        "en": "Ciudad Universitaria (lava ground)"
+      },
+      "beta": 5.07e-05,
+      "beta_permil_yr": 0.0507,
+      "beta_inv": "1/19731 yr^-1"
+    },
+    {
+      "id": "santafe",
+      "name": {
+        "tr": "Santa Fe (referans)",
+        "en": "Santa Fe (reference)"
+      },
+      "beta": 5.11e-05,
+      "beta_permil_yr": 0.0511,
+      "beta_inv": "1/19554 yr^-1"
+    }
+  ],
+  "zoning": {
+    "source": "zonificacion_geotecnica.geojson",
+    "evidence_quality": "resmi_ntc_2017",
+    "zones": {
+      "zona_i": {
+        "label": "Zona I (Lomas)",
+        "pixel_count": 207683,
+        "median": 6.598350136737815e-05,
+        "median_permil_yr": 0.06598350136737816,
+        "median_inv": "1/15155 yr^-1",
+        "p75": 0.00011864275613476539,
+        "p95": 0.0002295125602686354,
+        "frac_ge_1_5000": 0.07854277913936143,
+        "frac_ge_1_2000": 0.0015793300366423828,
+        "frac_ge_1_1000": 0.00027445674417260924
+      },
+      "zona_ii": {
+        "label": "Zona II (Transición)",
+        "pixel_count": 44922,
+        "median": 6.178442336128062e-05,
+        "median_permil_yr": 0.06178442336128062,
+        "median_inv": "1/16185 yr^-1",
+        "p75": 0.00011724467863815338,
+        "p95": 0.00027056916256728,
+        "frac_ge_1_5000": 0.1009527625662259,
+        "frac_ge_1_2000": 0.005275811406437825,
+        "frac_ge_1_1000": 4.452161524420106e-05
+      },
+      "zona_iii": {
+        "label": "Zona III (Lacustre)",
+        "pixel_count": 87636,
+        "median": 7.472491131067517e-05,
+        "median_permil_yr": 0.07472491131067517,
+        "median_inv": "1/13382 yr^-1",
+        "p75": 0.00014568146256530162,
+        "p95": 0.0003467916393046898,
+        "frac_ge_1_5000": 0.15993427358619744,
+        "frac_ge_1_2000": 0.015358984892053494,
+        "frac_ge_1_1000": 0.0009242776940983158
+      }
+    },
+    "ratios": {
+      "zona_ii_over_zona_iii": 0.8268249808207417,
+      "zona_ii_over_zona_i": 0.9363616977110959
+    },
+    "conditions": {
+      "ii_ge_1_5_iii": false,
+      "ii_ge_1_5_i": false
+    },
+    "verdict": "doğrulanmadı"
+  }
+}

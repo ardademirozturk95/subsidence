@@ -6,7 +6,7 @@ import { SeriesChart } from "@/components/SeriesChart"
 import { PolCompare } from "@/components/PolCompare"
 import { PointPicker } from "@/components/PointPicker"
 import { Everyday } from "@/components/Everyday"
-import { fmtCm, fmtDate, loadAll, type Backdrop, type Fringes, type Point, type Region, type View } from "@/lib/data"
+import { fmtCm, fmtDate, loadAll, type Backdrop, type Fringes, type Point, type Region, type TiltMeta, type View } from "@/lib/data"
 import { I18nProvider, useI18n, type Key } from "@/lib/i18n"
 
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
 */
 function Shell() {
   const { t, lang, setLang } = useI18n()
-  const [data, setData] = useState<{ region: Region; points: Point[]; fringes: Fringes | null } | null>(null)
+  const [data, setData] = useState<{ region: Region; points: Point[]; fringes: Fringes | null; tilt: TiltMeta | null } | null>(null)
   const [error, setError] = useState(false)
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
@@ -37,6 +37,10 @@ function Shell() {
   const backdrop: Backdrop = "map"
   const [selectedId, setSelectedId] = useState("neza")
   const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"))
+  const handleView = (v: View) => {
+    setView(v)
+    if (v === "tilt") setPlaying(false)
+  }
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark)
     try { localStorage.setItem("theme", dark ? "dark" : "light") } catch { /* depolama kapalı olabilir */ }
@@ -101,12 +105,16 @@ function Shell() {
           <main className="grid gap-4 p-4 lg:p-5 xl:h-[calc(100svh-104px)] xl:grid-cols-[minmax(290px,330px)_minmax(0,1fr)_minmax(310px,360px)] lg:grid-cols-2">
             {/* Orta: harita oynatıcı */}
             <section className="card flex min-h-[80svh] flex-col overflow-hidden lg:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-start-1 xl:min-h-0" aria-label={t("mapLabel")}>
-              <ViewSwitch view={view} onView={setView} fringes={data.fringes} date={region.dates[index]} />
+              <ViewSwitch view={view} onView={handleView} fringes={data.fringes} date={region.dates[index]} />
               <div className="relative min-h-[56svh] flex-1">
-                <SinkMap region={region} points={data.points} date={region.dates[index]} view={view} fringes={data.fringes}
+                <SinkMap region={region} points={data.points} date={region.dates[index]} view={view} fringes={data.fringes} tilt={data.tilt}
                   backdrop={backdrop} selectedId={selectedId} onSelect={setSelectedId} dark={dark} />
               </div>
-              <div className="border-t border-border">
+              <div
+                aria-disabled={view === "tilt"}
+                title={view === "tilt" ? t("tiltStaticHint") : undefined}
+                className={`border-t border-border transition-opacity ${view === "tilt" ? "pointer-events-none opacity-40 select-none" : ""}`}
+              >
                 <Timeline region={region} index={index} onIndex={setIndex} playing={playing} onPlaying={setPlaying} />
               </div>
             </section>
@@ -150,7 +158,7 @@ function ViewSwitch({ view, onView, fringes, date }: { view: View; onView: (v: V
   const { t, lang } = useI18n()
   const fr = fringes?.dates.find((d) => d.date === date)
   const num = (v: number) => v.toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { maximumFractionDigits: 1 })
-  const opts: [View, Key][] = [["disp", "viewDisp"], ["wrap", "viewWrap"], ["swipe", "viewSwipe"]]
+  const opts: [View, Key][] = [["disp", "viewDisp"], ["wrap", "viewWrap"], ["swipe", "viewSwipe"], ["tilt", "viewTilt"]]
   return (
     <div className="border-b border-border px-4 py-2 md:px-5">
       <div role="radiogroup" aria-label={t("viewLabel")} className="inline-flex flex-wrap rounded-md bg-ink/[0.06] p-0.5">
@@ -161,10 +169,16 @@ function ViewSwitch({ view, onView, fringes, date }: { view: View; onView: (v: V
           </button>
         ))}
       </div>
-      {fr && view !== "disp" && (
+      {fr && (view === "wrap" || view === "swipe") && (
         <p className="mt-2 max-w-3xl text-sm leading-snug">
           <span className="font-semibold">{t("storyTitleL")}. </span>
           {t("storyL", { cm: num(fr.max_los_cm), l: num(fr.rings_l) })}
+        </p>
+      )}
+      {view === "tilt" && (
+        <p className="mt-2 max-w-3xl text-sm leading-snug">
+          <span className="font-semibold">{t("tiltStoryTitle")}. </span>
+          {t("tiltStory")}
         </p>
       )}
     </div>

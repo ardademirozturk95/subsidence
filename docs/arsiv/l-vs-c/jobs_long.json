@@ -1,0 +1,103 @@
+{
+  "credit_before": 7950,
+  "credit_after": 7920,
+  "status": "completed_all_3",
+  "pairs": [
+    {
+      "name": "desc-dry-24d",
+      "hyp3_name": "cdmx-desc-dry-24d",
+      "nisar_track": "113",
+      "nisar_npz": "113/20260318_20260411.npz",
+      "season": "dry",
+      "direction": "descending",
+      "baseline_days": 24,
+      "satellite": "S1C",
+      "relative_orbit": 143,
+      "frame": 527,
+      "target_dates": [
+        "2026-03-17",
+        "2026-04-10"
+      ],
+      "actual_dates": [
+        "2026-03-16",
+        "2026-04-09"
+      ],
+      "shift_days": -1,
+      "nisar_offset_days": {
+        "start": -2,
+        "end": -2
+      },
+      "note": "S1C kullanıldı; NISAR çifti 2026-03-18/2026-04-11 ile tarih farkı −2 gün (başlangıç) ve −2 gün (bitiş).",
+      "ref_12d_comparison": "12-day ref desc-dry-0422-0504 uses S1D, relative orbit 143, frame 528; desc-dry-24d uses S1C, same relative orbit 143, different frame 527.",
+      "g1": "S1C_IW_SLC__1SDV_20260316T122502_20260316T122529_006789_00DB8D_1B53",
+      "g2": "S1C_IW_SLC__1SDV_20260409T122503_20260409T122530_007139_00E763_7DD5",
+      "job_id": "c89cd52f-6cf4-423f-af60-80223a39dd5e",
+      "status": "SUCCEEDED",
+      "corr_tif": "S1CC_20260316T122502_20260409T122503_VVP024_INT80_G_ueF_208A_corr.tif"
+    },
+    {
+      "name": "desc-rain-36d",
+      "hyp3_name": "cdmx-desc-rain-36d",
+      "nisar_track": "113",
+      "nisar_npz": "113/20260716_20260821.npz",
+      "season": "rain",
+      "direction": "descending",
+      "baseline_days": 36,
+      "satellite": "S1D",
+      "relative_orbit": 143,
+      "frame": 526,
+      "target_dates": [
+        "2026-07-15",
+        "2026-08-20"
+      ],
+      "actual_dates": [
+        "2026-07-15",
+        "2026-08-20"
+      ],
+      "shift_days": 0,
+      "nisar_offset_days": {
+        "start": -1,
+        "end": -1
+      },
+      "note": "Exact match (S1D, orbit 143, frame 526 matching desc-rain-0901-0913 in jobs.json).",
+      "ref_12d_comparison": "12-day refs: desc-rain-0609-0621 (S1D, orbit 143, frame 528) and desc-rain-0901-0913 (S1D, orbit 143, frame 526).",
+      "g1": "S1D_IW_SLC__1SDV_20260715T122510_20260715T122540_003684_006959_7549",
+      "g2": "S1D_IW_SLC__1SDV_20260820T122511_20260820T122542_004209_007B82_CDCA",
+      "job_id": "a9776ccb-9909-4b4e-848c-7a49bf3cfc32",
+      "status": "SUCCEEDED",
+      "corr_tif": "S1DD_20260715T122510_20260820T122511_VVP036_INT80_G_ueF_537B_corr.tif"
+    },
+    {
+      "name": "asc-rain-24d",
+      "hyp3_name": "cdmx-asc-rain-24d",
+      "nisar_track": "19",
+      "nisar_npz": "19/20260721_20260814.npz",
+      "season": "rain",
+      "direction": "ascending",
+      "baseline_days": 24,
+      "satellite": "S1C",
+      "relative_orbit": 78,
+      "frame": 55,
+      "target_dates": [
+        "2026-07-22",
+        "2026-08-15"
+      ],
+      "actual_dates": [
+        "2026-07-17",
+        "2026-08-10"
+      ],
+      "shift_days": -5,
+      "nisar_offset_days": {
+        "start": -4,
+        "end": -4
+      },
+      "note": "Shifted -5 days (within +-1 cycle / 12d) to keep exact S1C satellite, orbit 78, frame 55 per coordinator direction (#9).",
+      "ref_12d_comparison": "12-day ref asc-rain-0523-0604 uses S1C, relative orbit 78, frame 55 (exact match).",
+      "g1": "S1C_IW_SLC__1SDV_20260717T004726_20260717T004752_008576_010FBF_DAA6",
+      "g2": "S1C_IW_SLC__1SDV_20260810T004727_20260810T004754_008926_011B56_71A9",
+      "job_id": "59fecfff-7d00-409c-8a96-22223c6c38e8",
+      "status": "SUCCEEDED",
+      "corr_tif": "S1CC_20260717T004726_20260810T004727_VVP024_INT80_G_ueF_E23A_corr.tif"
+    }
+  ]
+}

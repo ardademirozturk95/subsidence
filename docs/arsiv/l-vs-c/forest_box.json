@@ -1,0 +1,36 @@
+{
+  "id": "forest",
+  "label": "Orman (Ajusco–Los Dinamos)",
+  "short": "FOR",
+  "lat": 19.255861,
+  "lon": -99.267585,
+  "utm_x": 471880.0,
+  "utm_y": 2129160.0,
+  "utm_epsg": 32614,
+  "ix": 42,
+  "iy": 476,
+  "box_pixels": 15,
+  "box_size_m": 1200,
+  "patch_area_km2": 202.94,
+  "patch_area_km2_4conn": 201.71,
+  "patch_pixel_count_8conn": 2512620,
+  "patch_pixel_count_4conn": 2497460,
+  "worldcover_2021_breakdown": {
+    "Tree cover": 100.0
+  },
+  "worldcover_2021_class_codes": {
+    "10": 100.0
+  },
+  "worldcover_pixel_count": 17831,
+  "min_edge_distance_m": 1518,
+  "selection_method": "Maximum inscribed circle / Euclidean distance transform peak inside the largest connected ESA WorldCover 2021 v200 class-10 (Tree cover) patch in the CDMX crop (lat 19.15-19.60, lon -99.30 to -98.85), snapped to the nearest NISAR 80 m UTM 14N pixel center so the 15x15 pixel (1.2 km x 1.2 km) box stays 100% inside both the crop and the forest patch.",
+  "source": "ESA WorldCover 2021 v200 (10 m, collection esa-worldcover via Planetary Computer STAC; tiles N18W102 & N18W099)",
+  "nisar_grid_reference": "backend/out/cache/113/20260318_20260411.npz (x, y arrays only)",
+  "cdmx_crop_bounds": {
+    "lat_min": 19.15,
+    "lat_max": 19.60,
+    "lon_min": -99.30,
+    "lon_max": -98.85
+  },
+  "coherence_inspected": false
+}
