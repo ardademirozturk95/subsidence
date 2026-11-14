@@ -226,17 +226,16 @@ function RegionPanel({ points, point, region, index, onSelect }: { points: Point
 }
 
 const SOURCES: [string, string][] = [
+  ["Palma Nava et al. 2022, Groundwater (Mexico City aquifer, ~23 million people, 63% groundwater)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC9543496/"],
+  ["Conagua, acuífero 0901 Zona Metropolitana de la Cd. de México (recarga 512.8, disponibilidad −591.2 hm³)", "https://www.gob.mx/conagua/acciones-y-programas/c"],
   ["Carrillo 1947, Influence of Artesian Wells in the Sinking of Mexico City", "https://www.semanticscholar.org/paper/Influence-of-Artesian-Wells-in-the-Sinking-of-City-Carrillo/bb4a5a13383dcfdfbee711f82b894f021c5c8e25"],
-  ["Chaussard et al. 2021, JGR Solid Earth", "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020JB020648"],
-  ["Cigna & Tapete 2021, Remote Sensing of Environment", "https://doi.org/10.1016/j.rse.2020.112161"],
-  ["Solano-Rojas et al. 2024, Scientific Reports", "https://doi.org/10.1038/s41598-024-53525-y"],
-  ["Managed aquifer recharge in Mexico City (review), PMC", "https://pmc.ncbi.nlm.nih.gov/articles/PMC9543496/"],
-  ["NASA/JPL 2026, US-Indian spacecraft captures Mexico City subsidence", "https://www.jpl.nasa.gov/images/pia26709-us-indian-spacecraft-captures-mexico-city-subsidence/"],
-  ["Conagua, acuífero 0901 Zona Metropolitana de la Cd. de México (recarga, extracción, disponibilidad)", "https://www.gob.mx/conagua/acciones-y-programas/c"],
-  ["Conagua, DR_0901 disponibilidad media anual (documento técnico)", "https://sigagis.conagua.gob.mx/gas1/Edos_Acuiferos_18/cmdx/DR_0901.pdf"],
-  ["Milenio (Conagua: acuífero más crítico)", "https://amp.milenio.com/comunidad/entre-eficiencia-y-trasvases-alternativa-contra-crisis-hidrica-en-cdmx"],
-  ["Infobae 2025, grietas en Iztapalapa", "https://www.infobae.com/mexico/2025/06/27/sobreexplotacion-del-acuifero-agrava-grietas-en-la-cdmx-hay-seguimiento-permanente-advierte-sheinbaum/"],
-  ["Milenio, resurge lago en Chalco", "https://amp.milenio.com/estados/resurge-lago-chalco-pone-riesgo-80-mil"],
+  ["Chaussard et al. 2021, JGR Solid Earth (rates track clay thickness)", "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020JB020648"],
+  ["Cigna & Tapete 2021, Remote Sensing of Environment (Sentinel-1, 2014–2020)", "https://doi.org/10.1016/j.rse.2020.112161"],
+  ["FOX / El País 2024, Cutzamala at historic lows, new wells planned", "https://www.fox5dc.com/news/mexico-city-day-zero-water-shortage-crisis-climate-change"],
+  ["Futura-Sciences, 14 steps added to the Angel of Independence", "https://www.futura-sciences.com/en/this-giant-city-is-sinking-so-fast-it-can-now-be-seen-from-space_39634/"],
+  ["Infobae 2025, grietas en la CDMX; Iztapalapa (Sheinbaum)", "https://www.infobae.com/mexico/2025/06/27/sobreexplotacion-del-acuifero-agrava-grietas-en-la-cdmx-hay-seguimiento-permanente-advierte-sheinbaum/"],
+  ["Chilango 2021, lago Tláhuac-Xico formado por hundimientos de hasta 5 m", "https://www.chilango.com/noticias/reportajes/escasez-de-agua-en-cdmx/"],
+  ["NASA/JPL 2026, US-Indian space mission maps extreme subsidence in Mexico City", "https://www.jpl.nasa.gov/news/us-indian-space-mission-maps-extreme-subsidence-in-mexico-city/"],
 ]
 
 /** Çökmenin nedeni: insan etkisini öne çıkaran neden-sonuç zinciri. Gerçekten bir sıra olduğu için numaralı. */

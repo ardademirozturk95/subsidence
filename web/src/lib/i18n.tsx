@@ -79,12 +79,12 @@ const S = {
     en: "Our hypothesis: the cause is physical (compacting clay), the trigger is human (groundwater pumping). Every fast-sinking spot we measured is on the old lakebed; every stable one is on rock.",
   },
   whyBlind: {
-    tr: "Radarın göremediği yerler de var: eski göl tabanında, havalimanının çevresinde, iki ölçüm arasında yüzey çok değiştiği için sinyal kopuyor. Haritadaki boşluklar 'çökme yok' değil, 'ölçüm yok' demek.",
-    en: "There are places the radar cannot see: on the old lakebed around the airport the surface changes too much between passes and the signal breaks up. Gaps on the map mean 'no measurement', not 'no sinking'.",
+    tr: "Radarın göremediği yerler de var: havalimanı çevresindeki eski göl tabanında iki ölçüm birbirine benzemediği için sinyal kopuyor (muhtemelen yüzey ve nem değişiyor). Haritadaki boşluklar 'çökme yok' değil, 'ölçüm yok' demek.",
+    en: "There are places the radar cannot see: on the old lakebed around the airport the two passes no longer match and the signal breaks up (likely because the surface and its moisture change). Gaps on the map mean 'no measurement', not 'no sinking'.",
   },
   whyCheck: {
-    tr: "Sonuçlarımız yayınlanmış çalışmalarla aynı mertebede: Nezahualcóyotl'de yılda yaklaşık 39 cm (Cigna ve Tapete 2021), şehrin en yüksek hızları Chalco'da (Solano-Rojas ve ark. 2024).",
-    en: "Our results match published studies in magnitude: about 39 cm a year at Nezahualcóyotl (Cigna and Tapete 2021), the city's highest rates at Chalco (Solano-Rojas et al. 2024).",
+    tr: "Sonuçlarımız yayınlanmış çalışmalarla aynı mertebede: Sentinel-1 ile 2014–2020 arasında Nezahualcóyotl'de yılda 38,7 cm, Iztapalapa'da 39,1 cm ölçülmüştü (Cigna ve Tapete 2021).",
+    en: "Our results match published studies in magnitude: Sentinel-1 measured 38.7 cm a year at Nezahualcóyotl and 39.1 cm at Iztapalapa over 2014–2020 (Cigna and Tapete 2021).",
   },
 
   radarTitle: { tr: "Radar ne görüyor?", en: "What does the radar see?" },
@@ -166,8 +166,14 @@ const S = {
     tr: "Zemin kendi kendine çökmüyor. Bu bir zincir ve her halkasında insan var.",
     en: "The ground is not sinking on its own. It is a chain, and people are in every link.",
   },
-  sf1: { tr: "%70", en: "70%" },
-  sfl1: { tr: "suyun yeraltından gelen payı", en: "of the water comes from underground" },
+  sf1: {
+    tr: "%63",
+    en: "63%",
+  },
+  sfl1: {
+    tr: "suyun yeraltından gelen payı",
+    en: "of the water demand met by groundwater",
+  },
   sf2: { tr: "2×", en: "2×" },
   sfl2: { tr: "çekim izni / yıllık besleme", en: "withdrawal rights vs. yearly recharge" },
   sf3: { tr: "1947", en: "1947" },
@@ -176,15 +182,21 @@ const S = {
   sfl4: { tr: "barajlar tarihî düşükte", en: "reservoirs at record lows" },
   sf5: { tr: "14", en: "14" },
   sfl5: { tr: "anıta eklenen basamak", en: "steps added to the monument" },
-  st1T: { tr: "20 milyon kişilik susuzluk", en: "A thirst for 20 million" },
-  st1: {
-    tr: "Valle de México'da 20 milyondan fazla insan yaşıyor. Suyun yaklaşık %70'i dışarıdan değil, şehrin hemen altındaki akiferden geliyor.",
-    en: "More than 20 million people live in the Valley of Mexico. About 70% of their water comes not from outside but from the aquifer right beneath the city.",
+  st1T: {
+    tr: "23 milyon kişilik susuzluk",
+    en: "A thirst for 23 million",
   },
-  st2T: { tr: "Gelenin iki katına izin verilmiş", en: "Pumping rights twice the inflow" },
+  st1: {
+    tr: "Mexico City metropol alanında yaklaşık 23 milyon kişi yaşıyor. Su ihtiyacının yaklaşık %63'ü dışarıdan değil, şehrin altındaki akiferden karşılanıyor (Palma Nava ve ark. 2022).",
+    en: "About 23 million people live in the Mexico City metropolitan area. Around 63% of their water demand is met not from outside but from the aquifer beneath the city (Palma Nava et al. 2022).",
+  },
+  st2T: {
+    tr: "Gelenden fazlası çekiliyor",
+    en: "More is drawn than comes in",
+  },
   st2: {
-    tr: "Conagua'ya göre akiferin yıllık beslenmesi 513 milyon m³, ama yeraltı suyu çekimi için verilmiş izinler 993 milyon m³: neredeyse iki katı. Conagua bu akiferi ülkenin en kritik akiferi sayıyor.",
-    en: "According to Conagua, the aquifer is recharged by 513 million m³ a year, yet groundwater withdrawal rights total 993 million m³: almost twice as much. Conagua rates it the most critical aquifer in the country.",
+    tr: "Conagua'ya göre akifer yılda 513 milyon m³ beslenmesine rağmen kullanılabilir suyu eksi 591 milyon m³: verilmiş çekim izinleri beslemenin iki katını aşıyor.",
+    en: "According to Conagua, the aquifer is recharged by 513 million m³ a year, yet its available water stands at minus 591 million m³: withdrawal rights exceed twice the recharge.",
   },
   st3T: { tr: "Kil sıkışıyor, geri dönmüyor", en: "The clay compacts for good" },
   st3: {
@@ -193,13 +205,13 @@ const S = {
   },
   st4T: { tr: "Beton ve kuraklık döngüyü hızlandırıyor", en: "Concrete and drought speed up the loop" },
   st4: {
-    tr: "Asfalt ve beton yağmurun akifere ulaşmasını engelliyor. 2024 kuraklığında şehre dışarıdan su getiren barajlar tarihî düşüğe indi; çözüm olarak yeni kuyular konuşuldu.",
-    en: "Asphalt and concrete keep rain from reaching the aquifer. In the 2024 drought the reservoirs that bring water from outside hit record lows, and new wells were proposed.",
+    tr: "Asfalt ve beton yağmurun akifere ulaşmasını engelliyor. 2023–2024 kuraklığında şehre dışarıdan su getiren Cutzamala barajları tarihî düşük seviyeye indi; hükümetin planlarından biri başkentin çevresinde yeni kuyular açmaktı.",
+    en: "Asphalt and concrete keep rain from reaching the aquifer. In the 2023–2024 drought the Cutzamala reservoirs that bring water from outside fell to historic lows, and one of the government's plans was to drill new wells around the capital.",
   },
   st5T: { tr: "Sonuç sokakta", en: "The result is on the street" },
   st5: {
-    tr: "Bağımsızlık Anıtı'na 14 basamak eklendi, Katedral eğik, Iztapalapa'nın yaklaşık üçte birinde yer çatlakları var. Tláhuac'ta zemin o kadar çöktü ki yeni bir göl oluştu; haritamızın en hızlı noktası (yılda 36 cm) tam orada.",
-    en: "Fourteen steps were added to the Angel of Independence, the Cathedral leans, and about a third of Iztapalapa has ground cracks. In Tláhuac the ground sank so far that a new lake formed; our fastest point (36 cm a year) is right there.",
+    tr: "Bağımsızlık Anıtı'nın çevresi çöktükçe kaidesine 14 yeni basamak eklendi. Iztapalapa'da yer çatlakları büyüyor; Sheinbaum'a göre şehirde en çok çöken ilçe orası. Tláhuac–Xico'da zemin 5 metreye kadar çöktüğü için yeni bir göl oluştu; haritamızın en hızlı noktaları (yılda 36 cm) bu güney çanağında.",
+    en: "As the ground around the Angel of Independence sank, 14 new steps were added beneath its base. Ground cracks are spreading in Iztapalapa, which President Sheinbaum calls the most subsiding borough in the city. At Tláhuac–Xico the ground sank by up to 5 metres and a new lake formed; our fastest points (36 cm a year) lie in this southern bowl.",
   },
   storyMap: {
     tr: "NISAR'ın 11 aylık ölçümü bu zinciri doğruluyor: hızlı çöken her yer eski göl tabanında, sabit kalan her yer kayada.",
@@ -211,7 +223,10 @@ const S = {
   },
   sourcesLabel: { tr: "Kaynaklar", en: "Sources" },
   howTitle: { tr: "Bu harita nasıl yapıldı?", en: "How this map was made" },
-  how1: { tr: "ASF Vertex'ten NISAR L2 GUNW interferogramlarını indirdik (12 günlük çiftler).", en: "We downloaded NISAR L2 GUNW interferograms from ASF Vertex (12-day pairs)." },
+  how1: {
+    tr: "NISAR L2 GUNW interferogramlarını ASF arşivinden, dosyaları indirmeden buluttan okuduk (çoğu 12 günlük çiftler).",
+    en: "We read NISAR L2 GUNW interferograms from the ASF archive straight from the cloud (mostly 12-day pairs).",
+  },
   how2: { tr: "İyonosfer düzeltmesini uygulayıp çiftleri sırayla toplayarak birikmiş hareketi çıkardık.", en: "We applied the ionosphere correction and chained the pairs into cumulative motion." },
   how3: { tr: "Uydunun batıdan (descending) ve doğudan (ascending) eğik bakışlarını birleştirip gerçek dikey harekete çevirdik.", en: "We combined the satellite's slanted views from the west (descending) and east (ascending) into true vertical motion." },
   how4: { tr: "Arka plan görüntüleri NISAR L2 GCOV ürününden (HH ve HV).", en: "Background images come from the NISAR L2 GCOV product (HH and HV)." },
