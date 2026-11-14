@@ -97,6 +97,7 @@ function Shell() {
               {point ? <PointPanel point={point} region={region} index={index} /> : <p className="text-muted-foreground">{t("pickPoint")}</p>}
               <Why />
               <RadarCard backdrop={backdrop} onBackdrop={setBackdrop} />
+              <Future />
               <How region={region} />
             </div>
           </aside>
@@ -209,6 +210,20 @@ function Why() {
       <p className="text-sm leading-relaxed">{t("why2")}</p>
       <p className="text-sm leading-relaxed">{t("why3")}</p>
       <p className="border-l-2 border-staff pl-3 text-sm leading-relaxed font-medium">{t("whyHuman")}</p>
+      <p className="text-sm leading-relaxed text-ink/80">{t("whyBlind")}</p>
+      <p className="text-xs leading-relaxed text-muted-foreground">{t("whyCheck")}</p>
+    </section>
+  )
+}
+
+function Future() {
+  const { t } = useI18n()
+  return (
+    <section aria-labelledby="future-h" className="space-y-3">
+      <h2 id="future-h" className="font-display text-xl font-extrabold">{t("futureTitle")}</h2>
+      <p className="text-sm leading-relaxed">{t("future1")}</p>
+      <p className="text-sm leading-relaxed">{t("future2")}</p>
+      <p className="text-sm leading-relaxed">{t("future3")}</p>
     </section>
   )
 }

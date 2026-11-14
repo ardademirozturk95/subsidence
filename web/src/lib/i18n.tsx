@@ -26,15 +26,15 @@ const S = {
   bandLabel: { tr: "Dalga boyu", en: "Wavelength" },
   bandL: { tr: "NISAR L-band", en: "NISAR L-band" },
   bandC: { tr: "C-band olsaydı", en: "If C-band" },
-  storyTitleL: { tr: "Uzun dalga, okunaklı halkalar", en: "Long wave, readable fringes" },
-  storyTitleC: { tr: "Aynı çökme, kısa dalgayla", en: "Same sinking, short wave" },
+  storyTitleL: { tr: "Radar hareketi halkalarla görür", en: "Radar sees motion as fringes" },
+  storyTitleC: { tr: "Aynı çökme, Sentinel-1'in dalgasıyla", en: "Same sinking, Sentinel-1's wave" },
   storyL: {
-    tr: "NISAR'ın 24 cm'lik dalgası her ~12 cm'lik hareketi tek bir renk turuyla çiziyor. Şehrin en hızlı yeri bu tarihe kadar {cm} cm çöktü, ama haritada sadece {l} halka var. Halkalar geniş ve sakin; bir yıllık çöküşü tek bakışta okuyabiliyoruz.",
-    en: "NISAR's 24 cm wave draws every ~12 cm of motion as one colour cycle. The city's fastest spot has sunk {cm} cm up to this date, yet the map shows only {l} fringes. They are wide and calm; a year of sinking reads at a glance.",
+    tr: "Her renk turu bir halka. NISAR'ın 24 cm'lik dalgasında bir halka, uyduya doğru yaklaşık 12 cm hareket demek. Şehrin en hızlı yeri bu tarihe kadar {cm} cm uzaklaştı; bu {l} halkaya karşılık geliyor. Halkaları merkezden dışa sayarak çökmenin ne kadar olduğunu buluyoruz.",
+    en: "Each colour cycle is one fringe. With NISAR's 24 cm wave, one fringe means about 12 cm of motion along the line of sight. The city's fastest spot has moved {cm} cm away up to this date, which is {l} fringes. Counting fringes from the centre outwards tells us how much the ground sank.",
   },
   storyC: {
-    tr: "Sentinel-1'in 5,5 cm'lik dalgasıyla aynı {cm} cm, {c} halkaya bölünürdü. Halkalar çanağın kenarında birbirine sıkışıyor ve ayırt etmek zorlaşıyor; sayım hatası olasılığı artıyor. NISAR'da aynı hareket 4 kat daha az halkaya düşüyor.",
-    en: "With Sentinel-1's 5.5 cm wave the same {cm} cm would split into {c} fringes. They crowd together at the bowl's edge and become hard to tell apart, so miscounting gets more likely. In NISAR the same motion falls into 4 times fewer fringes.",
+    tr: "Sentinel-1'in dalgası 5,5 cm; bir halkası 2,8 cm hareket. Aynı {cm} cm onun dalgasında {c} halkaya karşılık gelir. Biz hareketi 12 günlük adımlarla izlediğimiz için (her adımda yaklaşık 1 cm) iki uydu da bu çöküşü ölçebilir. Halka farkı deprem ve volkan gibi ani, büyük hareketlerde önem kazanır.",
+    en: "Sentinel-1's wave is 5.5 cm; one of its fringes is 2.8 cm of motion. The same {cm} cm equals {c} fringes at its wavelength. Because we track the motion in 12-day steps (about 1 cm each), both satellites can measure this sinking. The fringe difference matters for sudden, large motion such as earthquakes and volcanoes.",
   },
   ringsNote: {
     tr: "C-band görüntüsü bir simülasyondur: NISAR'ın ölçtüğü hareket Sentinel-1'in 5,5 cm'lik dalga boyuyla yeniden sarıldı. İki görüntü de aynı şekilde hafifçe yumuşatıldı (~400 m).",
@@ -79,12 +79,20 @@ const S = {
     en: "Most of the city's water is pumped from the aquifer below that clay. When the water leaves, the clay compacts and does not spring back.",
   },
   why3: {
-    tr: "Havzayı çevreleyen volkanik kayalık tepelerde, örneğin Santa Fe'de, zemin neredeyse kıpırdamıyor. Çökme kilin olduğu yerde.",
-    en: "On the volcanic rock around the basin, Santa Fe for example, the ground barely moves. Sinking follows the clay.",
+    tr: "Haritamız bunu gösteriyor: kalın kilin üstündeki Xochimilco–Tláhuac yılda 36 cm, Chalco 36 cm, Nezahualcóyotl 29 cm çöküyor. Volkanik kayanın üstündeki Santa Fe, Ciudad Universitaria ve ovanın ortasındaki Peñón Viejo tepesi ise neredeyse hiç kıpırdamıyor (yılda 1 cm'den az).",
+    en: "Our map shows this: on thick clay, Xochimilco–Tláhuac sinks 36 cm a year, Chalco 36 cm, Nezahualcóyotl 29 cm. On volcanic rock, Santa Fe, Ciudad Universitaria and the Peñón Viejo hill in the middle of the plain barely move (under 1 cm a year).",
   },
   whyHuman: {
-    tr: "Bizim hipotezimiz: neden fiziksel (kil), tetikleyici insan (pompalama). Kaya zemindeki Peñón Viejo, Ciudad Universitaria ve Santa Fe'nin sabit kalması bunu destekliyor.",
-    en: "Our hypothesis: the cause is physical (clay), the trigger is human (pumping). Rock sites such as Peñón Viejo, Ciudad Universitaria and Santa Fe staying put supports this.",
+    tr: "Hipotezimiz: neden fiziksel (sıkışan kil), tetikleyici insan (yeraltı suyu pompalama). Ölçtüğümüz hızlı çöken yerlerin hepsi eski göl tabanında, sabit kalanların hepsi kaya zeminde.",
+    en: "Our hypothesis: the cause is physical (compacting clay), the trigger is human (groundwater pumping). Every fast-sinking spot we measured is on the old lakebed; every stable one is on rock.",
+  },
+  whyBlind: {
+    tr: "Radarın göremediği yerler de var: eski göl tabanında, havalimanının çevresinde, iki ölçüm arasında yüzey çok değiştiği için sinyal kopuyor. Haritadaki boşluklar 'çökme yok' değil, 'ölçüm yok' demek.",
+    en: "There are places the radar cannot see: on the old lakebed around the airport the surface changes too much between passes and the signal breaks up. Gaps on the map mean 'no measurement', not 'no sinking'.",
+  },
+  whyCheck: {
+    tr: "Sonuçlarımız yayınlanmış çalışmalarla aynı mertebede: Sentinel-1 ile Nezahualcóyotl'de yılda yaklaşık 39 cm (Cigna ve Tapete 2021), Chalco'da yılda 35 cm'den fazla (Solano-Rojas ve ark. 2024).",
+    en: "Our results match published studies in magnitude: about 39 cm a year at Nezahualcóyotl with Sentinel-1 (Cigna and Tapete 2021), over 35 cm a year at Chalco (Solano-Rojas et al. 2024).",
   },
 
   radarTitle: { tr: "Radar ne görüyor?", en: "What does the radar see?" },
@@ -105,12 +113,25 @@ const S = {
     en: "Red is HH, green is HV, blue is the HH/HV ratio. The dry lakebed and water look dark navy, regularly aligned building blocks pink, vegetation and mixed city fabric green. Real NISAR GCOV data from 13 October 2026.",
   },
   lband: {
-    tr: "NISAR'ın L-band dalgası yaklaşık 24 cm. Bitki örtüsünün içinden geçip zemine ulaştığı için tarlalarda da ölçüm kopmuyor.",
-    en: "NISAR's L-band wave is about 24 cm long. It passes through vegetation to the ground, so measurements hold up over fields too.",
+    tr: "Polarizasyon ile dalga boyunu karıştırmamak gerek. NISAR'ın dalgası 24 cm (L-band), Sentinel-1'inki 5,5 cm (C-band). Uzun dalga bitkinin içine daha derin girer. Sentinel-1 ile karşılaştırdık: 12 günlük ölçümlerde şehirde ve tarlada ikisi de çalışıyor; dağlık ormanda NISAR biraz daha az sinyal kaybediyor.",
+    en: "Polarization and wavelength are different things. NISAR's wave is 24 cm (L-band), Sentinel-1's is 5.5 cm (C-band). The longer wave reaches deeper into vegetation. We compared the two: over 12 days both work in the city and over fields; in the mountain forest NISAR loses slightly less signal.",
   },
   dotAria: { tr: "Şehir, orman, tarla, kuru göl tabanı ve su için ölçülen HH ve HV değerleri", en: "Measured HH and HV values for city, forest, fields, dry lakebed and water" },
   dotNote: { tr: "Bu görüntüden ölçüldü: NISAR GCOV, 13 Ekim 2026, her tür için yaklaşık 1 km'lik alanın ortancası.", en: "Measured from this image: NISAR GCOV, 13 October 2026, median of a ~1 km area per type." },
 
+  futureTitle: { tr: "NISAR neyi mümkün kılıyor?", en: "What does NISAR make possible?" },
+  future1: {
+    tr: "Her 12 günde bir, ücretsiz ve hazır işlenmiş veri. Bu haritayı biz bir yarışma için yaptık; aynı yöntem dünyanın herhangi bir şehri için tekrarlanabilir. Çökme, tek seferlik makalelerden düzenli bir erken uyarıya dönüşebilir.",
+    en: "Free, ready-processed data every 12 days. We made this map for a competition; the same method works for any city in the world. Subsidence monitoring can move from one-off papers to routine early warning.",
+  },
+  future2: {
+    tr: "Metro, su boruları ve binalar en çok sabit zeminle çöken zeminin yan yana geldiği yerlerde hasar görür. Peñón Viejo tepesi yılda 1 cm'den az hareket ederken, yaklaşık 3 km ötedeki Iztapalapa ovası yılda 24 cm çöküyor. Bu geçişleri haritalamak altyapı riskini gösterir.",
+    en: "Metro lines, water mains and buildings are damaged most where stable and sinking ground meet. The Peñón Viejo hill moves less than 1 cm a year, while the Iztapalapa plain about 3 km away sinks 24 cm a year. Mapping these transitions shows infrastructure risk.",
+  },
+  future3: {
+    tr: "Uzun dalgası sayesinde NISAR, ormanlık yamaçlarda ve Konya gibi geniş tarım havzalarında yeraltı suyu kaynaklı çökmeyi izlemek için güçlü bir aday. Veri şu an 'provisional'; kalibrasyon tamamlandıkça sonuçlar daha da güvenilir olacak.",
+    en: "Thanks to its long wave, NISAR is a strong candidate for tracking groundwater-driven subsidence on forested slopes and in large farming basins such as Konya. The data are still 'provisional'; results will get more reliable as calibration is completed.",
+  },
   howTitle: { tr: "Bu harita nasıl yapıldı?", en: "How this map was made" },
   how1: { tr: "ASF Vertex'ten NISAR L2 GUNW interferogramlarını indirdik (12 günlük çiftler).", en: "We downloaded NISAR L2 GUNW interferograms from ASF Vertex (12-day pairs)." },
   how2: { tr: "İyonosfer düzeltmesini uygulayıp çiftleri sırayla toplayarak birikmiş hareketi çıkardık.", en: "We applied the ionosphere correction and chained the pairs into cumulative motion." },
