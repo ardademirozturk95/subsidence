@@ -82,8 +82,8 @@ const S = {
     en: "HV highlights things that scramble the signal: tree crowns, crops. Mountain forest and the Chalco fields glow, the flat lakebed almost disappears.",
   },
   polRGB: {
-    tr: "Kırmızı HH, yeşil HV, mavi HH/HV oranı. Şehir pembe-mor, orman yeşil, su ve göl tabanı siyah görünür.",
-    en: "Red is HH, green is HV, blue is the HH/HV ratio. The city looks pink-purple, forest green, water and lakebed black.",
+    tr: "Kırmızı HH, yeşil HV, mavi HH/HV oranı. Kurumuş göl tabanı ve su koyu lacivert, düzenli sıralı bina blokları pembe, bitki ve karışık şehir dokusu yeşil görünür. Görüntü 13 Ekim 2026 tarihli gerçek NISAR GCOV verisi.",
+    en: "Red is HH, green is HV, blue is the HH/HV ratio. The dry lakebed and water look dark navy, regularly aligned building blocks pink, vegetation and mixed city fabric green. Real NISAR GCOV data from 13 October 2026.",
   },
   lband: {
     tr: "NISAR'ın L-band dalgası yaklaşık 24 cm. Bitki örtüsünün içinden geçip zemine ulaştığı için tarlalarda da ölçüm kopmuyor.",

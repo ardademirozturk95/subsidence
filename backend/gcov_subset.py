@@ -27,7 +27,7 @@ OUT = Path(__file__).parent / "out"
 SEARCH = "https://api.daac.asf.alaska.edu/services/search/param"
 GRP = "science/LSAR/GCOV/grids/frequencyA/"
 GRAY_DB = (-30.0, -2.0)      # hh.png, hv.png (README)
-RGB_DB = dict(r=(-22.0, 0.0), g=(-30.0, -8.0), b=(2.0, 16.0))  # R: HH, G: HV, B: HH/HV oranı (dB)
+RGB_DB = dict(r=(-13.0, 6.0), g=(-20.0, -5.0), b=(2.0, 16.0))  # 13 Eki 2026 GCOV'un %2–%98 aralığı  # R: HH, G: HV, B: HH/HV oranı (dB)
 TARGET_M = 40.0              # çıktı çözünürlüğü (m); kaynak 10-20 m ise güçte ortalanarak buna indirilir
 
 
@@ -138,13 +138,25 @@ def main():
         token = get_token()
         if not token:
             sys.exit("EARTHDATA_TOKEN yok.")
-        import fsspec, aiohttp
-        fs = fsspec.filesystem("http", skip_instance_cache=True, client_kwargs={"timeout": aiohttp.ClientTimeout(total=1800, sock_read=300)})
-        f = fs.open(signed_url(g["url"], token), "rb", block_size=4 * 2**20, cache_type="blockcache", size=g["bytes"])
+        import fsspec, aiohttp, time as _t
         meta = dict(source="ASF", file=g["name"], date=g["date"], track=g["track"], frame=g["frame"], direction=g["dir"], collection=g["collection"])
-
-    with h5py.File(f, "r") as h:
-        P, x, y, zone, spacing = read_window(h)
+        # Ağ kopmalarına karşı: her denemede yeni imzalı adres (S3 imzası süreli), en fazla 4 deneme
+        for k in range(4):
+            try:
+                fs = fsspec.filesystem("http", skip_instance_cache=True, client_kwargs={"timeout": aiohttp.ClientTimeout(total=3600, sock_read=600)})
+                f = fs.open(signed_url(g["url"], token), "rb", block_size=2 * 2**20, cache_type="blockcache", size=g["bytes"])
+                with h5py.File(f, "r") as h:
+                    P, x, y, zone, spacing = read_window(h)
+                break
+            except Exception as e:
+                print(f"  tekrar {k + 1}/4 ({type(e).__name__})", flush=True)
+                _t.sleep(10 * (k + 1))
+        else:
+            sys.exit("GCOV okunamadı: ağ zaman aşımı. Daha sonra tekrar çalıştırın.")
+        f = None
+    if f is not None:
+        with h5py.File(f, "r") as h:
+            P, x, y, zone, spacing = read_window(h)
     n = max(1, int(round(TARGET_M / spacing)))
     hh, hv = multilook(P["HHHH"], n), multilook(P["HVHV"], n)
     xm = x[: (len(x) // n) * n].reshape(-1, n).mean(1); ym = y[: (len(y) // n) * n].reshape(-1, n).mean(1)
@@ -162,8 +174,8 @@ def main():
     d = Path(a.out) / "cdmx"
     d.mkdir(parents=True, exist_ok=True)
     gray = np.vstack([[[0, 0, 0]], np.repeat(np.linspace(0, 255, 255).round()[:, None], 3, axis=1)]).astype(np.uint8)
-    write_png(d / "hh.png", np.where(np.isfinite(hh_db), to_byte(hh_db, *GRAY_DB), 0).astype(np.uint8), gray)
-    write_png(d / "hv.png", np.where(np.isfinite(hv_db), to_byte(hv_db, *GRAY_DB), 0).astype(np.uint8), gray)
+    write_png(d / "hh.png", np.where(np.isfinite(hh_db), to_byte(hh_db, *RGB_DB["r"]), 0).astype(np.uint8), gray)
+    write_png(d / "hv.png", np.where(np.isfinite(hv_db), to_byte(hv_db, *RGB_DB["g"]), 0).astype(np.uint8), gray)
     ch = [np.clip((np.nan_to_num(v, nan=lo) - lo) / (hi - lo) * 255, 0, 255).round().astype(np.uint8)
           for v, (lo, hi) in ((hh_db, RGB_DB["r"]), (hv_db, RGB_DB["g"]), (ratio, RGB_DB["b"]))]
     write_rgba(d / "rgb.png", np.dstack(ch + [np.where(ok, 255, 0).astype(np.uint8)]))
