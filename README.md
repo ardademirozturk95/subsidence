@@ -7,6 +7,8 @@ Bazı mahalleler yılda 35 cm alçalıyor. Sebebi büyük ölçüde insan: şehr
 
 Ekip: Arda, Mert, Yağız.
 
+**Canlı site: https://ardademirozturk95.github.io/subsidence/**
+
 Projenin güncel durumu, sonuçları ve açık işler: **[docs/proje-durumu.md](docs/proje-durumu.md)**
 
 ---
