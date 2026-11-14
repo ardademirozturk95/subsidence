@@ -1,6 +1,7 @@
 # Görev promptu: Yağız'ın yapay zekâsı için
 
-> Bu metnin tamamını yapay zekâna ver. Yanına `subsidence_yagiz_paketi.zip` dosyasını aç ve proje klasörünü göster.
+> Bu metnin tamamını yapay zekâna ver.
+> Kurulum: daha önce gelen `subsidence_veri_paketi.zip`'i aç (NISAR önbelleği ve script'ler orada). Sonra küçük `subsidence_yagiz_ek.zip`'i **aynı klasörün üstüne** aç; yeni dosyaları ekler ve güncellenenleri değiştirir.
 
 ---
 
