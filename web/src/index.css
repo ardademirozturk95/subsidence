@@ -1,8 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/ibm-plex-sans/wght.css";
-@import "@fontsource-variable/source-serif-4/wght.css";
+@import "@fontsource-variable/inter/opsz.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 
@@ -10,10 +9,11 @@
 
 @theme inline {
     --font-heading: var(--font-serif);
-    --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
-    --font-serif: "Source Serif 4 Variable", Georgia, serif;
-    --font-display: "Source Serif 4 Variable", Georgia, serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    /* Apple tarzı: Mac/iPhone'da sistemin SF Pro'su, diğerlerinde ona en yakın açık yazı tipi Inter */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter Variable", "Segoe UI", system-ui, sans-serif;
+    --font-serif: var(--font-sans);
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Variable", "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
     --color-paper: var(--background);
     --color-card2: var(--card);
     --color-ink: var(--foreground);
@@ -195,10 +195,11 @@ html.dark { color-scheme: dark; }
 body { font-size: 14.5px; -webkit-font-smoothing: antialiased; }
 * { scrollbar-width: thin; scrollbar-color: color-mix(in oklch, var(--muted-foreground) 35%, transparent) transparent; }
 
-/* Büyük sayılar ve başlıklar: serif, sıkı aralık */
-.font-display { letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
+/* Başlıklar ve büyük sayılar: SF Display gibi sıkı aralık */
+.font-display { letter-spacing: -0.025em; font-feature-settings: "cv11", "ss03"; }
+body { font-feature-settings: "cv11"; }
 /* Veri etiketleri: mono */
-.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.num { font-family: var(--font-sans); font-variant-numeric: tabular-nums; letter-spacing: 0; }
 
 /* Panel: Mert'in kart dili (ince çizgi, 10 px köşe, gölge yok) */
 .card { background: var(--card); color: var(--card-foreground); border: 1px solid var(--border); border-radius: 10px; }
