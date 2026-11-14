@@ -7,7 +7,7 @@ import { useI18n } from "@/lib/i18n"
  */
 export function Staff({ cm, refDate, maxCm = 15 }: { cm: number; refDate: string; maxCm?: number }) {
   const { t, lang } = useI18n()
-  const W = 132, top = 14, px = 15, H = top + maxCm * px + 40
+  const W = 132, top = 14, px = Math.min(15, 240 / maxCm), H = top + maxCm * px + 40
   const groundY = top + Math.min(maxCm, Math.max(0, -cm)) * px
   const rodX = 22, rodW = 26
 
@@ -33,7 +33,7 @@ export function Staff({ cm, refDate, maxCm = 15 }: { cm: number; refDate: string
         <g key={i}>
           {i % 2 === 0 && <rect x={rodX + 1} y={top + i * px} width={rodW / 2} height={px} fill="var(--color-staff)" />}
           {i % 5 === 0 && i <= maxCm && (
-            <text x={rodX + rodW - 3} y={top + i * px + 11} textAnchor="end" className="fill-ink text-[10px] font-semibold tabular-nums">{i}</text>
+            <text x={rodX + rodW - 3} y={top + i * px + 9} textAnchor="end" className="fill-ink text-[10px] font-semibold tabular-nums">{i}</text>
           )}
         </g>
       ))}

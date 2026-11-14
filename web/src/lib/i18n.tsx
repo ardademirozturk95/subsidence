@@ -4,8 +4,8 @@ import type { L10n, Lang } from "@/lib/data"
 const S = {
   title: { tr: "Mexico City batıyor", en: "Mexico City is sinking" },
   lede: {
-    tr: "Şehir eski bir gölün kili üstünde duruyor. Yerin altından su çekildikçe kil sıkışıyor ve zemin bazı mahallelerde yılda 30 cm'den fazla alçalıyor. NISAR uydusunun radarı bu düşüşü uzaydan, santim santim ölçüyor.",
-    en: "The city sits on the clay of an old lake. As water is pumped from underground the clay compacts, and in some neighbourhoods the ground drops more than 30 cm a year. The NISAR satellite's radar measures that drop from space, centimetre by centimetre.",
+    tr: "Şehir eski bir gölün kili üstünde duruyor. Yerin altından su çekildikçe kil sıkışıyor ve zemin bazı mahallelerde yılda 30 cm'den fazla alçalıyor. Bu harita, NISAR uydusunun 11 aylık gerçek radar ölçümlerinden hesaplandı.",
+    en: "The city sits on the clay of an old lake. As water is pumped from underground the clay compacts, and in some neighbourhoods the ground drops more than 30 cm a year. This map was computed from 11 months of real NISAR radar measurements.",
   },
   mock: { tr: "Örnek veri", en: "Sample data" },
   mockHint: {
@@ -64,8 +64,8 @@ const S = {
     en: "On the volcanic rock around the basin, Santa Fe for example, the ground barely moves. Sinking follows the clay.",
   },
   whyHuman: {
-    tr: "Bizim hipotezimiz: neden fiziksel (kil), tetikleyici insan (pompalama). Bu yüzden haritadaki kırmızı alanlar kuyu yoğunluğuyla örtüşüyor.",
-    en: "Our hypothesis: the cause is physical (clay), the trigger is human (pumping). That is why the red areas line up with dense well fields.",
+    tr: "Bizim hipotezimiz: neden fiziksel (kil), tetikleyici insan (pompalama). Kaya zemindeki Peñón Viejo, Ciudad Universitaria ve Santa Fe'nin sabit kalması bunu destekliyor.",
+    en: "Our hypothesis: the cause is physical (clay), the trigger is human (pumping). Rock sites such as Peñón Viejo, Ciudad Universitaria and Santa Fe staying put supports this.",
   },
 
   radarTitle: { tr: "Radar ne görüyor?", en: "What does the radar see?" },
@@ -95,11 +95,11 @@ const S = {
   howTitle: { tr: "Bu harita nasıl yapıldı?", en: "How this map was made" },
   how1: { tr: "ASF Vertex'ten NISAR L2 GUNW interferogramlarını indirdik (12 günlük çiftler).", en: "We downloaded NISAR L2 GUNW interferograms from ASF Vertex (12-day pairs)." },
   how2: { tr: "İyonosfer düzeltmesini uygulayıp çiftleri sırayla toplayarak birikmiş hareketi çıkardık.", en: "We applied the ionosphere correction and chained the pairs into cumulative motion." },
-  how3: { tr: "Uydunun eğik bakışını dikey harekete çevirdik ve Sentinel-1 ile karşılaştırdık.", en: "We converted the satellite's slanted view into vertical motion and checked it against Sentinel-1." },
+  how3: { tr: "Uydunun batıdan (descending) ve doğudan (ascending) eğik bakışlarını birleştirip gerçek dikey harekete çevirdik.", en: "We combined the satellite's slanted views from the west (descending) and east (ascending) into true vertical motion." },
   how4: { tr: "Arka plan görüntüleri NISAR L2 GCOV ürününden (HH ve HV).", en: "Background images come from the NISAR L2 GCOV product (HH and HV)." },
   sourceLine: {
-    tr: "Kaynak: {sensor}, {product}, {maturity}. 27 Temmuz ile 10 Ağustos arasında NISAR verisi yok.",
-    en: "Source: {sensor}, {product}, {maturity}. NISAR has no data between 27 July and 10 August.",
+    tr: "Kaynak: {sensor}, {product}, {maturity}, track {track}. {g0} ile {g1} arasında 12 günlük ölçüm yok.",
+    en: "Source: {sensor}, {product}, {maturity}, track {track}. No 12-day measurement between {g0} and {g1}.",
   },
   loadError: { tr: "Veri yüklenemedi. Sayfayı yenile; sorun sürerse public/data klasörünü kontrol et.", en: "Data failed to load. Refresh the page; if it persists, check the public/data folder." },
   loading: { tr: "Veri yükleniyor", en: "Loading data" },

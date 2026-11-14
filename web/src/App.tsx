@@ -129,7 +129,7 @@ function ViewSwitch({ view, onView }: { view: View; onView: (v: View) => void })
 function PointPanel({ point, region, index }: { point: Point; region: Region; index: number }) {
   const { t, lang, pick } = useI18n()
   const cur = point.series[index]?.disp_cm ?? 0
-  const close = Math.abs(point.s1_rate_cm_yr - point.rate_cm_yr) <= Math.max(2, Math.abs(point.rate_cm_yr) * 0.15)
+  const close = point.s1_rate_cm_yr != null && Math.abs(point.s1_rate_cm_yr - point.rate_cm_yr) <= Math.max(2, Math.abs(point.rate_cm_yr) * 0.15)
   return (
     <section aria-labelledby="pt-h" aria-live="polite" className="space-y-4">
       <div>
@@ -171,7 +171,7 @@ function Why() {
 }
 
 function How({ region }: { region: Region }) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   return (
     <section aria-labelledby="how-h" className="space-y-3 border-t border-ink/15 pt-6">
       <h2 id="how-h" className="font-display text-lg font-extrabold">{t("howTitle")}</h2>
@@ -182,7 +182,7 @@ function How({ region }: { region: Region }) {
         <li>{t("how4")}</li>
       </ol>
       <p className="text-xs text-muted-foreground">
-        {t("sourceLine", { sensor: region.source.sensor, product: region.source.product, maturity: region.source.maturity })}
+        {t("sourceLine", { sensor: region.source.sensor, product: region.source.product, maturity: region.source.maturity, track: region.source.track, g0: fmtDate(region.gap[0], lang), g1: fmtDate(region.gap[1], lang) })}
       </p>
     </section>
   )

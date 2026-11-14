@@ -52,7 +52,7 @@ function png(w, h, rgba) {
 
 // ---------- Renk ölçekleri (web/src/lib/data.ts ile aynı) ----------
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
-const DISP_STOPS = ["#7a1420", "#c42a2a", "#e8836b", "#f6d7c8", "#f4f4f1", "#a9c7dc", "#2d6a8f"].map(hex)
+const DISP_STOPS = ["#7a1420", "#c42a2a", "#e8836b", "#f6d7c8", "#f4f4f1", "#d4e2ec", "#a9c7dc"].map(hex)
 const WRAP_STOPS = ["#d7263d", "#f49d37", "#f4e04d", "#3fa66b", "#2e86ab", "#7b4fa0", "#d7263d"].map(hex)
 function ramp(stops, t) {
   t = Math.min(1, Math.max(0, t)) * (stops.length - 1)

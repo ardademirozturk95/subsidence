@@ -1,0 +1,71 @@
+{
+ "_aciklama": "export_web.py bu dosyadan nokta tanımlarını okur; hız ve seri veriden hesaplanır. Koordinatlar 14 Kasım 2026 dikey hız haritasındaki çanaklara göre seçildi.",
+ "points": [
+  {
+   "id": "aragon",
+   "name": {"tr": "Aragón (havalimanının kuzeyi)", "en": "Aragón (north of the airport)"},
+   "note": {"tr": "Kuzey çanağın en hızlı çöken yeri; eski Texcoco gölünün kil tabanı.", "en": "Fastest-sinking spot of the northern bowl; clay bed of former Lake Texcoco."},
+   "lat": 19.4716, "lon": -99.0575
+  },
+  {
+   "id": "neza",
+   "name": {"tr": "Nezahualcóyotl", "en": "Nezahualcóyotl"},
+   "note": {"tr": "Göl tabanına kurulmuş yoğun yerleşim; hareket neredeyse tamamen dikey.", "en": "Dense housing built on the lake bed; motion is almost purely vertical."},
+   "lat": 19.4, "lon": -99.015
+  },
+  {
+   "id": "iztapalapa",
+   "name": {"tr": "Iztapalapa (doğu ova)", "en": "Iztapalapa (eastern plain)"},
+   "note": {"tr": "Peñón Viejo ile Santa Catarina sıradağı arasındaki ova; yer çatlaklarıyla bilinen bölge.", "en": "Plain between Peñón Viejo and the Santa Catarina range; an area known for ground fissures."},
+   "lat": 19.3564, "lon": -99.0407
+  },
+  {
+   "id": "penon",
+   "name": {"tr": "Peñón Viejo (volkanik tepe)", "en": "Peñón Viejo (volcanic hill)"},
+   "note": {"tr": "Çöken ovanın ortasında sabit kalan kaya ada: çökme kile özgü.", "en": "A rock island that stays put in the middle of the sinking plain: subsidence is tied to the clay."},
+   "lat": 19.3786, "lon": -99.03
+  },
+  {
+   "id": "zocalo",
+   "name": {"tr": "Zócalo (tarihi merkez)", "en": "Zócalo (historic centre)"},
+   "note": {"tr": "Katedralin ve eski şehrin bulunduğu meydan; çanağın batı yamacı.", "en": "Main square with the cathedral and old city; western slope of the bowl."},
+   "lat": 19.433, "lon": -99.133
+  },
+  {
+   "id": "angel",
+   "name": {"tr": "Bağımsızlık Anıtı", "en": "Angel of Independence"},
+   "note": {"tr": "Çanağın batı kenarı; anıtın çevresi çöktükçe kaidesine basamak eklendi.", "en": "Western edge of the bowl; steps were added to the base as the ground around it sank."},
+   "lat": 19.427, "lon": -99.168
+  },
+  {
+   "id": "tlaxialtemalco",
+   "name": {"tr": "Xochimilco–Tláhuac sulak alanı", "en": "Xochimilco–Tláhuac wetland"},
+   "note": {"tr": "San Luis Tlaxialtemalco'nun kuzeyindeki tarım alanı; haritadaki en hızlı çöken nokta.", "en": "Farmland north of San Luis Tlaxialtemalco; the fastest-sinking point on the map."},
+   "lat": 19.2682, "lon": -99.0392
+  },
+  {
+   "id": "chalco",
+   "name": {"tr": "Chalco ovası (Xico'nun güneyi)", "en": "Chalco plain (south of Xico)"},
+   "note": {"tr": "Eski Chalco gölü tabanı; Xico volkanının hemen güneyindeki tarlalar.", "en": "Bed of former Lake Chalco; fields just south of the Xico volcano."},
+   "lat": 19.2453, "lon": -98.9363
+  },
+  {
+   "id": "xochimilco",
+   "name": {"tr": "Xochimilco (çanak kenarı)", "en": "Xochimilco (bowl edge)"},
+   "note": {"tr": "Güney çanağın batı ucu; merkeze göre yavaş.", "en": "Western tip of the southern bowl; slow compared with its centre."},
+   "lat": 19.262, "lon": -99.1
+  },
+  {
+   "id": "cu",
+   "name": {"tr": "Ciudad Universitaria (lav zemin)", "en": "Ciudad Universitaria (lava ground)"},
+   "note": {"tr": "Bağımsız kontrol: referans olmayan kaya zeminde hareket sıfıra yakın.", "en": "Independent check: near-zero motion on rock that is not the reference."},
+   "lat": 19.332, "lon": -99.187
+  },
+  {
+   "id": "santafe",
+   "name": {"tr": "Santa Fe (referans)", "en": "Santa Fe (reference)"},
+   "note": {"tr": "Havza dışı kaya zemin; bütün ölçümler bu noktaya göre.", "en": "Bedrock outside the basin; every measurement is relative to this point."},
+   "lat": 19.36, "lon": -99.26
+  }
+ ]
+}

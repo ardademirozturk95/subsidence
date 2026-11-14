@@ -7,8 +7,8 @@ export function SeriesChart({ point, region, index }: { point: Point; region: Re
   const W = 320, H = 168, pl = 34, pr = 8, pt = 10, pb = 24
   const { dates, gap } = region
   const total = days(dates[0], dates[dates.length - 1])
-  const s1End = (point.s1_rate_cm_yr * total) / 365
-  const lo = Math.min(-2, ...point.series.map((s) => s.disp_cm), s1End)
+  const s1End = point.s1_rate_cm_yr == null ? null : (point.s1_rate_cm_yr * total) / 365
+  const lo = Math.min(-2, ...point.series.map((s) => s.disp_cm), s1End ?? 0)
   const yMin = Math.floor(lo / 2) * 2 - 1
   const x = (d: string) => pl + ((W - pl - pr) * days(dates[0], d)) / total
   const y = (v: number) => pt + ((H - pt - pb) * (0 - v)) / (0 - yMin)
@@ -42,7 +42,7 @@ export function SeriesChart({ point, region, index }: { point: Point; region: Re
             <line x1="0" y1="0" x2="0" y2="6" stroke="var(--color-ink)" strokeOpacity="0.14" strokeWidth="3" />
           </pattern>
         </defs>
-        <line x1={x(dates[0])} y1={y(0)} x2={x(last.date)} y2={y(s1End)} stroke="var(--color-lake)" strokeWidth={2} strokeDasharray="5 4" />
+        {s1End != null && <line x1={x(dates[0])} y1={y(0)} x2={x(last.date)} y2={y(s1End)} stroke="var(--color-lake)" strokeWidth={2} strokeDasharray="5 4" />}
         <path d={path} fill="none" stroke="var(--color-ink)" strokeWidth={2} strokeLinejoin="round" />
         {point.series.map((s, i) => (
           <circle key={s.date} cx={x(s.date)} cy={y(s.disp_cm)} r={i === index ? 5 : 2.6}
@@ -54,7 +54,7 @@ export function SeriesChart({ point, region, index }: { point: Point; region: Re
       </svg>
       <figcaption className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5"><svg width="18" height="8" aria-hidden="true"><line x1="0" x2="18" y1="4" y2="4" stroke="var(--color-ink)" strokeWidth="2" /><circle cx="9" cy="4" r="2.6" fill="var(--color-ink)" /></svg>{t("chartNisar")}</span>
-        <span className="inline-flex items-center gap-1.5"><svg width="18" height="8" aria-hidden="true"><line x1="0" x2="18" y1="4" y2="4" stroke="var(--color-lake)" strokeWidth="2" strokeDasharray="5 3" /></svg>{t("chartS1")}</span>
+        {s1End != null && <span className="inline-flex items-center gap-1.5"><svg width="18" height="8" aria-hidden="true"><line x1="0" x2="18" y1="4" y2="4" stroke="var(--color-lake)" strokeWidth="2" strokeDasharray="5 3" /></svg>{t("chartS1")}</span>}
       </figcaption>
     </figure>
   )
