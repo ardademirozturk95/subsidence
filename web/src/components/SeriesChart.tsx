@@ -45,7 +45,7 @@ export function SeriesChart({ point, region, index }: { point: Point; region: Re
         <path d={path} fill="none" stroke="var(--color-ink)" strokeWidth={2} strokeLinejoin="round" />
         {point.series.map((s, i) => (
           <circle key={s.date} cx={x(s.date)} cy={y(s.disp_cm)} r={i === index ? 5 : 2.6}
-            fill={i === index ? "var(--color-staff)" : "var(--color-ink)"} stroke={i === index ? "#fff" : "none"} strokeWidth={1.5} />
+            fill={i === index ? "var(--color-staff)" : "var(--color-ink)"} stroke={i === index ? "var(--color-card2)" : "none"} strokeWidth={1.5} />
         ))}
         {cur && <line x1={x(cur.date)} x2={x(cur.date)} y1={pt} y2={H - pb} stroke="var(--color-staff)" strokeOpacity={0.45} />}
         <text x={pl} y={H - 6} className="fill-muted-foreground text-[10px]">{fmtDate(dates[0], lang)}</text>

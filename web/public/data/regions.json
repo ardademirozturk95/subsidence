@@ -82,65 +82,124 @@
     "disp_stops_cm": [
      [
       -35.0,
-      "#7a1420"
+      "#67000d"
      ],
      [
       -26.25,
-      "#c42a2a"
+      "#bd0026"
      ],
      [
       -17.5,
-      "#e8836b"
+      "#f03b20"
      ],
      [
       -8.75,
-      "#f6d7c8"
+      "#fd8d3c"
+     ],
+     [
+      -3.5,
+      "#fecc5c"
      ],
      [
       -0.0,
-      "#f4f4f1"
+      "#c6dbef"
      ],
      [
       5.0,
-      "#a9c7dc"
+      "#aecce7"
+     ]
+    ],
+    "rate_stops_cm_yr": [
+     [
+      -40.0,
+      "#67000d"
+     ],
+     [
+      -30.0,
+      "#bd0026"
+     ],
+     [
+      -20.0,
+      "#f03b20"
+     ],
+     [
+      -10.0,
+      "#fd8d3c"
+     ],
+     [
+      -4.0,
+      "#fecc5c"
+     ],
+     [
+      -0.0,
+      "#c6dbef"
+     ],
+     [
+      8.0,
+      "#a5c6e3"
      ]
     ],
     "wrap_stops": [
      [
       0.0,
-      "#d7263d"
+      "#ff0000"
      ],
      [
       0.1667,
-      "#f49d37"
+      "#ffff00"
      ],
      [
       0.3333,
-      "#f4e04d"
+      "#00ff00"
      ],
      [
       0.5,
-      "#3fa66b"
+      "#00ffff"
      ],
      [
       0.6667,
-      "#2e86ab"
+      "#0000ff"
      ],
      [
       0.8333,
-      "#7b4fa0"
+      "#ff00ff"
      ],
      [
       1.0,
-      "#d7263d"
+      "#ff0000"
      ]
-    ]
+    ],
+    "fade": {
+     "alpha_min": 0.0,
+     "start_abs": 1.5,
+     "full_at_abs": 6.0,
+     "up_start": 3.0,
+     "up_full": 12.0,
+     "up_max": 0.6
+    },
+    "nodata": {
+     "rgb": "#808080",
+     "alpha": 0.43
+    }
    },
    "rate_range_cm_yr": [
-    -40,
-    8
+    -40.0,
+    8.0
    ],
    "wrap_track": 19,
+   "half_wave_c_cm": 2.773,
+   "value_encoding": {
+    "files": "val/disp_<tarih>.png, val/rate.png",
+    "formula": "deger = min + (gri - 1) / 254 * (max - min); gri 0 = veri yok",
+    "disp_range_cm": [
+     -35.0,
+     5.0
+    ],
+    "rate_range_cm_yr": [
+     -40.0,
+     8.0
+    ]
+   },
    "stats": {
     "days": 336,
     "vertical_rate_p1_cm_yr": -32.9,

@@ -16,6 +16,7 @@ export type Region = {
   gap: [string, string]
   disp_range_cm: [number, number]
   half_wave_cm: number
+  colors?: { disp_stops_cm: [number, string][]; wrap_stops: [number, string][] }
   dir: string
 }
 
@@ -58,21 +59,29 @@ export const WRAP_STOPS = ["#d7263d", "#f49d37", "#f4e04d", "#3fa66b", "#2e86ab"
 function hexToRgb(h: string) {
   return [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
 }
-// 0 cm her zaman beyaz durağa (index 4) düşer; eksi taraf 0..4, artı taraf 4..6 durakları kullanır.
-export const dispT = (cm: number, [vmin, vmax]: [number, number]) =>
-  cm <= 0 ? ((Math.max(cm, vmin) - vmin) / -vmin) * (4 / 6) : 4 / 6 + (Math.min(cm, vmax) / vmax) * (2 / 6)
-export const dispGradient = ([vmin, vmax]: [number, number]) => {
-  const zero = (-vmin / (vmax - vmin)) * 100
-  const at = (i: number) => (i <= 4 ? (i / 4) * zero : zero + ((i - 4) / 2) * (100 - zero))
-  return `linear-gradient(90deg, ${DISP_STOPS.map((c, i) => `${c} ${at(i).toFixed(1)}%`).join(", ")})`
+// Renk ölçeği regions.json > colors > disp_stops_cm'ten (cm konumlu duraklar). Yoksa eski sabit duraklar.
+function stopsOf(r: Region): [number, string][] {
+  if (r.colors?.disp_stops_cm?.length) return r.colors.disp_stops_cm
+  const [vmin, vmax] = r.disp_range_cm
+  return DISP_STOPS.map((c, i) => [i <= 4 ? vmin * (1 - i / 4) : (vmax * (i - 4)) / 2, c] as [number, string])
 }
-export function dispColor(cm: number, range: [number, number]) {
-  const stops = DISP_STOPS.map(hexToRgb)
-  let t = dispT(cm, range) * (stops.length - 1)
-  const i = Math.min(stops.length - 2, Math.floor(t))
-  t -= i
-  const c = stops[i].map((v, k) => Math.round(v + (stops[i + 1][k] - v) * t))
-  return `rgb(${c.join(",")})`
+export const dispGradient = (r: Region) => {
+  const [vmin, vmax] = r.disp_range_cm
+  return `linear-gradient(90deg, ${stopsOf(r).map(([cm, c]) => `${c} ${(((cm - vmin) / (vmax - vmin)) * 100).toFixed(1)}%`).join(", ")})`
+}
+export const wrapGradient = (r: Region, kind: "linear" | "conic" = "conic") => {
+  const st = r.colors?.wrap_stops?.length ? r.colors.wrap_stops : WRAP_STOPS.map((c, i) => [i / (WRAP_STOPS.length - 1), c] as [number, string])
+  return `${kind}-gradient(${kind === "linear" ? "90deg, " : ""}${st.map(([t, c]) => `${c} ${(t * 100).toFixed(1)}%`).join(", ")})`
+}
+export function dispColor(cm: number, r: Region) {
+  const st = stopsOf(r)
+  if (cm <= st[0][0]) return st[0][1]
+  if (cm >= st[st.length - 1][0]) return st[st.length - 1][1]
+  const k = st.findIndex(([v]) => v >= cm)
+  const [a, ca] = st[k - 1], [b, cb] = st[k]
+  const f = (cm - a) / (b - a)
+  const A = hexToRgb(ca), B = hexToRgb(cb)
+  return `rgb(${A.map((v, n) => Math.round(v + (B[n] - v) * f)).join(",")})`
 }
 
 export const days = (a: string, b: string) => (new Date(b).getTime() - new Date(a).getTime()) / 864e5

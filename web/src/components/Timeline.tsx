@@ -33,14 +33,14 @@ export function Timeline({ region, index, onIndex, playing, onPlaying }: Props) 
           if (!playing && index === dates.length - 1) onIndex(0)
           onPlaying(!playing)
         }}
-        className="grid size-11 shrink-0 place-items-center rounded-full bg-ink text-white hover:bg-ink/85 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-staff"
+        className="grid size-11 shrink-0 place-items-center rounded-full bg-ink text-paper hover:bg-ink/85 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-staff"
         aria-label={playing ? t("pause") : t("play")}
       >
         {playing ? <Pause className="size-5" fill="currentColor" /> : <Play className="size-5 translate-x-px" fill="currentColor" />}
       </button>
 
       <div className="w-[7.5rem] shrink-0">
-        <div className="font-display text-2xl leading-none font-extrabold tabular-nums">{fmtDate(dates[index], lang)}</div>
+        <div className="font-display text-2xl leading-none font-semibold tabular-nums">{fmtDate(dates[index], lang)}</div>
         <div className="mt-1 text-xs text-muted-foreground">{dates[index].slice(0, 4)}</div>
       </div>
 

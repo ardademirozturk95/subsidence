@@ -10,7 +10,7 @@ export function PolCompare({ region, backdrop, onBackdrop }: { region: Region; b
   const text: Record<Backdrop, Key | null> = { map: null, hh: "polHH", hv: "polHV", rgb: "polRGB" }
   return (
     <section aria-labelledby="pol-h" className="space-y-3">
-      <h2 id="pol-h" className="font-display text-xl leading-tight font-extrabold">{t("polTitle")}</h2>
+      <h2 id="pol-h" className="font-display text-xl leading-tight font-semibold">{t("polTitle")}</h2>
 
       <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-ink select-none">
         <img src={polUrl(region, "hv")} alt="HV" className="absolute inset-0 size-full object-cover" draggable={false} />
@@ -35,7 +35,7 @@ export function PolCompare({ region, backdrop, onBackdrop }: { region: Region; b
         <div role="radiogroup" aria-label={t("polOnMap")} className="inline-flex rounded-md bg-ink/[0.06] p-0.5">
           {opts.map(([v, label]) => (
             <button key={v} type="button" role="radio" aria-checked={backdrop === v} onClick={() => onBackdrop(v)}
-              className={`rounded-[5px] px-2.5 py-1 text-xs font-semibold focus-visible:outline-2 focus-visible:outline-staff ${backdrop === v ? "bg-ink text-white" : "text-ink/75 hover:text-ink"}`}>
+              className={`rounded-[5px] px-2.5 py-1 text-xs font-semibold focus-visible:outline-2 focus-visible:outline-staff ${backdrop === v ? "bg-ink text-paper" : "text-ink/75 hover:text-ink"}`}>
               {label}
             </button>
           ))}

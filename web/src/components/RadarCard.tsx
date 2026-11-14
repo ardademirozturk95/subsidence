@@ -15,7 +15,7 @@ export function RadarCard({ backdrop, onBackdrop }: { backdrop: Backdrop; onBack
   const text = TEXT[backdrop]
   return (
     <section aria-labelledby="radar-h" className="space-y-3">
-      <h2 id="radar-h" className="font-display text-xl font-extrabold">{t("radarTitle")}</h2>
+      <h2 id="radar-h" className="font-display text-xl font-semibold">{t("radarTitle")}</h2>
       <p className="text-sm leading-relaxed text-ink/80">{t("radarIntro")}</p>
       <div role="radiogroup" aria-label={t("backdrop")} className="inline-flex rounded-md bg-ink/[0.06] p-0.5">
         {OPTIONS.map((o) => {
@@ -27,7 +27,7 @@ export function RadarCard({ backdrop, onBackdrop }: { backdrop: Backdrop; onBack
               role="radio"
               aria-checked={on}
               onClick={() => onBackdrop(o.v)}
-              className={`rounded-[5px] px-3 py-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-staff ${on ? "bg-ink text-white" : "text-ink/75 hover:text-ink"}`}
+              className={`rounded-[5px] px-3 py-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-staff ${on ? "bg-ink text-paper" : "text-ink/75 hover:text-ink"}`}
             >
               {o.label === "HH" || o.label === "HV" || o.label === "RGB" ? o.label : t(o.label as Key)}
             </button>

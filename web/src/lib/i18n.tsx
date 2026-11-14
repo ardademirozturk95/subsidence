@@ -115,6 +115,11 @@ const S = {
   },
   chartTrend: { tr: "11 ayın eğilimi", en: "11-month trend" },
   pointTitle: { tr: "{n}, NISAR'ın {k} ölçümüyle", en: "{n}, from {k} NISAR measurements" },
+  subtitle: {
+    tr: "NISAR L-band radarı, 11 ay, 28 ölçüm: bazı mahalleler yılda 35 cm alçalıyor.",
+    en: "NISAR L-band radar, 11 months, 28 passes: some neighbourhoods drop 35 cm a year.",
+  },
+  themeToggle: { tr: "Açık / koyu tema", en: "Light / dark theme" },
   regionPick: { tr: "Yer seç", en: "Choose a place" },
   statSince: { tr: "{d} tarihinden bu yana", en: "since {d}" },
   statRate: { tr: "yıllık çökme hızı", en: "sinking per year" },
