@@ -4,13 +4,16 @@ aiosignal==1.4.0
 attrs==26.1.0
 certifi==2026.10.23
 charset-normalizer==3.5.2
+colorama==0.4.6
 contourpy==1.4.0
 cycler==0.12.1
 fonttools==4.68.0
 frozenlist==1.8.0
 fsspec==2026.9.0
 h5py==3.16.0
+hyp3_sdk==7.7.8
 idna==3.20
+imagecodecs==2026.11.11
 kiwisolver==1.5.1
 matplotlib==3.11.2
 multidict==7.2.1
@@ -21,6 +24,9 @@ propcache==0.5.4
 pyparsing==3.3.3
 python-dateutil==4.0.0
 requests==2.34.2
+scipy==1.18.1
+tifffile==2026.11.12
+tqdm==4.70.1
 tzdata==2026.6
 urllib3==2.8.0
 yarl==1.25.1
