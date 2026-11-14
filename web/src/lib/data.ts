@@ -31,10 +31,18 @@ export type Point = {
   series: Sample[]
 }
 
-export type View = "disp" | "wrap" | "swipe"
+export type View = "disp" | "wrap" | "swipe" | "tilt"
 export type Fringes = {
   l_half_wave_cm: number
   dates: { date: string; max_los_cm: number; rings_l: number }[]
+}
+export type TiltPointEntry = number | { beta_per_yr?: number; beta?: number; reciprocal?: number; [key: string]: unknown }
+export type TiltMeta = {
+  units?: string
+  vmax_per_yr?: number
+  thresholds_per_yr?: number[]
+  points?: Record<string, TiltPointEntry> | Array<{ id: string; beta_per_yr?: number; beta?: number }>
+  [key: string]: unknown
 }
 export type Backdrop = "map" | "hh" | "hv" | "rgb"
 
@@ -42,14 +50,30 @@ const base = import.meta.env.BASE_URL
 export const dataUrl = (path: string) => `${base}data/${path}`
 export const frameUrl = (r: Region, kind: "disp" | "lwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
 export const polUrl = (r: Region, pol: Exclude<Backdrop, "map">) => dataUrl(`${r.dir}/${pol}.png`)
+export const tiltUrl = (r: Region) => dataUrl(`${r.dir}/tilt.png`)
+export const tiltMetaUrl = (r: Region) => dataUrl(`${r.dir}/tilt.json`)
 
-export async function loadAll(): Promise<{ region: Region; points: Point[]; fringes: Fringes | null }> {
+export async function loadAll(): Promise<{ region: Region; points: Point[]; fringes: Fringes | null; tilt: TiltMeta | null }> {
   const regions = await fetch(dataUrl("regions.json")).then((r) => r.json())
   const region: Region = regions.regions[0]
   const pts = await fetch(dataUrl(`${region.dir}/points.json`)).then((r) => r.json())
-  // Halka simülasyonu isteğe bağlı: dosya yoksa site yine çalışır
-  const raw = await fetch(dataUrl(`${region.dir}/fringes.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null)
-  return { region, points: pts.points, fringes: normalizeFringes(raw, region) }
+  // Halka simülasyonu ve eğim metaverisi isteğe bağlı: dosya yoksa site yine çalışır
+  const [raw, tilt] = await Promise.all([
+    fetch(dataUrl(`${region.dir}/fringes.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(tiltMetaUrl(region)).then((r) => (r.ok ? (r.json() as Promise<TiltMeta>) : null)).catch(() => null),
+  ])
+  return { region, points: pts.points, fringes: normalizeFringes(raw, region), tilt }
+}
+
+/** Extract a point's annual tilt rate beta (yr^-1) from tilt.json metadata, if available. */
+export function tiltPointBeta(tilt: TiltMeta | null, pointId: string): number | null {
+  const pts = tilt?.points
+  if (!pts) return null
+  const entry = Array.isArray(pts) ? pts.find((p) => p.id === pointId) : pts[pointId]
+  if (typeof entry === "number") return Number.isFinite(entry) ? entry : null
+  if (!entry || typeof entry !== "object") return null
+  const val = entry.beta_per_yr ?? entry.beta
+  return typeof val === "number" && Number.isFinite(val) ? val : null
 }
 
 // fringes.json iki biçimde gelebilir: bizim {dates:[{date,max_los_cm,rings_l}]} ya da

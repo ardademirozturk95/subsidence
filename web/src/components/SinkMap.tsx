@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { CircleMarker, ImageOverlay, MapContainer, Pane, TileLayer, Tooltip, ZoomControl, useMap } from "react-leaflet"
-import { dispColor, dispGradient, wrapGradient, frameUrl, polUrl, type Backdrop, type Fringes, type Point, type Region, type View } from "@/lib/data"
+import { dispColor, dispGradient, wrapGradient, frameUrl, polUrl, tiltUrl, tiltPointBeta, type Backdrop, type Fringes, type Point, type Region, type TiltMeta, type View } from "@/lib/data"
 import { useI18n } from "@/lib/i18n"
 
 type Props = {
@@ -9,17 +9,19 @@ type Props = {
   date: string
   view: View
   fringes: Fringes | null
+  tilt: TiltMeta | null
   dark: boolean
   backdrop: Backdrop
   selectedId: string
   onSelect: (id: string) => void
 }
 
-export function SinkMap({ region, points, date, view, fringes, backdrop, selectedId, onSelect, dark }: Props) {
-  const { t, pick } = useI18n()
+export function SinkMap({ region, points, date, view, fringes, tilt, backdrop, selectedId, onSelect, dark }: Props) {
+  const { t, lang, pick } = useI18n()
   const [split, setSplit] = useState(0.5)
-  const showWrap = view !== "disp"
-  const showDisp = view !== "wrap"
+  const showWrap = view === "wrap" || view === "swipe"
+  const showDisp = view === "disp" || view === "swipe"
+  const showTilt = view === "tilt"
 
   // Kareleri önceden indir: oynatırken titreme olmasın
   useEffect(() => {
@@ -50,6 +52,9 @@ export function SinkMap({ region, points, date, view, fringes, backdrop, selecte
         <Pane name="disp" style={{ zIndex: 420 }}>
           {showDisp && <ImageOverlay url={frameUrl(region, "disp", date)} bounds={region.bounds} opacity={backdrop === "map" ? 0.82 : 0.7} />}
         </Pane>
+        <Pane name="tilt" style={{ zIndex: 420 }}>
+          {showTilt && <ImageOverlay url={tiltUrl(region)} bounds={region.bounds} opacity={backdrop === "map" ? 0.85 : 0.75} />}
+        </Pane>
         <Pane name="labels" style={{ zIndex: 450 }}>
           <TileLayer
             key={dark ? "lab-d" : "lab-l"}
@@ -64,6 +69,8 @@ export function SinkMap({ region, points, date, view, fringes, backdrop, selecte
         {points.map((p) => {
           const sel = p.id === selectedId
           const now = p.series.find((s) => s.date === date)?.disp_cm ?? 0
+          const beta = tiltPointBeta(tilt, p.id)
+          const betaInv = beta && beta > 0 ? Math.round(1 / beta).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB") : null
           return (
             <CircleMarker
               key={p.id}
@@ -75,7 +82,8 @@ export function SinkMap({ region, points, date, view, fringes, backdrop, selecte
               bubblingMouseEvents={false}
             >
               <Tooltip permanent={sel} direction="right" offset={[10, 0]} className="pt-label">
-                {pick(p.name)}
+                <span>{pick(p.name)}</span>
+                {betaInv && <span className="ml-1.5 opacity-75">· {t("tiltTooltipBeta", { n: betaInv })}</span>}
               </Tooltip>
             </CircleMarker>
           )
@@ -181,6 +189,27 @@ function Legend({ region, view, half }: { region: Region; view: View; half: numb
   const { t } = useI18n()
   const [vmin, vmax] = region.disp_range_cm
   const zero = (-vmin / (vmax - vmin)) * 100
+  if (view === "tilt") {
+    return (
+      <div className="pointer-events-none absolute right-3 bottom-3 z-[500] w-60 rounded-md border border-border bg-card2/95 px-3 py-2 text-xs text-ink">
+        <div className="mb-1 font-medium">{t("legendTiltTitle")}</div>
+        <div
+          className="h-2.5 rounded-sm"
+          style={{ background: "linear-gradient(90deg, #1b1b2f 0%, #5b2c6f 25%, #b53471 50%, #e67e22 75%, #fde725 100%)" }}
+        />
+        <div className="relative mt-1 h-4 tabular-nums">
+          <span className="num absolute left-0">0</span>
+          <span className="num absolute -translate-x-1/2" style={{ left: "25%" }}>1/5000</span>
+          <span className="num absolute -translate-x-1/2" style={{ left: "55%" }}>1/2000</span>
+          <span className="num absolute right-0">1/1000 yr⁻¹</span>
+        </div>
+        <div className="flex justify-between text-muted-foreground">
+          <span>{t("legendTiltLow")}</span>
+          <span>{t("legendTiltHigh")}</span>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="pointer-events-none absolute right-3 bottom-3 z-[500] w-56 rounded-md border border-border bg-card2/95 px-3 py-2 text-xs text-ink">
       {view !== "wrap" && (
