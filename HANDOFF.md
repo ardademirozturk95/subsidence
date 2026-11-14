@@ -91,6 +91,29 @@ Bakış geometrisi (Mexico City, yaklaşık 2000 m katmanı):
 
 Nokta koordinatları örnek veriden kalma tahminlerdi. Haritadaki gerçek çanağa göre yeniden seçilmeleri gerekiyor.
 
+### DİKEY HIZ (iki track birleşik, 348 gün) — ana sonuç
+
+`backend/out/vertical.png`, `vertical.json`, `vertical.npz` (`vU` dikey, `vE` doğu-batı, cm/yıl).
+
+| Nokta | Dikey (cm/yıl) | Doğu-batı | LOS 113 | LOS 19 |
+|---|---|---|---|---|
+| Nezahualcóyotl | **−28,8** | +0,1 | −20,8 | −22,7 |
+| Zócalo | −11,8 | +1,6 | −9,9 | −8,2 |
+| Xochimilco | −11,9 | +2,1 | −9,9 | −7,7 |
+| Bağımsızlık Anıtı | −5,2 | +1,7 | −4,8 | −3,1 |
+| Santa Fe (referans) | +0,7 | +0,1 | +0,4 | +0,6 |
+| Iztapalapa / Chalco | −3,5 / −1,7 | | | koordinatlar çanağın dışında, yeniden seçilecek |
+
+- Haritanın %1'lik en hızlı kısmı yılda **−31 cm** ve daha fazla: literatürle (yılda 30–40 cm) uyumlu.
+- Nezahualcóyotl'de doğu-batı hareketi yaklaşık 0: hareket neredeyse tamamen dikey, fiziksel olarak beklenen bu.
+- Güneybatıdaki dağlarda doğu-batı bileşeni gürültülü (−5 ile −10); orman ve topoğrafya. Kentte küçük (+1–2), muhtemelen referanslama kaynaklı ufak bir sapma.
+
+### Troposfer düzeltmesi denendi: KULLANILMIYOR
+
+Track 113'te çift başına şehir geneli saçılım: düzeltmesiz **1,53 cm**, ıslak+kuru troposfer (+) 1,94 cm, (−) 2,05 cm, +gelgit 1,94 cm.
+Ürünün hava modeli (ECMWF) katmanları bu havzada gürültüyü artırıyor. `chain_test.py` varsayılanı artık `--corr none`.
+Gürültü, hızın tüm tarihlere doğru uydurulmasıyla azaltılıyor.
+
 ### Önemli düzeltme
 
 Zincirin ilk yarısından (168 gün) Nezahualcóyotl için yılda −36 cm çıkmıştı. Tam zincirde değer yılda −21 cm oldu.
@@ -165,8 +188,8 @@ Dikkat: arayüzün kutusu EPSG:4326 düz ızgara bekliyor. Bizim veri UTM 14N'de
 
 ## 6. Yapılacaklar (öncelik sırasıyla)
 
-1. **Track 19 (ascending) zincirini tamamla**, sonra `decompose.py` ile dikey hız haritası. (Çalışıyor olabilir; `out/vertical.json` varsa bitmiştir.)
-2. **Troposfer düzeltmesi**: `--corr tropo --sign 1` ve `--sign -1` dene. Her çiftin şehir geneli ortalamasının standart sapmasını düşüreni seç. Sonra hızları yeniden hesapla.
+1. ~~Track 19 zinciri ve dikey hız~~ **bitti** (`out/vertical.*`).
+2. ~~Troposfer düzeltmesi~~ **denendi, kullanılmıyor** (yukarıya bakın).
 3. **Noktaları yeniden yerleştir**: dikey hız haritasındaki çanaklara göre (en hızlı yer, kenar, sabit kaya).
 4. **Arayüze aktar**: `vertical.npz` ve `stack`'ten dikey birikmiş kareleri EPSG:4326'ya örnekle, README şemasındaki PNG ve JSON'ları üret.
 5. **L-band / C-band karşılaştırması**: aynı tarihlere denk gelen 3–5 Sentinel-1 12 günlük çifti ASF HyP3'ten sipariş et (ücretsiz, aynı Earthdata hesabı). Chalco ve Xochimilco tarlalarında tutarlılığı NISAR'la yan yana koy. Tam C-band zaman serisi çıkarmayın; zaman kaybı. Doğrulama için literatür hızları yeterli.

@@ -128,7 +128,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--track", type=int, default=113)
     ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--corr", default="tropo", choices=["none", "tropo", "tropo_set"],
+    ap.add_argument("--corr", default="none", choices=["none", "tropo", "tropo_set"],
                     help="hava modeli troposfer (ve gelgit) düzeltmesi")
     ap.add_argument("--sign", type=int, default=1, choices=[1, -1], help="düzeltme işareti (ürün kuralı doğrulanınca sabitlenecek)")
     a = ap.parse_args()
@@ -180,7 +180,7 @@ def main():
     tc = tdays - tdays.mean()
     rate = np.tensordot(tc, S - S.mean(0), axes=1) / (tc @ tc) * 365
     rate[np.isnan(cum)] = np.nan
-    np.savez_compressed(OUT / f"rate_{a.track}{"" if a.corr == "tropo" else "_" + a.corr}.npz", rate=rate.astype("float32"), stack=S.astype("float32"),
+    np.savez_compressed(OUT / f"rate_{a.track}{"" if a.corr == "none" else "_" + a.corr}.npz", rate=rate.astype("float32"), stack=S.astype("float32"),
                         dates=np.array(dates), x=np.load(paths[0])["x"], y=np.load(paths[0])["y"])
 
     import matplotlib
