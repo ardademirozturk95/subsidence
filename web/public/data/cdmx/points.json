@@ -1,0 +1,461 @@
+{
+ "note": "ÖRNEK VERİ / MOCK DATA",
+ "points": [
+  {
+   "id": "neza",
+   "name": {
+    "tr": "Nezahualcóyotl",
+    "en": "Nezahualcóyotl"
+   },
+   "lat": 19.4,
+   "lon": -99.015,
+   "note": {
+    "tr": "Eski Texcoco gölünün kıyısında, kalın kil üstünde kurulu",
+    "en": "Built on thick clay at the edge of former Lake Texcoco"
+   },
+   "rate_cm_yr": -34.7,
+   "s1_rate_cm_yr": -33.9,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -0.93
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -2.52
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -3.6
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -5.58
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -6.59
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -8.26
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -8.88
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -10.03
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -11.6
+    }
+   ]
+  },
+  {
+   "id": "aicm",
+   "name": {
+    "tr": "Havalimanı (AICM)",
+    "en": "Airport (AICM)"
+   },
+   "lat": 19.436,
+   "lon": -99.072,
+   "note": {
+    "tr": "Pistler her yıl yeniden düzleştiriliyor",
+    "en": "Runways need regular re-levelling"
+   },
+   "rate_cm_yr": -32.5,
+   "s1_rate_cm_yr": -31,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -1.11
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -2.18
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -3.16
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -4.98
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -6.64
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -7.5
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -8.82
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -9.8
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -10.09
+    }
+   ]
+  },
+  {
+   "id": "iztapalapa",
+   "name": {
+    "tr": "Iztapalapa",
+    "en": "Iztapalapa"
+   },
+   "lat": 19.357,
+   "lon": -99.058,
+   "note": {
+    "tr": "Yoğun kuyu alanı; yollarda ve evlerde çatlaklar",
+    "en": "Dense well field; cracks in roads and homes"
+   },
+   "rate_cm_yr": -33.7,
+   "s1_rate_cm_yr": -32.8,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -1.22
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -2.4
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -3.53
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -5.68
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -7.04
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -7.91
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -9.27
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -9.92
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -11.13
+    }
+   ]
+  },
+  {
+   "id": "chalco",
+   "name": {
+    "tr": "Chalco",
+    "en": "Chalco"
+   },
+   "lat": 19.265,
+   "lon": -98.93,
+   "note": {
+    "tr": "Çöken zeminde 1980'lerden beri yeni bir göl oluştu",
+    "en": "A new lake has formed on the sinking ground since the 1980s"
+   },
+   "rate_cm_yr": -27.4,
+   "s1_rate_cm_yr": -28.1,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -1.33
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -2.05
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -2.64
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -4.5
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -5.19
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -6.05
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -7.08
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -8.22
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -8.95
+    }
+   ]
+  },
+  {
+   "id": "xochimilco",
+   "name": {
+    "tr": "Xochimilco",
+    "en": "Xochimilco"
+   },
+   "lat": 19.262,
+   "lon": -99.1,
+   "note": {
+    "tr": "Kanallar ve tarlalar; kuyular şehre su veriyor",
+    "en": "Canals and fields; wells here supply the city"
+   },
+   "rate_cm_yr": -17.5,
+   "s1_rate_cm_yr": -18,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -0.39
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -1.43
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -2.22
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -2.6
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -3.39
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -3.86
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -4.5
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -5.43
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -5.64
+    }
+   ]
+  },
+  {
+   "id": "zocalo",
+   "name": {
+    "tr": "Zócalo (tarihi merkez)",
+    "en": "Zócalo (historic centre)"
+   },
+   "lat": 19.433,
+   "lon": -99.133,
+   "note": {
+    "tr": "Katedral bir yana eğik; onlarca yıldır destekleniyor",
+    "en": "The cathedral leans; it has been shored up for decades"
+   },
+   "rate_cm_yr": -12,
+   "s1_rate_cm_yr": -11.2,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -0.13
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -0.75
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -0.78
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -2.61
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -2.34
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -2.71
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -3.3
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -3.43
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -4.24
+    }
+   ]
+  },
+  {
+   "id": "angel",
+   "name": {
+    "tr": "Bağımsızlık Anıtı",
+    "en": "Angel of Independence"
+   },
+   "lat": 19.427,
+   "lon": -99.168,
+   "note": {
+    "tr": "Zemin çöktükçe anıtın tabanına 14 basamak eklendi",
+    "en": "14 steps were added to its base as the ground sank around it"
+   },
+   "rate_cm_yr": -3.5,
+   "s1_rate_cm_yr": -3.4,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": 0.45
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -0.56
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -0.15
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": -1.23
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": -0.68
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -0.86
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -0.62
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -1.47
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": -1.33
+    }
+   ]
+  },
+  {
+   "id": "santafe",
+   "name": {
+    "tr": "Santa Fe",
+    "en": "Santa Fe"
+   },
+   "lat": 19.36,
+   "lon": -99.26,
+   "note": {
+    "tr": "Havza dışında, kaya zemin: neredeyse sabit",
+    "en": "Outside the basin, on rock: nearly stable"
+   },
+   "rate_cm_yr": 0,
+   "s1_rate_cm_yr": 0,
+   "series": [
+    {
+     "date": "2026-06-17",
+     "disp_cm": 0
+    },
+    {
+     "date": "2026-06-29",
+     "disp_cm": -0.02
+    },
+    {
+     "date": "2026-07-11",
+     "disp_cm": -0.13
+    },
+    {
+     "date": "2026-07-23",
+     "disp_cm": -0.31
+    },
+    {
+     "date": "2026-08-16",
+     "disp_cm": 0.36
+    },
+    {
+     "date": "2026-08-28",
+     "disp_cm": 0.17
+    },
+    {
+     "date": "2026-09-09",
+     "disp_cm": -0.01
+    },
+    {
+     "date": "2026-09-21",
+     "disp_cm": -0.2
+    },
+    {
+     "date": "2026-10-03",
+     "disp_cm": -0.18
+    },
+    {
+     "date": "2026-10-15",
+     "disp_cm": 0.15
+    }
+   ]
+  }
+ ]
+}

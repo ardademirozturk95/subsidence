@@ -1,0 +1,27 @@
+# Ham uydu verisi (büyük): depoya girmez, script ile indirilir
+*.h5
+*.he5
+*.tif
+*.tiff
+*.zip
+raw/
+downloads/
+
+# Gizli bilgiler
+.env
+*.key
+.netrc
+_netrc
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# İşletim sistemi / editör
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

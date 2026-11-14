@@ -1,0 +1,56 @@
+{
+ "note": "ÖRNEK VERİ / MOCK DATA",
+ "regions": [
+  {
+   "id": "cdmx",
+   "name": {
+    "tr": "Mexico City",
+    "en": "Mexico City"
+   },
+   "center": [
+    19.38,
+    -99.08
+   ],
+   "zoom": 11,
+   "bounds": [
+    [
+     19.15,
+     -99.3
+    ],
+    [
+     19.6,
+     -98.85
+    ]
+   ],
+   "source": {
+    "status": "mock",
+    "sensor": "NISAR L-band HH",
+    "product": "L2 GUNW + L2 GCOV",
+    "maturity": "provisional",
+    "track": "—"
+   },
+   "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-08-28",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+   ],
+   "gap": [
+    "2026-07-27",
+    "2026-08-10"
+   ],
+   "disp_range_cm": [
+    -15,
+    3
+   ],
+   "half_wave_cm": 11.9,
+   "dir": "cdmx"
+  }
+ ]
+}
