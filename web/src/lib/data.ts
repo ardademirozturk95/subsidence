@@ -32,18 +32,26 @@ export type Point = {
 }
 
 export type View = "disp" | "wrap" | "swipe"
+export type Band = "L" | "C"
+export type Fringes = {
+  l_half_wave_cm: number
+  c_half_wave_cm: number
+  dates: { date: string; max_los_cm: number; rings_l: number; rings_c: number }[]
+}
 export type Backdrop = "map" | "hh" | "hv" | "rgb"
 
 const base = import.meta.env.BASE_URL
 export const dataUrl = (path: string) => `${base}data/${path}`
-export const frameUrl = (r: Region, kind: "disp" | "wrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
+export const frameUrl = (r: Region, kind: "disp" | "wrap" | "lwrap" | "cwrap", date: string) => dataUrl(`${r.dir}/${kind}_${date}.png`)
 export const polUrl = (r: Region, pol: Exclude<Backdrop, "map">) => dataUrl(`${r.dir}/${pol}.png`)
 
-export async function loadAll(): Promise<{ region: Region; points: Point[] }> {
+export async function loadAll(): Promise<{ region: Region; points: Point[]; fringes: Fringes | null }> {
   const regions = await fetch(dataUrl("regions.json")).then((r) => r.json())
   const region: Region = regions.regions[0]
   const pts = await fetch(dataUrl(`${region.dir}/points.json`)).then((r) => r.json())
-  return { region, points: pts.points }
+  // Halka simülasyonu isteğe bağlı: dosya yoksa site yine çalışır
+  const fringes = await fetch(dataUrl(`${region.dir}/fringes.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  return { region, points: pts.points, fringes }
 }
 
 // Renk ölçekleri — scripts/mock-data.mjs ile birebir aynı olmalı.

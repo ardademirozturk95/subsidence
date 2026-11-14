@@ -1,0 +1,176 @@
+{
+ "note": "SİMÜLASYON: NISAR'ın ölçtüğü hareket C-band dalga boyuyla yeniden sarıldı; Sentinel-1 verisi değildir.",
+ "l_half_wave_cm": 11.92,
+ "c_half_wave_cm": 2.77,
+ "track": 19,
+ "dates": [
+  {
+   "date": "2025-11-11",
+   "max_los_cm": 0.0,
+   "rings_l": 0.0,
+   "rings_c": 0.0
+  },
+  {
+   "date": "2025-11-23",
+   "max_los_cm": 2.1,
+   "rings_l": 0.2,
+   "rings_c": 0.8
+  },
+  {
+   "date": "2025-12-05",
+   "max_los_cm": 4.7,
+   "rings_l": 0.4,
+   "rings_c": 1.7
+  },
+  {
+   "date": "2025-12-17",
+   "max_los_cm": 3.7,
+   "rings_l": 0.3,
+   "rings_c": 1.3
+  },
+  {
+   "date": "2025-12-29",
+   "max_los_cm": 4.2,
+   "rings_l": 0.4,
+   "rings_c": 1.5
+  },
+  {
+   "date": "2026-01-10",
+   "max_los_cm": 4.3,
+   "rings_l": 0.4,
+   "rings_c": 1.5
+  },
+  {
+   "date": "2026-01-22",
+   "max_los_cm": 6.2,
+   "rings_l": 0.5,
+   "rings_c": 2.2
+  },
+  {
+   "date": "2026-02-03",
+   "max_los_cm": 6.2,
+   "rings_l": 0.5,
+   "rings_c": 2.2
+  },
+  {
+   "date": "2026-02-15",
+   "max_los_cm": 6.8,
+   "rings_l": 0.6,
+   "rings_c": 2.5
+  },
+  {
+   "date": "2026-02-27",
+   "max_los_cm": 8.2,
+   "rings_l": 0.7,
+   "rings_c": 3.0
+  },
+  {
+   "date": "2026-03-11",
+   "max_los_cm": 8.9,
+   "rings_l": 0.7,
+   "rings_c": 3.2
+  },
+  {
+   "date": "2026-03-23",
+   "max_los_cm": 9.9,
+   "rings_l": 0.8,
+   "rings_c": 3.6
+  },
+  {
+   "date": "2026-04-04",
+   "max_los_cm": 10.8,
+   "rings_l": 0.9,
+   "rings_c": 3.9
+  },
+  {
+   "date": "2026-04-16",
+   "max_los_cm": 13.2,
+   "rings_l": 1.1,
+   "rings_c": 4.8
+  },
+  {
+   "date": "2026-04-28",
+   "max_los_cm": 13.4,
+   "rings_l": 1.1,
+   "rings_c": 4.8
+  },
+  {
+   "date": "2026-05-10",
+   "max_los_cm": 14.4,
+   "rings_l": 1.2,
+   "rings_c": 5.2
+  },
+  {
+   "date": "2026-05-22",
+   "max_los_cm": 16.1,
+   "rings_l": 1.4,
+   "rings_c": 5.8
+  },
+  {
+   "date": "2026-06-03",
+   "max_los_cm": 17.4,
+   "rings_l": 1.5,
+   "rings_c": 6.3
+  },
+  {
+   "date": "2026-06-15",
+   "max_los_cm": 17.1,
+   "rings_l": 1.4,
+   "rings_c": 6.2
+  },
+  {
+   "date": "2026-06-27",
+   "max_los_cm": 18.8,
+   "rings_l": 1.6,
+   "rings_c": 6.8
+  },
+  {
+   "date": "2026-07-09",
+   "max_los_cm": 19.2,
+   "rings_l": 1.6,
+   "rings_c": 6.9
+  },
+  {
+   "date": "2026-07-21",
+   "max_los_cm": 19.8,
+   "rings_l": 1.7,
+   "rings_c": 7.2
+  },
+  {
+   "date": "2026-08-14",
+   "max_los_cm": 22.1,
+   "rings_l": 1.9,
+   "rings_c": 8.0
+  },
+  {
+   "date": "2026-08-26",
+   "max_los_cm": 23.2,
+   "rings_l": 1.9,
+   "rings_c": 8.4
+  },
+  {
+   "date": "2026-09-07",
+   "max_los_cm": 24.6,
+   "rings_l": 2.1,
+   "rings_c": 8.9
+  },
+  {
+   "date": "2026-09-19",
+   "max_los_cm": 24.5,
+   "rings_l": 2.1,
+   "rings_c": 8.8
+  },
+  {
+   "date": "2026-10-01",
+   "max_los_cm": 25.4,
+   "rings_l": 2.1,
+   "rings_c": 9.1
+  },
+  {
+   "date": "2026-10-13",
+   "max_los_cm": 26.7,
+   "rings_l": 2.2,
+   "rings_c": 9.6
+  }
+ ]
+}

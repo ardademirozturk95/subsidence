@@ -4,7 +4,7 @@ import { Timeline } from "@/components/Timeline"
 import { Staff } from "@/components/Staff"
 import { SeriesChart } from "@/components/SeriesChart"
 import { RadarCard } from "@/components/RadarCard"
-import { fmtCm, fmtDate, loadAll, type Backdrop, type Point, type Region, type View } from "@/lib/data"
+import { fmtCm, fmtDate, loadAll, type Backdrop, type Band, type Fringes, type Point, type Region, type View } from "@/lib/data"
 import { I18nProvider, useI18n } from "@/lib/i18n"
 
 export default function App() {
@@ -17,11 +17,12 @@ export default function App() {
 
 function Shell() {
   const { t, lang, setLang } = useI18n()
-  const [data, setData] = useState<{ region: Region; points: Point[] } | null>(null)
+  const [data, setData] = useState<{ region: Region; points: Point[]; fringes: Fringes | null } | null>(null)
   const [error, setError] = useState(false)
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [view, setView] = useState<View>("disp")
+  const [band, setBand] = useState<Band>("L")
   const [backdrop, setBackdrop] = useState<Backdrop>("map")
   const [selectedId, setSelectedId] = useState("neza")
 
@@ -71,13 +72,15 @@ function Shell() {
       {data && region && (
         <main className="grid min-h-0 flex-1 lg:grid-cols-[minmax(360px,420px)_1fr]">
           <section className="flex min-h-[78svh] flex-col border-ink/15 lg:order-2 lg:min-h-0 lg:border-l">
-            <ViewSwitch view={view} onView={setView} />
+            <ViewSwitch view={view} onView={setView} band={band} onBand={setBand} fringes={data.fringes} date={region.dates[index]} />
             <div className="relative min-h-[56svh] flex-1">
               <SinkMap
                 region={region}
                 points={data.points}
                 date={region.dates[index]}
                 view={view}
+                band={band}
+                fringes={data.fringes}
                 backdrop={backdrop}
                 selectedId={selectedId}
                 onSelect={setSelectedId}
@@ -103,11 +106,15 @@ function Shell() {
   )
 }
 
-function ViewSwitch({ view, onView }: { view: View; onView: (v: View) => void }) {
-  const { t } = useI18n()
+type VSProps = { view: View; onView: (v: View) => void; band: Band; onBand: (b: Band) => void; fringes: Fringes | null; date: string }
+function ViewSwitch({ view, onView, band, onBand, fringes, date }: VSProps) {
+  const { t, lang } = useI18n()
+  const fr = fringes?.dates.find((d) => d.date === date)
+  const num = (v: number) => v.toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { maximumFractionDigits: 1 })
   const opts: [View, Parameters<typeof t>[0]][] = [["disp", "viewDisp"], ["wrap", "viewWrap"], ["swipe", "viewSwipe"]]
   return (
-    <div className="flex items-center gap-3 border-b border-ink/15 px-4 py-2 md:px-5">
+    <div className="border-b border-ink/15 px-4 py-2 md:px-5">
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
       <div role="radiogroup" aria-label={t("viewLabel")} className="inline-flex flex-wrap rounded-md bg-ink/[0.06] p-0.5">
         {opts.map(([v, k]) => (
           <button
@@ -122,6 +129,32 @@ function ViewSwitch({ view, onView }: { view: View; onView: (v: View) => void })
           </button>
         ))}
       </div>
+      {fringes && view !== "disp" && (
+        <div role="radiogroup" aria-label={t("bandLabel")} className="inline-flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">{t("bandLabel")}</span>
+          <span className="inline-flex rounded-md bg-ink/[0.06] p-0.5">
+            {(["L", "C"] as const).map((b) => (
+              <button
+                key={b}
+                type="button"
+                role="radio"
+                aria-checked={band === b}
+                onClick={() => onBand(b)}
+                className={`rounded-[5px] px-3 py-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-staff ${band === b ? (b === "C" ? "bg-staff text-white" : "bg-ink text-white") : "text-ink/75 hover:text-ink"}`}
+              >
+                {t(b === "L" ? "bandL" : "bandC")}
+              </button>
+            ))}
+          </span>
+        </div>
+      )}
+    </div>
+      {fringes && fr && view !== "disp" && (
+        <div className="mt-2 max-w-3xl text-sm leading-snug">
+          <p>{t("ringsLine", { l: num(fr.rings_l), c: num(fr.rings_c) })}</p>
+          {band === "C" && <p className="mt-1 text-xs text-muted-foreground">{t("ringsNote")}</p>}
+        </div>
+      )}
     </div>
   )
 }
