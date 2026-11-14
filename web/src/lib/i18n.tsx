@@ -74,12 +74,12 @@ const S = {
     en: "NISAR sends microwaves to the ground and listens to the echo in two ways. The view you pick becomes the map background.",
   },
   polHH: {
-    tr: "HH binalara ve sert yüzeylere duyarlı. Şehir parlak, düz göl tabanı ve su koyu. Çökmeyi ölçtüğümüz faz da bu kanaldan geliyor.",
-    en: "HH responds to buildings and hard surfaces. The city is bright, the flat lakebed and water are dark. The phase we use to measure sinking comes from this channel.",
+    tr: "HH binalara ve sert yüzeylere duyarlı. Şehir çok parlak (yaklaşık −2 dB), düz göl tabanı (−9 dB) ve su (−16 dB) koyu. Çökmeyi ölçtüğümüz faz da bu kanaldan geliyor.",
+    en: "HH responds to buildings and hard surfaces. The city is very bright (about −2 dB), the flat lakebed (−9 dB) and water (−16 dB) are dark. The phase we use to measure sinking comes from this channel.",
   },
   polHV: {
-    tr: "HV, sinyali karıştıran hacimleri öne çıkarır: ağaç taçları, ekinler. Dağlardaki orman ve Chalco tarlaları parlar, düz göl tabanı neredeyse kaybolur.",
-    en: "HV highlights things that scramble the signal: tree crowns, crops. Mountain forest and the Chalco fields glow, the flat lakebed almost disappears.",
+    tr: "HV, sinyali karıştıran yüzeyleri öne çıkarır. L-band'de buna hem orman (−9 dB) hem karmaşık şehir dokusu (−8 dB) girer. Düz yüzeyler koyu kalır: tarla −13, kuru göl tabanı −17, su −22 dB.",
+    en: "HV highlights surfaces that scramble the signal. At L-band that includes both forest (−9 dB) and the complex city fabric (−8 dB). Flat surfaces stay dark: fields −13, dry lakebed −17, water −22 dB.",
   },
   polRGB: {
     tr: "Kırmızı HH, yeşil HV, mavi HH/HV oranı. Kurumuş göl tabanı ve su koyu lacivert, düzenli sıralı bina blokları pembe, bitki ve karışık şehir dokusu yeşil görünür. Görüntü 13 Ekim 2026 tarihli gerçek NISAR GCOV verisi.",
@@ -89,8 +89,8 @@ const S = {
     tr: "NISAR'ın L-band dalgası yaklaşık 24 cm. Bitki örtüsünün içinden geçip zemine ulaştığı için tarlalarda da ölçüm kopmuyor.",
     en: "NISAR's L-band wave is about 24 cm long. It passes through vegetation to the ground, so measurements hold up over fields too.",
   },
-  dotAria: { tr: "Şehir, orman, tarla, kuru göl tabanı ve su için tipik HH ve HV değerleri", en: "Typical HH and HV values for city, forest, fields, dry lakebed and water" },
-  dotNote: { tr: "Tipik L-band değerleri, yaklaşık.", en: "Typical L-band values, approximate." },
+  dotAria: { tr: "Şehir, orman, tarla, kuru göl tabanı ve su için ölçülen HH ve HV değerleri", en: "Measured HH and HV values for city, forest, fields, dry lakebed and water" },
+  dotNote: { tr: "Bu görüntüden ölçüldü: NISAR GCOV, 13 Ekim 2026, her tür için yaklaşık 1 km'lik alanın ortancası.", en: "Measured from this image: NISAR GCOV, 13 October 2026, median of a ~1 km area per type." },
 
   howTitle: { tr: "Bu harita nasıl yapıldı?", en: "How this map was made" },
   how1: { tr: "ASF Vertex'ten NISAR L2 GUNW interferogramlarını indirdik (12 günlük çiftler).", en: "We downloaded NISAR L2 GUNW interferograms from ASF Vertex (12-day pairs)." },

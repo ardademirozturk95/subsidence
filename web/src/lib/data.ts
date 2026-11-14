@@ -1,5 +1,5 @@
 // Veri tipleri, yükleyiciler ve renk ölçekleri.
-// public/data/ altındaki dosyalar şimdilik ÖRNEK VERİ (scripts/mock-data.mjs).
+// public/data/ altındaki dosyalar GERÇEK NISAR verisi (backend/export_web.py, backend/gcov_subset.py).
 // Mert ve Yağız gerçek NISAR çıktısını AYNI şemayla koyunca arayüz değişmeden çalışır.
 
 export type Lang = "tr" | "en"
@@ -82,11 +82,13 @@ export const fmtDate = (d: string, lang: Lang, long = false) =>
 export const fmtCm = (v: number, lang: Lang, digits = 1) =>
   (v < 0 ? "−" : v > 0 ? "+" : "") + Math.abs(v).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { minimumFractionDigits: digits, maximumFractionDigits: digits })
 
-// Tipik L-band geri saçılım değerleri (dB), yaklaşık; anlatım amaçlı.
+// GERÇEK ÖLÇÜM: NISAR L2 GCOV, track 19, 13 Eki 2026 (backend/out/gcov_cdmx.npz), dB ortanca.
+// Pencere ±0,005° (~1 km), su için ±0,002°. Merkezler: şehir Zócalo 19,433/−99,133; orman Ajusco eteği 19,20/−99,25;
+// tarla Chalco 19,23/−98,90; kuru göl tabanı Texcoco 19,50/−98,99; su Nabor Carrillo gölü 19,465/−98,965.
 export const BACKSCATTER: { cls: L10n; hh: number; hv: number }[] = [
-  { cls: { tr: "Şehir", en: "City" }, hh: -4, hv: -13 },
-  { cls: { tr: "Orman", en: "Forest" }, hh: -8, hv: -13.5 },
-  { cls: { tr: "Tarla", en: "Fields" }, hh: -11, hv: -18 },
-  { cls: { tr: "Kuru göl tabanı", en: "Dry lakebed" }, hh: -16, hv: -27 },
-  { cls: { tr: "Su", en: "Water" }, hh: -25, hv: -32 },
+  { cls: { tr: "Şehir", en: "City" }, hh: -1.9, hv: -8.0 },
+  { cls: { tr: "Orman", en: "Forest" }, hh: -3.9, hv: -9.2 },
+  { cls: { tr: "Tarla", en: "Fields" }, hh: -7.4, hv: -13.0 },
+  { cls: { tr: "Kuru göl tabanı", en: "Dry lakebed" }, hh: -9.3, hv: -16.6 },
+  { cls: { tr: "Su", en: "Water" }, hh: -15.7, hv: -21.5 },
 ]

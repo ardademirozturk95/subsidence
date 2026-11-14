@@ -17,6 +17,15 @@ import { fileURLToPath } from "node:url"
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "web", "public", "data")
 const DIR = join(OUT, "cdmx")
+// Güvenlik: gerçek veri varken örnek veriyle üstüne yazma
+import { existsSync, readFileSync } from "node:fs"
+if (!process.argv.includes("--force") && existsSync(join(OUT, "regions.json"))) {
+  const cur = JSON.parse(readFileSync(join(OUT, "regions.json"), "utf8"))
+  if (cur.regions?.some((r) => r.source?.status === "verified")) {
+    console.error("web/public/data GERÇEK NISAR verisi içeriyor; örnek veri yazılmadı. Yine de istiyorsan --force kullan.")
+    process.exit(1)
+  }
+}
 mkdirSync(DIR, { recursive: true })
 
 // ---------- Küçük PNG yazıcı (RGBA) ----------

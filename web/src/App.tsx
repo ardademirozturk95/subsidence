@@ -43,7 +43,7 @@ function Shell() {
       <header className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-ink/15 px-4 py-3 md:px-5">
         <Logo />
         <h1 className="font-display text-[1.75rem] leading-none font-extrabold">{t("title")}</h1>
-        <span className="text-sm text-muted-foreground max-md:hidden">NISAR L-band, 2026</span>
+        <span className="text-sm text-muted-foreground max-md:hidden">{lang === "tr" ? "NISAR L-band, Kas 2025 – Eki 2026" : "NISAR L-band, Nov 2025 – Oct 2026"}</span>
         <div className="ml-auto flex items-center gap-3">
           {region && (
             <span

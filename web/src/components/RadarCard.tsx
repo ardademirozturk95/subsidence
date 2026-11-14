@@ -43,13 +43,13 @@ export function RadarCard({ backdrop, onBackdrop }: { backdrop: Backdrop; onBack
 }
 
 function DotPlot({ backdrop, pick, label }: { backdrop: Backdrop; pick: (v: { tr: string; en: string }) => string; label: string }) {
-  const x0 = 108, x1 = 312, lo = -35, hi = 0
+  const x0 = 108, x1 = 312, lo = -25, hi = 0
   const x = (v: number) => x0 + ((x1 - x0) * (v - lo)) / (hi - lo)
   const hhOn = backdrop !== "hv", hvOn = backdrop !== "hh"
   const rows = BACKSCATTER.length
   return (
     <svg viewBox={`0 0 320 ${rows * 26 + 44}`} className="h-auto w-full" role="img" aria-label={label}>
-      {[-30, -20, -10, 0].map((v) => (
+      {[-20, -15, -10, -5, 0].map((v) => (
         <g key={v}>
           <line x1={x(v)} x2={x(v)} y1={4} y2={rows * 26 + 6} stroke="var(--color-ink)" strokeOpacity={0.1} />
           <text x={x(v)} y={rows * 26 + 18} textAnchor="middle" className="fill-muted-foreground text-[10px] tabular-nums">{v} dB</text>

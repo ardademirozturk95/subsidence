@@ -41,7 +41,7 @@ export function Timeline({ region, index, onIndex, playing, onPlaying }: Props) 
 
       <div className="w-[7.5rem] shrink-0">
         <div className="font-display text-2xl leading-none font-extrabold tabular-nums">{fmtDate(dates[index], lang)}</div>
-        <div className="mt-1 text-xs text-muted-foreground">2026</div>
+        <div className="mt-1 text-xs text-muted-foreground">{dates[index].slice(0, 4)}</div>
       </div>
 
       <div
