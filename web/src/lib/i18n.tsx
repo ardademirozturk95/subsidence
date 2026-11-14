@@ -26,9 +26,15 @@ const S = {
   bandLabel: { tr: "Dalga boyu", en: "Wavelength" },
   bandL: { tr: "NISAR L-band", en: "NISAR L-band" },
   bandC: { tr: "C-band olsaydı", en: "If C-band" },
-  ringsLine: {
-    tr: "En hızlı çöken yerde bu tarihe kadar L-band'de {l} halka, C-band'de {c} halka. Halka sıklaştıkça saymak, yani hareketi doğru çözmek zorlaşır.",
-    en: "At the fastest-sinking spot, up to this date: {l} fringes at L-band, {c} at C-band. The denser the fringes, the harder they are to count, i.e. to resolve the motion correctly.",
+  storyTitleL: { tr: "Uzun dalga, okunaklı halkalar", en: "Long wave, readable fringes" },
+  storyTitleC: { tr: "Aynı çökme, kısa dalgayla", en: "Same sinking, short wave" },
+  storyL: {
+    tr: "NISAR'ın 24 cm'lik dalgası her ~12 cm'lik hareketi tek bir renk turuyla çiziyor. Şehrin en hızlı yeri bu tarihe kadar {cm} cm çöktü, ama haritada sadece {l} halka var. Halkalar geniş ve sakin; bir yıllık çöküşü tek bakışta okuyabiliyoruz.",
+    en: "NISAR's 24 cm wave draws every ~12 cm of motion as one colour cycle. The city's fastest spot has sunk {cm} cm up to this date, yet the map shows only {l} fringes. They are wide and calm; a year of sinking reads at a glance.",
+  },
+  storyC: {
+    tr: "Sentinel-1'in 5,5 cm'lik dalgasıyla aynı {cm} cm, {c} halkaya bölünürdü. Halkalar çanağın kenarında birbirine sıkışıyor ve ayırt etmek zorlaşıyor; sayım hatası olasılığı artıyor. NISAR'da aynı hareket 4 kat daha az halkaya düşüyor.",
+    en: "With Sentinel-1's 5.5 cm wave the same {cm} cm would split into {c} fringes. They crowd together at the bowl's edge and become hard to tell apart, so miscounting gets more likely. In NISAR the same motion falls into 4 times fewer fringes.",
   },
   ringsNote: {
     tr: "C-band görüntüsü bir simülasyondur: NISAR'ın ölçtüğü hareket Sentinel-1'in 5,5 cm'lik dalga boyuyla yeniden sarıldı. İki görüntü de aynı şekilde hafifçe yumuşatıldı (~400 m).",

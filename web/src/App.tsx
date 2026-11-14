@@ -150,8 +150,18 @@ function ViewSwitch({ view, onView, band, onBand, fringes, date }: VSProps) {
       )}
     </div>
       {fringes && fr && view !== "disp" && (
-        <div className="mt-2 max-w-3xl text-sm leading-snug">
-          <p>{t("ringsLine", { l: num(fr.rings_l), c: num(fr.rings_c) })}</p>
+        <div className={`mt-2 max-w-3xl border-l-4 pl-3 ${band === "C" ? "border-staff" : "border-ink"}`}>
+          <div className="flex flex-wrap items-baseline gap-x-3">
+            <h2 className="font-display text-lg font-extrabold">{t(band === "C" ? "storyTitleC" : "storyTitleL")}</h2>
+            <span className="font-display text-lg font-extrabold tabular-nums">
+              <span className={band === "L" ? "" : "text-ink/40"}>{num(fr.rings_l)}</span>
+              <span className="mx-1.5 text-sm font-semibold text-muted-foreground">{lang === "tr" ? "halka /" : "fringes /"}</span>
+              <span className={band === "C" ? "text-staff" : "text-ink/40"}>{num(fr.rings_c)}</span>
+            </span>
+          </div>
+          <p className="mt-0.5 text-sm leading-snug">
+            {t(band === "C" ? "storyC" : "storyL", { cm: num(fr.max_los_cm), l: num(fr.rings_l), c: num(fr.rings_c) })}
+          </p>
           {band === "C" && <p className="mt-1 text-xs text-muted-foreground">{t("ringsNote")}</p>}
         </div>
       )}
