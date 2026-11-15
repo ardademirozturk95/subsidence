@@ -131,6 +131,15 @@ export const fmtDate = (d: string, lang: Lang, long = false) =>
     ...(long ? { year: "numeric" } : {}),
   })
 
+// YAYIMLANMIŞ DEĞERLER (dikey, cm/yıl): Cigna & Tapete 2021, Remote Sensing of Environment 253, 112161 (özet).
+// Sentinel-1, 2014–2020; ilçe zirveleri ve Katedral. Bizim noktalarla birebir aynı yer değil, aynı bölge.
+export const LITERATURE: { id: string; pub: number; upTo?: boolean }[] = [
+  { id: "neza", pub: -38.7 },
+  { id: "iztapalapa", pub: -39.1 },
+  { id: "aragon", pub: -32.0 },
+  { id: "zocalo", pub: -8.8, upTo: true },
+]
+
 export const fmtCm = (v: number, lang: Lang, digits = 1) =>
   (v < 0 ? "−" : v > 0 ? "+" : "") + Math.abs(v).toLocaleString(lang === "tr" ? "tr-TR" : "en-GB", { minimumFractionDigits: digits, maximumFractionDigits: digits })
 

@@ -6,6 +6,7 @@ import { SeriesChart } from "@/components/SeriesChart"
 import { PolCompare } from "@/components/PolCompare"
 import { PointPicker } from "@/components/PointPicker"
 import { Everyday } from "@/components/Everyday"
+import { Validation } from "@/components/Validation"
 import { fmtCm, fmtDate, loadAll, type Backdrop, type Fringes, type Point, type Region, type TiltMeta, type View } from "@/lib/data"
 import { I18nProvider, useI18n, type Key } from "@/lib/i18n"
 
@@ -129,6 +130,7 @@ function Shell() {
               <h2 className="font-display text-xl leading-tight font-semibold">{t("chartTitle2")}</h2>
               <p className="mb-2 text-sm text-muted-foreground">{t("pointTitle", { n: point.name[lang], k: region.dates.length })}</p>
               <SeriesChart point={point} region={region} index={index} />
+              <Validation points={data.points} selectedId={point.id} onSelect={setSelectedId} />
             </Panel>
 
           </main>

@@ -125,7 +125,7 @@ const S = {
     en: "Thanks to its long wave, NISAR is a strong candidate for tracking groundwater-driven subsidence on forested slopes and in large farming basins such as Konya. The data are still 'provisional'; results will get more reliable as calibration is completed.",
   },
   chartTrend: { tr: "11 ayın eğilimi", en: "11-month trend" },
-  pointTitle: { tr: "{n}, NISAR'ın {k} ölçümüyle", en: "{n}, from {k} NISAR measurements" },
+  pointTitle: { tr: "{n} · {k} ölçüm", en: "{n} · {k} measurements" },
   subtitle: {
     tr: "Bunu NISAR radarıyla kurduk ve dünyanın en hızlı çöken şehirlerinden biri olan Mexico City'de denedik: bazı mahalleler yılda 35 cm alçalıyor. Aynı yöntem her şehirde uygulanabilir.",
     en: "We built this with NISAR radar and tested it on Mexico City, one of the fastest-sinking cities on Earth: some neighbourhoods drop 35 cm a year. The same method works for any city.",
@@ -233,6 +233,14 @@ const S = {
   sourceLine: {
     tr: "Kaynak: {sensor}, {product}, {maturity}, track {track}. {g0} ile {g1} arasında 12 günlük ölçüm yok.",
     en: "Source: {sensor}, {product}, {maturity}, track {track}. No 12-day measurement between {g0} and {g1}.",
+  },
+  valTitle: { tr: "Nasıl doğruladık? (cm/yıl)", en: "How we checked it (cm a year)" },
+  valOurs: { tr: "Bu harita (NISAR, tek yıl, alan ortancası)", en: "This map (NISAR, one year, area median)" },
+  valPub: { tr: "Cigna ve Tapete 2021 (2014–20, ilçe zirvesi)", en: "Cigna & Tapete 2021 (2014–20, district peak)" },
+  valAria: { tr: "{n}: bu harita yılda {a} cm, yayımlanmış değer yılda {b} cm", en: "{n}: this map {a} cm a year, published {b} cm a year" },
+  valRock: {
+    tr: "Kaya zeminde {k} kontrol noktası: {v} ≈ 0",
+    en: "{k} control points on rock: {v} ≈ 0",
   },
   loadError: { tr: "Veri yüklenemedi. Sayfayı yenile; sorun sürerse public/data klasörünü kontrol et.", en: "Data failed to load. Refresh the page; if it persists, check the public/data folder." },
   loading: { tr: "Veri yükleniyor", en: "Loading data" },
