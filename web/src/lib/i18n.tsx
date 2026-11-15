@@ -113,8 +113,8 @@ const S = {
 
   futureTitle: { tr: "NISAR neyi mümkün kılıyor?", en: "What does NISAR make possible?" },
   future1: {
-    tr: "Her 12 günde bir, ücretsiz ve hazır işlenmiş veri. Bu haritayı biz bir yarışma için yaptık; aynı yöntem dünyanın herhangi bir şehri için tekrarlanabilir. Çökme, tek seferlik makalelerden düzenli bir erken uyarıya dönüşebilir.",
-    en: "Free, ready-processed data every 12 days. We made this map for a competition; the same method works for any city in the world. Subsidence monitoring can move from one-off papers to routine early warning.",
+    tr: "Her 12 günde bir, ücretsiz ve hazır işlenmiş veri. Bu haritayı biz bir yarışma için yaptık; aynı yöntem dünyanın herhangi bir şehri için tekrarlanabilir. Su idareleri bununla, yağmur suyunu yeraltına geri veren kuyuların çökmeyi yavaşlatıp yavaşlatmadığını her 12 günde bir izleyebilir; belediyeler de hangi boru hattını önce denetleyeceğine karar verebilir.",
+    en: "Free, ready-processed data every 12 days. We made this map for a competition; the same method works for any city in the world. Water agencies could use it to watch, every 12 days, whether recharge wells slow the sinking, and city crews to decide which pipes to inspect first.",
   },
   future2: {
     tr: "Metro, su boruları ve binalar en çok sabit zeminle çöken zeminin yan yana geldiği yerlerde hasar görür. Peñón Viejo tepesi yılda 1 cm'den az hareket ederken, yaklaşık 3 km ötedeki Iztapalapa ovası yılda 24 cm çöküyor. Bu geçişleri haritalamak altyapı riskini gösterir.",

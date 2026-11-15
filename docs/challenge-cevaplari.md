@@ -28,7 +28,7 @@ Mexico City kurutulmuş Texcoco gölünün yumuşak, suya doymuş kili üstünde
 
 ### 3. NISAR gelecekte neleri mümkün kılacak?
 
-- **Her şehir için düzenli erken uyarı.** Her 12 günde bir, ücretsiz ve hazır işlenmiş veri. Bu haritayı bir yarışma için yaptık; aynı yöntem dünyanın herhangi bir şehri için tekrarlanabilir.
+- **Her şehir için düzenli izleme.** Her 12 günde bir, ücretsiz ve hazır işlenmiş veri. Bu haritayı bir yarışma için yaptık; aynı yöntem dünyanın herhangi bir şehri için tekrarlanabilir. Su idareleri bununla, yağmur suyunu yeraltına geri veren kuyuların çökmeyi yavaşlatıp yavaşlatmadığını her 12 günde bir izleyebilir; belediyeler de hangi boru hattını önce denetleyeceğine karar verebilir.
 - **Altyapı riski.** Metro, su boruları ve binalar en çok sabit zeminle çöken zeminin yan yana geldiği yerlerde hasar görür. Peñón Viejo tepesi yılda 1 cm'den az hareket ederken, yaklaşık 3 km ötedeki Iztapalapa ovası yılda 24 cm çöküyor.
 - **Tarım havzaları ve ormanlar.** Uzun dalgası sayesinde NISAR, ormanlık yamaçlarda ve Konya gibi tarım havzalarında yeraltı suyu kaynaklı çökmeyi izlemek için güçlü bir aday. Veri şu an "provisional"; kalibrasyon tamamlandıkça sonuçlar daha da güvenilir olacak.
 
@@ -56,6 +56,6 @@ We measure sinking from the phase of the radar wave, taken from NISAR's **HH** c
 
 ### 3. What will NISAR make possible?
 
-- **Routine early warning for any city.** Free, ready-processed data every 12 days. We built this map for a competition; the same method works anywhere in the world.
+- **Routine monitoring for any city.** Free, ready-processed data every 12 days. We built this map for a competition; the same method works anywhere in the world. Water agencies could use it to watch, every 12 days, whether recharge wells slow the sinking, and city crews to decide which pipes to inspect first.
 - **Infrastructure risk.** Metro lines, water mains and buildings are damaged most where stable and sinking ground meet. The Peñón Viejo hill moves less than 1 cm a year while the Iztapalapa plain about 3 km away sinks 24 cm a year.
 - **Farming basins and forests.** Thanks to its long wave, NISAR is a strong candidate for tracking groundwater-driven subsidence on forested slopes and in farming basins such as Konya. The data are still "provisional"; results will get more reliable as calibration is completed.
